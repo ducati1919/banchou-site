@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>よくある質問（Q&A） | トランクルーム収納番長</title>
+<meta name="description" content="収納番長のよくある質問。ご契約・料金・利用方法・セキュリティ・解約など、気になる疑問をまとめてご案内します。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* ── ヒーロー ── */
+.faq-hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
+  color: white; text-align: center;
+  padding: 56px 24px 48px;
+  position: relative; overflow: hidden;
+}
+.faq-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 2px, transparent 2px 24px);
+}
+.faq-hero-inner { max-width: 760px; margin: 0 auto; position: relative; }
+.faq-hero h1 { font-size: clamp(26px,4vw,40px); font-weight: 900; margin-bottom: 10px; }
+.faq-hero p { opacity: .92; font-size: 15px; line-height: 1.7; }
+
+/* ── カテゴリーナビ ── */
+.faq-cat-nav {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center;
+  padding: 28px 24px;
+  background: white;
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 60px; z-index: 10;
+}
+.faq-cat-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 999px;
+  border: 2px solid var(--line);
+  background: white; color: var(--ink-2);
+  font-size: 13px; font-weight: 700;
+  cursor: pointer; text-decoration: none;
+  transition: all .18s;
+}
+.faq-cat-btn:hover, .faq-cat-btn.active {
+  border-color: var(--orange); color: var(--orange);
+  background: #FFF5EE;
+}
+
+/* ── FAQセクション ── */
+.faq-section { border-bottom: 1px solid var(--line); }
+.faq-section:last-of-type { border-bottom: none; }
+
+.faq-cat-head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+}
+.faq-cat-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--orange); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.faq-cat-title {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 20px; font-weight: 900; color: var(--ink);
+}
+
+/* ── アコーディオン ── */
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+
+.faq-item {
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.faq-item.open { border-color: var(--orange); }
+
+.faq-q {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px;
+  cursor: pointer;
+  background: white;
+  user-select: none;
+}
+.faq-q:hover { background: #FFFAF5; }
+
+.faq-q-badge {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--orange); color: white;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 900; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.faq-q-text {
+  flex: 1;
+  font-weight: 700; font-size: 15px; color: var(--ink);
+  line-height: 1.5;
+}
+.faq-q-chevron {
+  width: 22px; height: 22px; flex-shrink: 0;
+  color: var(--ink-3);
+  transition: transform .3s ease;
+}
+.faq-item.open .faq-q-chevron { transform: rotate(180deg); }
+
+.faq-a {
+  display: none;
+  padding: 0 20px 20px 66px;
+  color: var(--ink-2); font-size: 14px; line-height: 1.8;
+  border-top: 1px solid var(--line);
+  background: #FFFAF5;
+}
+.faq-a.open { display: block; }
+
+.faq-a strong { color: var(--orange); }
+.faq-a a { color: var(--orange); font-weight: 700; }
+
+/* ── まだ解決しない帯 ── */
+.still-help {
+  background: var(--cream);
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  margin-top: 16px;
+}
+.still-help h3 {
+  font-size: 20px; font-weight: 900; margin-bottom: 8px;
+}
+.still-help p { color: var(--ink-3); font-size: 14px; margin-bottom: 24px; }
+.still-help-btns {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+}
+.still-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; border-radius: 999px;
+  font-weight: 900; font-size: 15px; text-decoration: none;
+  transition: all .2s;
+}
+.still-btn.line {
+  background: var(--green); color: white;
+}
+.still-btn.line:hover { background: var(--green-deep); }
+.still-btn.tel {
+  background: var(--orange); color: white;
+}
+.still-btn.tel:hover { background: var(--orange-deep); }
+
+/* ── レスポンシブ ── */
+@media (max-width: 640px) {
+  .faq-a { padding-left: 20px; }
+  .faq-cat-nav { top: 56px; gap: 8px; }
+  .faq-cat-btn { font-size: 12px; padding: 7px 14px; }
+  .still-help-btns { flex-direction: column; }
+  .still-btn { justify-content: center; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="notice-bar">
+  <strong>★堺市西区最安値</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>24時間利用可能</strong> &nbsp;│&nbsp; <strong>女性も安心</strong>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長" /></a>
+    <nav class="nav">
+      <a href="index.html">ホーム</a>
+      <a href="flow.html">利用の流れ</a>
+      <a href="price.html">料金</a>
+      <a href="rooms.html">お部屋一覧</a>
+      <a href="access.html">アクセス</a>
+      <a href="faq.html" class="active">Q&amp;A</a>
+      <a href="blog.html">ブログ</a>
+    </nav>
+    <div class="header-cta">
+      <div class="tel-block">
+        <div class="label">お電話はこちら</div>
+        <a href="tel:0120666780" class="num">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          0120-666-780
+        </a>
+      </div>
+      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="btn-line-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+        お問い合わせ
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<!-- パンくず -->
+<div style="background:var(--cream);border-bottom:1px solid var(--line);padding:10px 24px;font-size:12px;color:var(--ink-3);">
+  <div class="container" style="padding:0;">
+    <a href="index.html" style="color:var(--ink-3);text-decoration:none;">ホーム</a>
+    <span style="margin:0 8px;">›</span>よくある質問（Q&amp;A）
+  </div>
+</div>
+
+<!-- ヒーロー -->
+<div class="faq-hero">
+  <div class="faq-hero-inner">
+    <div class="section-eyebrow" style="color:rgba(255,255,255,.8);margin-bottom:8px;">— FAQ —</div>
+    <h1>よくある質問</h1>
+    <p>ご利用前に気になる疑問をまとめました。<br>解決しない場合はお気軽にLINE・お電話でお問い合わせください。</p>
+  </div>
+</div>
+
+<!-- カテゴリーナビ -->
+<div class="faq-cat-nav">
+  <a href="#cat-visit"   class="faq-cat-btn">👀 見学・お申込み</a>
+  <a href="#cat-price"   class="faq-cat-btn">💰 料金・費用</a>
+  <a href="#cat-usage"   class="faq-cat-btn">🔑 ご利用方法</a>
+  <a href="#cat-security"class="faq-cat-btn">🛡️ セキュリティ</a>
+  <a href="#cat-cancel"  class="faq-cat-btn">📋 解約・変更</a>
+  <a href="#cat-other"   class="faq-cat-btn">❓ その他</a>
+</div>
+
+<!-- FAQ本文 -->
+<section style="background:white; padding:0 0 64px;">
+  <div class="container">
+
+    <!-- ① 見学・お申込み -->
+    <div class="faq-section" id="cat-visit" style="padding: 56px 0 40px;">
+      <div class="faq-cat-head reveal">
+        <div class="faq-cat-icon">👀</div>
+        <div class="faq-cat-title">見学・お申込み</div>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">見学は予約が必要ですか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            予約なしでもお越しいただけます。ただし、事前にお電話またはLINEでご連絡いただくと、スムーズにご案内できます。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">見学は無料ですか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            <strong>完全無料</strong>です。実際のお部屋のサイズ感や雰囲気をご確認いただいてからご契約いただけます。お気軽にお越しください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">申込みに必要なものは何ですか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            <strong>本人確認書類</strong>（運転免許証・健康保険証・マイナンバーカードなど）と<strong>初月の賃料</strong>のみです。印鑑は不要です。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">契約当日から荷物を入れられますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            はい、ご契約手続き完了後、<strong>その日すぐ</strong>にご利用いただけます。最短即日でのご利用開始が可能です。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">希望の部屋が空いていない場合はどうなりますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            空き待ちのご登録が可能です。空きが出次第ご連絡いたします。また、ご希望のサイズに近い別のお部屋をご提案することもできますので、お気軽にご相談ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">法人での契約は可能ですか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            はい、法人でのご利用も歓迎しております。在庫保管・書類保管・季節商品の保管などにご利用いただいています。詳しくはお問い合わせください。
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ② 料金・費用 -->
+    <div class="faq-section" id="cat-price" style="padding: 56px 0 40px;">
+      <div class="faq-cat-head reveal">
+        <div class="faq-cat-icon">💰</div>
+        <div class="faq-cat-title">料金・費用</div>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">初期費用はいくらかかりますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            <strong>初期費用は¥0</strong>です。敷金・礼金・保証金・事務手数料など一切かかりません。ご利用開始月の賃料のみご準備ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">月額料金はいくらですか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            お部屋のサイズにより異なります。<strong>最低2,700円（税込）〜</strong>で、4.4帖の最大サイズで39,600円（税込）です。詳しくは<a href="price.html">料金ページ</a>または<a href="rooms.html">お部屋一覧</a>をご覧ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">支払い方法はどうなっていますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            銀行振込（月払い）にてお願いしております。詳しくはご契約時にご案内いたします。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">途中で部屋のサイズを変更できますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            空き状況によっては別のお部屋への変更（アップサイズ・ダウンサイズ）が可能です。ご希望の場合はお気軽にご相談ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">退去時にクリーニング費用などはかかりますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            <strong>退去費用は¥0</strong>です。原状回復費用・クリーニング費用は一切かかりません。荷物をお出しいただければ手続き完了です。
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ③ ご利用方法 -->
+    <div class="faq-section" id="cat-usage" style="padding: 56px 0 40px;">
+      <div class="faq-cat-head reveal">
+        <div class="faq-cat-icon">🔑</div>
+        <div class="faq-cat-title">ご利用方法</div>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">何時でも荷物を出し入れできますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            はい、<strong>24時間365日、いつでも</strong>出し入れ自由です。深夜・早朝・祝日もご利用いただけます。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">入室はどうやってするのですか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            ご契約時にお渡しする<strong>暗証番号</strong>で電子ロックを解錠してご入室いただきます。鍵の紛失の心配がなく、番号は安全のため定期的に変更も可能です。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">台車は使えますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            台車を<strong>無料で貸し出し</strong>しています。重い荷物の搬入・搬出もラクラクです。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">車で荷物を運べますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            はい、<strong>駐車スペースを完備</strong>しています。お車での搬入・搬出も安心してご利用いただけます。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">何を保管できますか？保管できないものはありますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            家具・家電・衣類・書類・趣味グッズ・季節用品など幅広くご利用いただけます。<br>
+            ただし、<strong>以下のものは保管できません</strong>：<br>
+            危険物・爆発物・引火物・薬品・食品・生き物・法律に触れるもの・悪臭を発するもの・他者の財産など。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">家族や友人も入室できますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            暗証番号をお伝えすれば、ご家族やご友人もご利用いただけます。ただし、第三者への暗証番号の無断提供はご遠慮ください。
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ④ セキュリティ -->
+    <div class="faq-section" id="cat-security" style="padding: 56px 0 40px;">
+      <div class="faq-cat-head reveal">
+        <div class="faq-cat-icon">🛡️</div>
+        <div class="faq-cat-title">セキュリティ</div>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">防犯対策はどうなっていますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            <strong>防犯カメラ</strong>を館内各所に設置しています。また、入口は<strong>電子ロック</strong>で施錠されており、契約者のみが入室可能です。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">女性一人でも安心して利用できますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            はい、<strong>女性のお客様にも多くご利用いただいています</strong>。館内は明るく清潔で、防犯カメラも設置済みです。夜間・早朝の利用も安心してご利用いただけます。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">荷物に保険はかけられますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            弊社では保険の取り扱いは行っておりません。貴重品や高価な品物を保管される場合は、お客様ご自身で保険にご加入されることをおすすめします。
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ⑤ 解約・変更 -->
+    <div class="faq-section" id="cat-cancel" style="padding: 56px 0 40px;">
+      <div class="faq-cat-head reveal">
+        <div class="faq-cat-icon">📋</div>
+        <div class="faq-cat-title">解約・変更</div>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">解約はいつでもできますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            はい、いつでも解約できます。<strong>解約希望月の1ヶ月前</strong>までにお電話またはLINEにてご連絡ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">解約時にかかる費用はありますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            <strong>退去費用は¥0</strong>です。原状回復費用・クリーニング費用など一切かかりません。荷物をお出しいただければ完了です。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">最低利用期間はありますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            特に最低利用期間の定めはありません。ただし、解約は1ヶ月前のご連絡をお願いしておりますので、ご了承ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">契約者の変更（名義変更）はできますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            名義変更はお電話またはLINEにてご相談ください。必要書類などについて個別にご案内いたします。
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ⑥ その他 -->
+    <div class="faq-section" id="cat-other" style="padding: 56px 0 40px;">
+      <div class="faq-cat-head reveal">
+        <div class="faq-cat-icon">❓</div>
+        <div class="faq-cat-title">その他</div>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">場所はどこにありますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            大阪府堺市西区津久野町にあります。<strong>JR津久野駅からすぐ</strong>の場所です。詳しくは<a href="access.html">アクセスページ</a>をご確認ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">近隣のトランクルームと何が違いますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            <strong>堺市西区内で最安値水準</strong>の料金と、<strong>初期費用¥0・退去費用¥0</strong>のわかりやすい料金体系が特徴です。また、JR津久野駅から徒歩圏内のアクセスの良さも好評です。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <div class="faq-q-badge">Q</div>
+            <div class="faq-q-text">LINEでも問い合わせできますか？</div>
+            <svg class="faq-q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">
+            はい、<strong>LINEでのお問い合わせも大歓迎</strong>です。空き状況の確認・見学のご連絡・各種ご相談などお気軽にメッセージをお送りください。<a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener">→ LINEで相談する</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- まだ解決しない場合 -->
+    <div class="still-help reveal">
+      <h3>解決しないことがあれば</h3>
+      <p>お気軽にLINEまたはお電話でご連絡ください。どんな些細な疑問でも丁寧にお答えします。</p>
+      <div class="still-help-btns">
+        <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="still-btn line">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+          LINEで質問する
+        </a>
+        <a href="tel:0120666780" class="still-btn tel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          0120-666-780
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">◎ まずはここから</span>
+    <h2>見学・お問い合わせは<br><span class="hl">お気軽に</span>どうぞ！</h2>
+    <p>見学無料・予約不要。空き状況やサイズのご相談もお気軽に。</p>
+    <div class="cta-buttons">
+      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="cta-card line">
+        <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg></div>
+        <div class="cta-label">LINE / 24時間受付</div>
+        <div class="cta-value">LINEで相談</div>
+        <div class="cta-sub">見学予約・空き状況・お見積りまで</div>
+        <div class="cta-arrow" style="background:#E6F9EC;color:var(--green-deep)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </a>
+      <a href="tel:0120666780" class="cta-card tel">
+        <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="cta-label">TEL / お気軽にお電話ください</div>
+        <div class="cta-value">0120-666-780</div>
+        <div class="cta-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/toplogo.jpg" alt="収納番長" />
+        <p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p>
+      </div>
+      <div class="footer-col">
+        <h4>メニュー</h4>
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="flow.html">利用の流れ</a></li>
+          <li><a href="price.html">料金</a></li>
+          <li><a href="rooms.html">お部屋一覧</a></li>
+          <li><a href="access.html">アクセス</a></li>
+          <li><a href="faq.html">Q&amp;A</a></li>
+          <li><a href="blog.html">ブログ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>店舗情報</h4>
+        <ul>
+          <li>大阪府堺市西区津久野町</li>
+          <li>JR津久野駅 徒歩すぐ</li>
+          <li>ご利用 24時間365日</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>お問い合わせ</h4>
+        <ul>
+          <li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="apply.html">お申し込み</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 トランクルーム収納番長 All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 浮かぶLINEボタン -->
+<a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="float-line" aria-label="LINEで問い合わせ">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+</a>
+
+<script>
+// アコーディオン開閉
+function toggleFaq(qEl) {
+  const item = qEl.closest('.faq-item');
+  const answer = item.querySelector('.faq-a');
+  const isOpen = item.classList.contains('open');
+
+  // 同カテゴリ内の他を閉じる
+  item.closest('.faq-list').querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-a').classList.remove('open');
+  });
+
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+
+// スクロールリビール
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ハンバーガーメニュー
+const toggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
+if (toggle && nav) {
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+}
+</script>
+
+</body>
+</html>

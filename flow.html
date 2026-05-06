@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ご利用までの流れ | トランクルーム収納番長</title>
+<meta name="description" content="収納番長のご利用までの流れ。見学→お申込み→ご契約→ご利用開始の4ステップで簡単スタート。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+  /* ── ステップ全体 ── */
+  .steps-section { background: white; }
+
+  .step-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    padding: 72px 0;
+    border-bottom: 2px dashed var(--line);
+    position: relative;
+  }
+  .step-block:last-of-type { border-bottom: none; }
+
+  /* 奇数は画像左・テキスト右、偶数は逆 */
+  .step-block.reverse { direction: rtl; }
+  .step-block.reverse > * { direction: ltr; }
+
+  /* ステップ番号ライン */
+  .step-label {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--orange); color: white;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 22px;
+    display: grid; place-items: center;
+    box-shadow: 0 6px 16px rgba(232,116,26,.35);
+    flex-shrink: 0;
+  }
+  .step-name {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 13px;
+    color: var(--orange); letter-spacing: .15em;
+  }
+
+  .step-text h2 {
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 900; margin-bottom: 16px; line-height: 1.3;
+  }
+  .step-text h2 .accent { color: var(--orange); }
+  .step-text p {
+    font-size: 15px; color: var(--ink-2);
+    line-height: 2; margin-bottom: 20px;
+  }
+
+  .step-points {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 28px;
+  }
+  .step-points li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--ink-2); line-height: 1.7;
+  }
+  .step-points li::before {
+    content: '';
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--orange); flex-shrink: 0;
+    margin-top: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+    background-size: 14px; background-repeat: no-repeat; background-position: center;
+  }
+
+  .step-note {
+    background: var(--cream); border-left: 4px solid var(--orange);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px; font-size: 13px; color: var(--ink-2); line-height: 1.7;
+  }
+  .step-note strong { color: var(--orange); font-weight: 900; }
+
+  /* ステップ画像 */
+  .step-visual {
+    position: relative;
+  }
+  .step-visual img {
+    width: 100%; border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    display: block;
+  }
+  .step-visual .step-badge {
+    position: absolute; bottom: -16px; right: 20px;
+    background: var(--yellow); color: var(--ink);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 13px;
+    padding: 10px 20px; border-radius: 999px;
+    box-shadow: var(--shadow-md);
+    white-space: nowrap;
+  }
+
+  /* ── 矢印コネクター ── */
+  .step-arrow {
+    text-align: center; padding: 8px 0;
+    color: var(--orange); font-size: 32px; line-height: 1;
+  }
+
+  /* ── よくある質問 mini ── */
+  .faq-mini { background: var(--cream); }
+  .faq-mini-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .faq-item {
+    background: white; border-radius: 14px;
+    padding: 20px 22px; border: 2px solid var(--line);
+  }
+  .faq-item .q {
+    font-weight: 900; color: var(--orange);
+    font-size: 14px; margin-bottom: 8px;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .faq-item .q::before {
+    content: 'Q';
+    background: var(--orange); color: white;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 12px; flex-shrink: 0; margin-top: 1px;
+  }
+  .faq-item .a {
+    font-size: 13px; color: var(--ink-2); line-height: 1.7;
+    padding-left: 30px;
+  }
+
+  /* ── レスポンシブ ── */
+  @media (max-width: 860px) {
+    .step-block {
+      grid-template-columns: 1fr;
+      gap: 32px; padding: 52px 0;
+    }
+    .step-block.reverse { direction: ltr; }
+    .faq-mini-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notice-bar">
+  <strong>★堺市西区最安値</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>24時間利用可能</strong> &nbsp;│&nbsp; <strong>女性も安心</strong>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長" /></a>
+    <nav class="nav">
+      <a href="index.html">ホーム</a>
+      <a href="flow.html" class="active">利用の流れ</a>
+      <a href="price.html">料金</a>
+      <a href="rooms.html">お部屋一覧</a>
+      <a href="access.html">アクセス</a>
+      <a href="faq.html">Q&amp;A</a>
+      <a href="blog.html">ブログ</a>
+    </nav>
+    <div class="header-cta">
+      <div class="tel-block">
+        <div class="label">お電話はこちら</div>
+        <a href="tel:0120666780" class="num">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          0120-666-780
+        </a>
+      </div>
+      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="btn-line-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+        お問い合わせ
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<!-- ページヘッダー -->
+<div class="page-header">
+  <div class="crumb"><a href="index.html">ホーム</a> &rsaquo; ご利用までの流れ</div>
+  <span class="eyebrow">FLOW</span>
+  <h1>ご利用までの<span class="accent">流れ</span></h1>
+  <p>見学からご利用開始まで、たった4ステップ。<br>初めての方でも安心してご利用いただけます。</p>
+</div>
+
+<!-- ステップ概要バー -->
+<div style="background:var(--orange);color:white;padding:20px 24px;">
+  <div style="max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:10px;font-family:'M PLUS Rounded 1c',sans-serif;font-weight:900;font-size:15px;">
+      <span style="width:36px;height:36px;background:white;color:var(--orange);border-radius:50%;display:grid;place-items:center;font-size:16px;flex-shrink:0;">1</span>見学
+    </div>
+    <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
+    <div style="display:flex;align-items:center;gap:10px;font-family:'M PLUS Rounded 1c',sans-serif;font-weight:900;font-size:15px;">
+      <span style="width:36px;height:36px;background:white;color:var(--orange);border-radius:50%;display:grid;place-items:center;font-size:16px;flex-shrink:0;">2</span>お申込み
+    </div>
+    <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
+    <div style="display:flex;align-items:center;gap:10px;font-family:'M PLUS Rounded 1c',sans-serif;font-weight:900;font-size:15px;">
+      <span style="width:36px;height:36px;background:white;color:var(--orange);border-radius:50%;display:grid;place-items:center;font-size:16px;flex-shrink:0;">3</span>ご契約
+    </div>
+    <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
+    <div style="display:flex;align-items:center;gap:10px;font-family:'M PLUS Rounded 1c',sans-serif;font-weight:900;font-size:15px;">
+      <span style="width:36px;height:36px;background:white;color:var(--orange);border-radius:50%;display:grid;place-items:center;font-size:16px;flex-shrink:0;">4</span>ご利用開始
+    </div>
+  </div>
+</div>
+
+<!-- ステップ詳細 -->
+<section class="steps-section">
+  <div class="container">
+
+    <!-- STEP 1 見学 -->
+    <div class="step-block reveal">
+      <div class="step-visual">
+        <img src="assets/P2120283.JPG" alt="店舗外観・見学" />
+        <div class="step-badge">📍 津久野駅からすぐ</div>
+      </div>
+      <div class="step-text">
+        <div class="step-label">
+          <div class="step-num">1</div>
+          <div class="step-name">STEP 01</div>
+        </div>
+        <h2>まずは<span class="accent">見学</span>へ<br>お越しください</h2>
+        <p>実際のお部屋のサイズ感や施設の雰囲気を確かめてからご契約いただけます。見学は無料・予約不要です。お気軽にお越しください。</p>
+        <ul class="step-points">
+          <li>見学無料・予約不要（事前連絡いただけると確実です）</li>
+          <li>実際のお部屋のサイズ感をご確認いただけます</li>
+          <li>スタッフがご案内しますのでお気軽に質問を</li>
+        </ul>
+        <div class="step-note">
+          <strong>📞 まずはお電話を：</strong> 0120-666-780<br>
+          見学予約・空き状況確認はお電話またはLINEで承ります。
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 お申込み -->
+    <div class="step-block reverse reveal">
+      <div class="step-visual">
+        <img src="assets/P2120288.JPG" alt="館内案内板・フロアマップ" />
+        <div class="step-badge">📋 その場でお申込みOK</div>
+      </div>
+      <div class="step-text">
+        <div class="step-label">
+          <div class="step-num">2</div>
+          <div class="step-name">STEP 02</div>
+        </div>
+        <h2>ご希望のお部屋を<br><span class="accent">お申込み</span></h2>
+        <p>見学後、お気に入りのお部屋が見つかりましたらその場でお申込みいただけます。1F・2F合わせて多数のお部屋をご用意しています。</p>
+        <ul class="step-points">
+          <li>1F（101〜134号室）・2F（201〜214号室）から選択</li>
+          <li>サイズは0.4帖〜4.4帖まで豊富にご用意</li>
+          <li>空き状況はスタッフにお気軽にご確認ください</li>
+          <li>希望のお部屋が空いていない場合は空き待ちも可能</li>
+        </ul>
+        <div class="step-note">
+          <strong>💡 サイズの目安：</strong><br>
+          0.4帖〜：小物・書類・季節アイテム ／
+          1帖〜：家電・衣類・趣味グッズ ／
+          2帖〜：家具・大型荷物・法人利用
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 ご契約 -->
+    <div class="step-block reveal">
+      <div class="step-visual">
+        <img src="assets/P2120287.JPG" alt="電子ロック入口・ご契約" />
+        <div class="step-badge">🔑 即日ご利用可</div>
+      </div>
+      <div class="step-text">
+        <div class="step-label">
+          <div class="step-num">3</div>
+          <div class="step-name">STEP 03</div>
+        </div>
+        <h2>書類確認・<br><span class="accent">ご契約</span>手続き</h2>
+        <p>ご契約の手続きは書類のご確認と簡単なお手続きのみ。初期費用は¥0なので、初月の賃料のみご用意いただければ、その日からご利用スタートできます。</p>
+        <ul class="step-points">
+          <li>初期費用¥0（敷金・礼金・保証金なし）</li>
+          <li>必要なもの：本人確認書類（免許証など）</li>
+          <li>お支払い方法：銀行振込（月払い）</li>
+          <li>最短即日からご利用開始できます</li>
+        </ul>
+        <div class="step-note">
+          <strong>📄 ご用意いただくもの：</strong><br>
+          本人確認書類（運転免許証・健康保険証など）と初月賃料のみ。印鑑は不要です。
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 ご利用開始 -->
+    <div class="step-block reverse reveal">
+      <div class="step-visual">
+        <img src="assets/P2120291.JPG" alt="館内通路・ご利用開始" />
+        <div class="step-badge">🎉 24時間いつでも利用OK</div>
+      </div>
+      <div class="step-text">
+        <div class="step-label">
+          <div class="step-num">4</div>
+          <div class="step-name">STEP 04</div>
+        </div>
+        <h2>いつでも自由に<br><span class="accent">ご利用開始！</span></h2>
+        <p>ご契約完了後、すぐにご利用いただけます。24時間365日いつでも出し入れ自由。台車も無料でご利用いただけます。</p>
+        <ul class="step-points">
+          <li>24時間365日、いつでも自由に出し入れ可能</li>
+          <li>台車無料貸出（重い荷物も楽々搬入）</li>
+          <li>駐車スペースあり（お車での搬入も安心）</li>
+          <li>電子ロック・防犯カメラで安全・安心</li>
+        </ul>
+        <div class="step-note">
+          <strong>🔑 入室方法：</strong><br>
+          お渡しする暗証番号で電子ロックを解錠してご入室ください。番号は安全のため定期的に変更できます。
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 設備紹介 帯 -->
+<section style="background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:48px 24px;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">施設案内</span>
+      <h2 class="section-title">安心・便利な設備が揃っています</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;" class="reveal">
+      <figure style="border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);">
+        <img src="assets/P2120291.JPG" alt="明るい館内通路" style="width:100%;height:180px;object-fit:cover;" />
+        <figcaption style="background:var(--ink);color:white;font-size:12px;font-weight:700;padding:10px 14px;text-align:center;">明るく清潔な館内</figcaption>
+      </figure>
+      <figure style="border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);">
+        <img src="assets/P2120290.JPG" alt="台車無料貸出" style="width:100%;height:180px;object-fit:cover;" />
+        <figcaption style="background:var(--ink);color:white;font-size:12px;font-weight:700;padding:10px 14px;text-align:center;">台車 無料貸出</figcaption>
+      </figure>
+      <figure style="border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);">
+        <img src="assets/P2120301.JPG" alt="駐車スペース" style="width:100%;height:180px;object-fit:cover;" />
+        <figcaption style="background:var(--ink);color:white;font-size:12px;font-weight:700;padding:10px 14px;text-align:center;">駐車スペース完備</figcaption>
+      </figure>
+      <figure style="border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);">
+        <img src="assets/P2120304.JPG" alt="セキュリティ・特徴" style="width:100%;height:180px;object-fit:cover;" />
+        <figcaption style="background:var(--ink);color:white;font-size:12px;font-weight:700;padding:10px 14px;text-align:center;">充実のセキュリティ</figcaption>
+      </figure>
+    </div>
+    <style>@media(max-width:640px){.facility-row{grid-template-columns:1fr 1fr!important}}</style>
+  </div>
+</section>
+
+<!-- よくある質問 mini -->
+<section class="faq-mini">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">よくある質問</span>
+      <h2 class="section-title">ご利用に関するQ&amp;A</h2>
+    </div>
+    <div class="faq-mini-grid reveal">
+      <div class="faq-item">
+        <div class="q">見学は予約が必要ですか？</div>
+        <div class="a">予約なしでもお越しいただけますが、事前にお電話いただくとスムーズにご案内できます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">契約当日から荷物を入れられますか？</div>
+        <div class="a">はい、ご契約完了後すぐにご利用いただけます。最短即日でのご利用開始が可能です。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">解約はいつでもできますか？</div>
+        <div class="a">解約は1ヶ月前のご連絡をお願いしております。退去時の費用は一切かかりません。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">法人での契約は可能ですか？</div>
+        <div class="a">はい、法人でのご利用も歓迎しております。在庫保管・書類保管などにご利用いただいています。詳しくはお問い合わせください。</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;" class="reveal">
+      <a href="faq.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-weight:900;font-family:'M PLUS Rounded 1c',sans-serif;padding:12px 28px;border:2px solid var(--orange);border-radius:999px;transition:all .2s;" onmouseover="this.style.background='var(--orange)';this.style.color='white'" onmouseout="this.style.background='';this.style.color='var(--orange)'">
+        Q&amp;Aをもっと見る
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">◎ まずはここから</span>
+    <h2>見学・お問い合わせは<br><span class="hl">お気軽に</span>どうぞ！</h2>
+    <p>見学無料・予約不要。空き状況やサイズのご相談もお気軽に。</p>
+    <div class="cta-buttons">
+      <a href="contact.html" class="cta-card line">
+        <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg></div>
+        <div class="cta-label">お問い合わせフォーム / 24時間受付</div>
+        <div class="cta-value">フォームで相談</div>
+        <div class="cta-sub">見学予約・空き状況・お見積りまで</div>
+        <div class="cta-arrow" style="background:#E6F9EC;color:var(--green-deep)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </a>
+      <a href="tel:0120666780" class="cta-card tel">
+        <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="cta-label">TEL / お気軽にお電話ください</div>
+        <div class="cta-value">0120-666-780</div>
+        <div class="cta-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/toplogo.jpg" alt="収納番長" />
+        <p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p>
+      </div>
+      <div class="footer-col">
+        <h4>メニュー</h4>
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="flow.html">利用の流れ</a></li>
+          <li><a href="price.html">料金</a></li>
+          <li><a href="rooms.html">お部屋一覧</a></li>
+          <li><a href="access.html">アクセス</a></li>
+          <li><a href="faq.html">Q&amp;A</a></li>
+          <li><a href="blog.html">ブログ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>店舗情報</h4>
+        <ul>
+          <li>大阪府堺市西区津久野町</li>
+          <li>JR津久野駅 徒歩すぐ</li>
+          <li>ご利用 24時間365日</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>お問い合わせ</h4>
+        <ul>
+          <li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="apply.html">お申し込み</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 トランクルーム収納番長. All Rights Reserved.</span>
+      <span>SAKAI / NISHI-KU / TSUKUNO</span>
+    </div>
+  </div>
+</footer>
+
+<div class="floating-cta">
+  <a href="contact.html" class="floating-line">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+    <span class="txt">お問い合わせ</span>
+  </a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
