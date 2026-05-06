@@ -85,6 +85,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transition: transform .15s;
 }
 .btn-line-sm:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--green-deep); }
+.btn-contact-sm {
+  background: var(--orange); color: white;
+  padding: 11px 18px; border-radius: 10px;
+  font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: 0 3px 0 var(--orange-deep);
+  transition: transform .15s;
+}
+.btn-contact-sm:hover { transform: translateY(1px); box-shadow: 0 2px 0 var(--orange-deep); }
 .menu-toggle { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; }
 .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); position: relative; }
 .menu-toggle span::before, .menu-toggle span::after {
