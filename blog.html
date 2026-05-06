@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ブログ | トランクルーム収納番長</title>
+<meta name="description" content="トランクルーム収納番長のスタッフブログ。収納のコツ・活用事例・お役立ち情報を発信中。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* ---- Layout ---- */
+  .blog-wrap {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  /* ---- Featured post ---- */
+  .featured-post {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 0;
+    background: white;
+    border: 2px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    transition: box-shadow .2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .featured-post:hover { box-shadow: var(--shadow-lg); }
+  .featured-img {
+    background: var(--cream-2);
+    position: relative; min-height: 280px;
+    overflow: hidden;
+  }
+  .featured-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .4s;
+  }
+  .featured-post:hover .featured-img img { transform: scale(1.04); }
+  .featured-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--orange); color: white;
+    font-size: 11px; font-weight: 900;
+    padding: 4px 12px; border-radius: 999px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    letter-spacing: .06em;
+  }
+  .featured-body {
+    padding: 36px 32px;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: 12px;
+  }
+  .post-meta {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; color: var(--ink-3); font-weight: 700;
+  }
+  .post-cat {
+    background: var(--cream-2); color: var(--orange);
+    padding: 3px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 900;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    border: 1px solid var(--orange);
+  }
+  .featured-body h2 {
+    font-size: 22px; font-weight: 900;
+    line-height: 1.5;
+  }
+  .featured-body p {
+    font-size: 13px; color: var(--ink-2);
+    line-height: 1.9; flex-grow: 1;
+  }
+  .read-more {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--orange); font-weight: 900; font-size: 13px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+  }
+
+  /* ---- Section header row ---- */
+  .posts-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .posts-header h3 {
+    font-size: 17px; font-weight: 900;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .posts-header h3::before {
+    content: '';
+    display: block; width: 4px; height: 20px;
+    background: var(--orange); border-radius: 2px;
+  }
+  .posts-count { font-size: 12px; color: var(--ink-3); font-weight: 700; }
+
+  /* ---- Post grid ---- */
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .post-card {
+    background: white; border: 2px solid var(--line);
+    border-radius: 16px; overflow: hidden;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+    display: flex; flex-direction: column;
+    text-decoration: none; color: inherit;
+  }
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--orange);
+  }
+  .post-thumb {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--cream-2);
+    overflow: hidden; position: relative;
+  }
+  .post-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .4s;
+  }
+  .post-card:hover .post-thumb img { transform: scale(1.05); }
+  .post-thumb-placeholder {
+    width: 100%; height: 100%;
+    display: grid; place-items: center;
+    color: var(--line);
+  }
+  .post-body { padding: 18px 20px; flex-grow: 1; display: flex; flex-direction: column; gap: 8px; }
+  .post-body h3 { font-size: 15px; font-weight: 900; line-height: 1.55; }
+  .post-body p { font-size: 12px; color: var(--ink-3); line-height: 1.7; flex-grow: 1; }
+  .post-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--line-2);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .post-footer .arrow { color: var(--orange); opacity: .7; }
+
+  /* ---- Sidebar ---- */
+  .sidebar { display: flex; flex-direction: column; gap: 24px; }
+  .side-card {
+    background: white; border: 2px solid var(--line);
+    border-radius: 18px; padding: 24px;
+  }
+  .side-card h3 {
+    font-size: 14px; font-weight: 900; color: var(--orange);
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* Search */
+  .search-wrap {
+    display: flex; gap: 8px;
+  }
+  .search-input {
+    flex: 1; border: 2px solid var(--line);
+    border-radius: 10px; padding: 10px 14px;
+    font-size: 14px; font-family: 'Noto Sans JP', sans-serif;
+    color: var(--ink); background: var(--bg);
+    outline: none; transition: border-color .2s;
+  }
+  .search-input:focus { border-color: var(--orange); }
+  .search-btn {
+    width: 42px; border-radius: 10px;
+    background: var(--orange); color: white;
+    display: grid; place-items: center;
+    flex-shrink: 0; cursor: pointer;
+    border: none; transition: background .2s;
+  }
+  .search-btn:hover { background: var(--orange-deep); }
+
+  /* Categories */
+  .cat-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .cat-list li a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 12px; border-radius: 10px;
+    font-size: 13px; font-weight: 700; color: var(--ink-2);
+    transition: all .2s;
+  }
+  .cat-list li a:hover { background: var(--cream); color: var(--orange); }
+  .cat-list .cnt {
+    background: var(--line); color: var(--ink-3);
+    font-size: 11px; font-weight: 900;
+    padding: 2px 8px; border-radius: 999px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    min-width: 28px; text-align: center;
+  }
+
+  /* Recent */
+  .recent-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .recent-list li a {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 0; border-bottom: 1px solid var(--line-2);
+    transition: opacity .2s;
+  }
+  .recent-list li:last-child a { border-bottom: none; }
+  .recent-list li a:hover { opacity: .75; }
+  .recent-thumb {
+    width: 64px; height: 48px; border-radius: 8px;
+    background: var(--cream-2); overflow: hidden; flex-shrink: 0;
+  }
+  .recent-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .recent-thumb-ph {
+    width: 100%; height: 100%;
+    display: grid; place-items: center; color: var(--line);
+  }
+  .recent-body { flex: 1; }
+  .recent-body .t { font-size: 12px; font-weight: 800; color: var(--ink); line-height: 1.5; margin-bottom: 4px; }
+  .recent-body .d { font-size: 11px; color: var(--ink-3); }
+
+  /* Tags */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    background: var(--cream); color: var(--ink-2);
+    border: 1px solid var(--line);
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    transition: all .2s; cursor: pointer;
+  }
+  .tag:hover { background: var(--orange); color: white; border-color: var(--orange); }
+
+  /* CTA mini */
+  .side-cta {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
+    color: white; border-radius: 18px; padding: 28px 24px;
+    text-align: center;
+  }
+  .side-cta h3 { font-size: 16px; font-weight: 900; margin-bottom: 8px; color: white; border: none; padding: 0; }
+  .side-cta p { font-size: 12px; opacity: .9; margin-bottom: 16px; line-height: 1.7; }
+  .side-cta a {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: white; color: var(--orange);
+    border-radius: 10px; padding: 13px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 14px;
+    transition: transform .15s;
+  }
+  .side-cta a:hover { transform: translateY(-2px); }
+
+  /* Pagination */
+  .pagination {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; margin-top: 40px;
+  }
+  .page-btn {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: grid; place-items: center;
+    font-weight: 900; font-size: 14px;
+    border: 2px solid var(--line);
+    background: white; color: var(--ink-2);
+    cursor: pointer; transition: all .2s;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+  }
+  .page-btn:hover, .page-btn.active {
+    border-color: var(--orange); background: var(--orange); color: white;
+  }
+  .page-btn.arrow { color: var(--orange); }
+  .page-btn.arrow:disabled { opacity: .3; cursor: default; }
+
+  @media (max-width: 960px) {
+    .blog-wrap { grid-template-columns: 1fr; }
+    .sidebar { flex-direction: row; flex-wrap: wrap; }
+    .side-card { flex: 1 1 240px; }
+    .featured-post { grid-template-columns: 1fr; }
+    .featured-img { min-height: 220px; }
+    .post-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .post-grid { grid-template-columns: 1fr; }
+    .featured-body { padding: 24px 20px; }
+    .featured-body h2 { font-size: 18px; }
+    .sidebar { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notice-bar">
+  <strong>★堺市西区最安値</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>24時間利用可能</strong> &nbsp;│&nbsp; <strong>女性も安心</strong>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長" /></a>
+    <nav class="nav">
+      <a href="index.html">ホーム</a>
+      <a href="flow.html">利用の流れ</a>
+      <a href="price.html">料金</a>
+      <a href="rooms.html">お部屋一覧</a>
+      <a href="access.html">アクセス</a>
+      <a href="faq.html">Q&amp;A</a>
+      <a href="blog.html" class="active">ブログ</a>
+    </nav>
+    <div class="header-cta">
+      <div class="tel-block">
+        <div class="label">お電話はこちら</div>
+        <a href="tel:0120666780" class="num">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          0120-666-780
+        </a>
+      </div>
+      <a href="contact.html" class="btn-line-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+        お問い合わせ
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<div class="page-header">
+  <p class="crumb"><a href="index.html">ホーム</a> &rsaquo; ブログ</p>
+  <span class="eyebrow">BLOG</span>
+  <h1><span class="accent">スタッフブログ</span></h1>
+  <p>収納のコツ・活用事例・お役立ち情報を発信しています。</p>
+</div>
+
+<section>
+  <div class="blog-wrap">
+
+    <!-- Main -->
+    <main>
+
+      <!-- Featured -->
+      <a href="blog/seasonal-storage.html" class="featured-post reveal">
+        <div class="featured-img">
+          <img src="assets/P2120291.JPG" alt="季節の収納入れ替え術" />
+          <span class="featured-badge">★ 注目記事</span>
+        </div>
+        <div class="featured-body">
+          <div class="post-meta">
+            <span class="post-cat">収納のコツ</span>
+            <span>2026年4月28日</span>
+          </div>
+          <h2>季節の衣替えを楽にする！<br>トランクルーム活用3つのコツ</h2>
+          <p>衣替えのたびにクローゼットが溢れてしまう…そんなお悩みを解決。季節ごとに「使うもの」と「しまうもの」を分けるだけで、自宅収納がスッキリします。トランクルームをうまく使う3つのポイントをご紹介します。</p>
+          <span class="read-more">
+            続きを読む
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Post grid header -->
+      <div class="posts-header">
+        <h3>すべての記事</h3>
+        <span class="posts-count">全6件</span>
+      </div>
+
+      <!-- Post grid -->
+      <div class="post-grid">
+
+        <a href="blog/what-to-store.html" class="post-card reveal">
+          <div class="post-thumb">
+            <img src="assets/P2120284.JPG" alt="トランクルームに向いているもの" />
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="post-cat">活用ガイド</span>
+              <span>2026年4月20日</span>
+            </div>
+            <h3>トランクルームに預けると便利なもの・向かないもの</h3>
+            <p>何でも預けられるイメージのトランクルームですが、実は預けられないものもあります。失敗しないために事前にチェックしておきましょう。</p>
+          </div>
+          <div class="post-footer">
+            <div class="post-meta"><span class="post-cat">活用ガイド</span></div>
+            <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></div>
+          </div>
+        </a>
+
+        <a href="blog/moving-tips.html" class="post-card reveal">
+          <div class="post-thumb">
+            <img src="assets/P2120286.JPG" alt="引っ越しとトランクルーム" />
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="post-cat">活用ガイド</span>
+              <span>2026年4月10日</span>
+            </div>
+            <h3>引っ越し前後のトランクルーム活用術。荷物を減らして快適に。</h3>
+            <p>引っ越しで「荷物が多すぎて困った」という経験はありませんか？トランクルームをうまく使えば、引っ越し費用を抑えながら余裕ある新生活が始められます。</p>
+          </div>
+          <div class="post-footer">
+            <div class="post-meta"><span class="post-cat">活用ガイド</span></div>
+            <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></div>
+          </div>
+        </a>
+
+        <a href="blog/collection-storage.html" class="post-card reveal">
+          <div class="post-thumb">
+            <img src="assets/P2120288.JPG" alt="コレクション収納" />
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="post-cat">活用ガイド</span>
+              <span>2026年3月25日</span>
+            </div>
+            <h3>大切なコレクションを守る！趣味グッズの正しい保管方法</h3>
+            <p>フィギュア・カード・楽器・釣り道具…大切な趣味グッズを自宅で保管するのはスペース的に難しいですよね。トランクルームでの正しい保管方法をご紹介します。</p>
+          </div>
+          <div class="post-footer">
+            <div class="post-meta"><span class="post-cat">活用ガイド</span></div>
+            <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></div>
+          </div>
+        </a>
+
+        <a href="blog/choose-size.html" class="post-card reveal">
+          <div class="post-thumb">
+            <img src="assets/P2120292.JPG" alt="サイズの選び方" />
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="post-cat">はじめての方へ</span>
+              <span>2026年3月15日</span>
+            </div>
+            <h3>はじめてのトランクルーム。サイズの選び方を失敗しないコツ</h3>
+            <p>「どのサイズが自分に合うかわからない」という方は多いです。実際に預けたいものを書き出してみることで、ぴったりのサイズが分かります。</p>
+          </div>
+          <div class="post-footer">
+            <div class="post-meta"><span class="post-cat">はじめての方へ</span></div>
+            <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></div>
+          </div>
+        </a>
+
+        <a href="blog/sakai-nishiku.html" class="post-card reveal">
+          <div class="post-thumb">
+            <img src="assets/P2120283.JPG" alt="堺市西区のトランクルーム" />
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="post-cat">地域情報</span>
+              <span>2026年3月5日</span>
+            </div>
+            <h3>堺市西区でトランクルームを選ぶ3つのポイント</h3>
+            <p>堺市西区エリアでトランクルームをお探しの方へ。立地・価格・セキュリティの3点を軸に、後悔しない選び方をまとめました。</p>
+          </div>
+          <div class="post-footer">
+            <div class="post-meta"><span class="post-cat">地域情報</span></div>
+            <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></div>
+          </div>
+        </a>
+
+        <a href="blog/open-info.html" class="post-card reveal">
+          <div class="post-thumb">
+            <img src="assets/P2120296.JPG" alt="オープン情報" />
+          </div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="post-cat">お知らせ</span>
+              <span>2026年2月20日</span>
+            </div>
+            <h3>【オープン情報】トランクルーム収納番長が津久野駅すぐにオープン！</h3>
+            <p>この度、JR阪和線「津久野駅」徒歩すぐの好立地に、トランクルーム収納番長がオープンいたしました。堺市西区エリア最安値水準の賃料で、初期費用¥0にてご利用いただけます。</p>
+          </div>
+          <div class="post-footer">
+            <div class="post-meta"><span class="post-cat">お知らせ</span></div>
+            <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></div>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page-btn arrow" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <!-- Search -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          記事を検索
+        </h3>
+        <div class="search-wrap">
+          <input type="text" class="search-input" placeholder="キーワードを入力…" />
+          <button class="search-btn" aria-label="検索">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          カテゴリー
+        </h3>
+        <ul class="cat-list">
+          <li>
+            <a href="#">
+              収納のコツ
+              <span class="cnt">1</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              活用ガイド
+              <span class="cnt">3</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              はじめての方へ
+              <span class="cnt">1</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              地域情報
+              <span class="cnt">1</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              お知らせ
+              <span class="cnt">1</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Recent posts -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          最近の記事
+        </h3>
+        <ul class="recent-list">
+          <li>
+            <a href="blog/seasonal-storage.html">
+              <div class="recent-thumb"><img src="assets/P2120291.JPG" alt="季節の収納" /></div>
+              <div class="recent-body">
+                <div class="t">季節の衣替えを楽にする！トランクルーム活用3つのコツ</div>
+                <div class="d">2026年4月28日</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="blog/what-to-store.html">
+              <div class="recent-thumb"><img src="assets/P2120284.JPG" alt="預けるもの" /></div>
+              <div class="recent-body">
+                <div class="t">トランクルームに預けると便利なもの・向かないもの</div>
+                <div class="d">2026年4月20日</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="blog/moving-tips.html">
+              <div class="recent-thumb"><img src="assets/P2120286.JPG" alt="引っ越し" /></div>
+              <div class="recent-body">
+                <div class="t">引っ越し前後のトランクルーム活用術</div>
+                <div class="d">2026年4月10日</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tags -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          タグ
+        </h3>
+        <div class="tag-cloud">
+          <span class="tag">#収納</span>
+          <span class="tag">#衣替え</span>
+          <span class="tag">#引っ越し</span>
+          <span class="tag">#コレクション</span>
+          <span class="tag">#堺市</span>
+          <span class="tag">#津久野</span>
+          <span class="tag">#初期費用</span>
+          <span class="tag">#24時間</span>
+          <span class="tag">#サイズ選び</span>
+          <span class="tag">#セキュリティ</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="side-cta reveal">
+        <h3>空き状況を確認する</h3>
+        <p>まずはお気軽にお問い合わせください。見学予約・お見積りも無料です。</p>
+        <a href="contact.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          お問い合わせはこちら
+        </a>
+      </div>
+
+    </aside>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">◎ お問い合わせ</span>
+    <h2>まずは <span class="hl">お気軽に</span> ご連絡ください！</h2>
+    <p>空き状況・お見積り・見学予約まで、お問い合わせフォームまたはお電話で承ります。</p>
+    <div class="cta-buttons">
+      <a href="contact.html" class="cta-card line">
+        <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg></div>
+        <div class="cta-label">お問い合わせフォーム / 24時間受付</div>
+        <div class="cta-value">フォームで相談</div>
+        <div class="cta-sub">お見積り・ご質問まで、お気軽にお問い合わせください</div>
+        <div class="cta-arrow" style="background:#E6F9EC;color:var(--green-deep)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </a>
+      <a href="tel:0120666780" class="cta-card tel">
+        <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="cta-label">TEL / お気軽にお電話ください</div>
+        <div class="cta-value">0120-666-780</div>
+        <div class="cta-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/toplogo.jpg" alt="収納番長" />
+        <p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p>
+      </div>
+      <div class="footer-col">
+        <h4>メニュー</h4>
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="flow.html">利用の流れ</a></li>
+          <li><a href="price.html">料金</a></li>
+          <li><a href="rooms.html">お部屋一覧</a></li>
+          <li><a href="access.html">アクセス</a></li>
+          <li><a href="faq.html">Q&amp;A</a></li>
+          <li><a href="blog.html">ブログ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>店舗情報</h4>
+        <ul>
+          <li>大阪府堺市西区津久野町</li>
+          <li>JR津久野駅 徒歩すぐ</li>
+          <li>ご利用 24時間365日</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>お問い合わせ</h4>
+        <ul>
+          <li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="apply.html">お申し込み</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 トランクルーム収納番長. All Rights Reserved.</span>
+      <span>SAKAI / NISHI-KU / TSUKUNO</span>
+    </div>
+  </div>
+</footer>
+
+<div class="floating-cta">
+  <a href="contact.html" class="floating-line">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+    <span class="txt">お問い合わせ</span>
+  </a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  if (toggle && nav) toggle.addEventListener('click', () => nav.classList.toggle('open'));
+</script>
+</body>
+</html>

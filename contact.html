@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>お問い合わせ | トランクルーム収納番長</title>
+<meta name="description" content="トランクルーム収納番長へのお問い合わせはこちら。空き状況・お見積り・見学予約など、お気軽にご連絡ください。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ---- Form ---- */
+  .form-card {
+    background: white;
+    border: 2px solid var(--line);
+    border-radius: 24px;
+    padding: 48px;
+  }
+  .form-card h2 {
+    font-size: 22px; font-weight: 900;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .form-card h2 .ico {
+    width: 40px; height: 40px; background: var(--orange);
+    border-radius: 10px; display: grid; place-items: center; color: white;
+    flex-shrink: 0;
+  }
+  .form-lead { font-size: 13px; color: var(--ink-3); margin-bottom: 36px; line-height: 1.7; }
+
+  .form-group { margin-bottom: 24px; }
+  .form-label {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 800; font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .form-label .req {
+    background: var(--red); color: white;
+    font-size: 10px; font-weight: 900;
+    padding: 2px 8px; border-radius: 999px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    letter-spacing: .04em;
+  }
+  .form-label .opt {
+    background: var(--line); color: var(--ink-3);
+    font-size: 10px; font-weight: 900;
+    padding: 2px 8px; border-radius: 999px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    transition: border-color .2s, box-shadow .2s;
+    appearance: none;
+    outline: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 4px rgba(232,116,26,.1);
+    background: white;
+  }
+  .form-textarea { resize: vertical; min-height: 140px; line-height: 1.8; }
+  .form-select-wrap { position: relative; }
+  .form-select-wrap::after {
+    content: '';
+    position: absolute; right: 16px; top: 50%;
+    transform: translateY(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--ink-3);
+    pointer-events: none;
+  }
+
+  .radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+  .radio-label {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg); border: 2px solid var(--line);
+    border-radius: 999px; padding: 10px 18px;
+    cursor: pointer; font-size: 14px; font-weight: 700;
+    transition: all .2s;
+    user-select: none;
+  }
+  .radio-label input { display: none; }
+  .radio-label:hover { border-color: var(--orange); background: white; }
+  .radio-label:has(input:checked) {
+    background: var(--orange); color: white;
+    border-color: var(--orange);
+    box-shadow: 0 3px 8px rgba(232,116,26,.3);
+  }
+
+  .form-note { font-size: 12px; color: var(--ink-3); margin-top: 6px; line-height: 1.6; }
+
+  .privacy-box {
+    background: var(--cream); border: 2px solid var(--line);
+    border-radius: 14px; padding: 18px 20px;
+    font-size: 12px; color: var(--ink-3);
+    line-height: 1.8; margin-bottom: 28px;
+  }
+  .privacy-box strong { color: var(--ink-2); font-weight: 800; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--orange); color: white;
+    border: none; border-radius: 14px;
+    padding: 20px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 5px 0 var(--orange-deep);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .form-submit:hover { transform: translateY(2px); box-shadow: 0 3px 0 var(--orange-deep); }
+
+  /* ---- Sidebar ---- */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+  .side-card {
+    background: white; border: 2px solid var(--line);
+    border-radius: 20px; padding: 28px 24px;
+  }
+  .side-card h3 {
+    font-size: 15px; font-weight: 900;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
+    color: var(--orange);
+  }
+
+  .tel-large {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 30px;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 6px;
+    letter-spacing: -.01em;
+  }
+  .tel-large svg { color: var(--orange); }
+  .tel-meta { font-size: 12px; color: var(--ink-3); margin-bottom: 18px; }
+  .btn-tel-full {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--orange); color: white;
+    border-radius: 12px; padding: 14px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 15px;
+    box-shadow: 0 4px 0 var(--orange-deep);
+    transition: transform .15s, box-shadow .15s;
+    width: 100%;
+  }
+  .btn-tel-full:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--orange-deep); }
+
+  .hours-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .hours-list li {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; padding: 8px 0;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .hours-list li:last-child { border-bottom: none; }
+  .hours-list .label { color: var(--ink-2); font-weight: 700; }
+  .hours-list .val { font-weight: 900; color: var(--ink); }
+  .hours-list .badge {
+    background: var(--orange); color: white;
+    font-size: 10px; font-weight: 900;
+    padding: 2px 8px; border-radius: 999px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+  }
+
+  .faq-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .faq-list li a {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--ink-2); font-weight: 700;
+    transition: color .2s;
+  }
+  .faq-list li a::before {
+    content: 'Q';
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--orange); color: white;
+    font-size: 11px; font-weight: 900;
+    display: grid; place-items: center; flex-shrink: 0;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+  }
+  .faq-list li a:hover { color: var(--orange); }
+
+  /* ---- Success state ---- */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 60px 40px;
+  }
+  .form-success .ico-ok {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: #E6F9EC; color: var(--green-deep);
+    display: grid; place-items: center;
+    margin: 0 auto 24px;
+  }
+  .form-success h3 { font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+  .form-success p { font-size: 14px; color: var(--ink-3); line-height: 1.9; }
+
+  @media (max-width: 900px) {
+    .contact-wrap { grid-template-columns: 1fr; }
+    .sidebar { flex-direction: column; }
+    .form-card { padding: 32px 24px; }
+  }
+  @media (max-width: 560px) {
+    .form-card { padding: 24px 16px; border-radius: 16px; }
+    .tel-large { font-size: 26px; }
+    .radio-group { gap: 8px; }
+    .radio-label { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notice-bar">
+  <strong>★堺市西区最安値</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>24時間利用可能</strong> &nbsp;│&nbsp; <strong>女性も安心</strong>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長" /></a>
+    <nav class="nav">
+      <a href="index.html">ホーム</a>
+      <a href="flow.html">利用の流れ</a>
+      <a href="price.html">料金</a>
+      <a href="rooms.html">お部屋一覧</a>
+      <a href="access.html">アクセス</a>
+      <a href="faq.html">Q&amp;A</a>
+      <a href="blog.html">ブログ</a>
+    </nav>
+    <div class="header-cta">
+      <div class="tel-block">
+        <div class="label">お電話はこちら</div>
+        <a href="tel:0120666780" class="num">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          0120-666-780
+        </a>
+      </div>
+      <a href="contact.html" class="btn-line-sm active">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+        お問い合わせ
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<div class="page-header">
+  <p class="crumb"><a href="index.html">ホーム</a> &rsaquo; お問い合わせ</p>
+  <span class="eyebrow">CONTACT</span>
+  <h1><span class="accent">お問い合わせ</span></h1>
+  <p>空き状況・お見積り・見学予約など、何でもお気軽にご連絡ください。<br>24時間フォームを受け付けております。</p>
+</div>
+
+<section>
+  <div class="contact-wrap">
+
+    <!-- Form -->
+    <div class="form-card">
+      <h2>
+        <div class="ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        お問い合わせフォーム
+      </h2>
+      <p class="form-lead">通常1営業日以内にご返信いたします。お急ぎの場合はお電話をご利用ください。</p>
+
+      <form id="contactForm" novalidate>
+
+        <div class="form-group">
+          <label class="form-label">お問い合わせ種別 <span class="req">必須</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="category" value="空き状況の確認" required> 空き状況の確認</label>
+            <label class="radio-label"><input type="radio" name="category" value="お見積り"> お見積り</label>
+            <label class="radio-label"><input type="radio" name="category" value="見学のご予約"> 見学のご予約</label>
+            <label class="radio-label"><input type="radio" name="category" value="ご契約について"> ご契約について</label>
+            <label class="radio-label"><input type="radio" name="category" value="その他"> その他</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="name">お名前 <span class="req">必須</span></label>
+          <input type="text" id="name" name="name" class="form-input" placeholder="例：田中 太郎" autocomplete="name" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="tel">電話番号 <span class="req">必須</span></label>
+          <input type="tel" id="tel" name="tel" class="form-input" placeholder="例：090-1234-5678" autocomplete="tel" required />
+          <p class="form-note">折り返しのご連絡に使用します。ハイフンあり・なし、どちらでもかまいません。</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">メールアドレス <span class="opt">任意</span></label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="例：example@mail.com" autocomplete="email" />
+          <p class="form-note">返信メールをご希望の場合はご入力ください。</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="size">ご希望のサイズ <span class="opt">任意</span></label>
+          <div class="form-select-wrap">
+            <select id="size" name="size" class="form-select">
+              <option value="">— 選択してください —</option>
+              <option value="小サイズ（小物・書類など）">小サイズ（小物・書類など）</option>
+              <option value="中サイズ（家電・衣類など）">中サイズ（家電・衣類など）</option>
+              <option value="大サイズ（家具・バイクなど）">大サイズ（家具・バイクなど）</option>
+              <option value="わからない・相談したい">わからない・相談したい</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">お問い合わせ内容 <span class="req">必須</span></label>
+          <textarea id="message" name="message" class="form-textarea" placeholder="ご希望・ご質問など、なんでもお気軽にご記入ください。" required></textarea>
+        </div>
+
+        <div class="privacy-box">
+          <strong>個人情報の取り扱いについて</strong><br>
+          ご入力いただいた個人情報は、お問い合わせへの対応のみに使用し、第三者への提供・開示は行いません。送信ボタンをクリックすることで、個人情報の取り扱いに同意いただいたものとみなします。
+        </div>
+
+        <button type="submit" class="form-submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 2L11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg>
+          送信する
+        </button>
+      </form>
+
+      <!-- Success -->
+      <div class="form-success" id="successMsg">
+        <div class="ico-ok">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3>お問い合わせを受け付けました</h3>
+        <p>ご連絡ありがとうございます。<br>通常1営業日以内に担当者よりご連絡いたします。<br>お急ぎの場合はお電話（0120-666-780）でもご対応いたします。</p>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+      <!-- TEL -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          お電話でのお問い合わせ
+        </h3>
+        <p class="tel-large">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          0120-666-780
+        </p>
+        <p class="tel-meta">通話料無料 / 受付時間 9:00〜18:00</p>
+        <a href="tel:0120666780" class="btn-tel-full">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          今すぐ電話する
+        </a>
+      </div>
+
+      <!-- Hours -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          営業・利用時間
+        </h3>
+        <ul class="hours-list">
+          <li>
+            <span class="label">電話受付</span>
+            <span class="val">9:00〜18:00</span>
+          </li>
+          <li>
+            <span class="label">フォーム受付</span>
+            <span class="val"><span class="badge">24時間</span></span>
+          </li>
+          <li>
+            <span class="label">施設ご利用</span>
+            <span class="val"><span class="badge">24時間 365日</span></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- FAQ link -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          よくある質問
+        </h3>
+        <ul class="faq-list">
+          <li><a href="faq.html#first">初めてでも使えますか？</a></li>
+          <li><a href="faq.html#payment">支払い方法は？</a></li>
+          <li><a href="faq.html#cancel">解約はいつでもできますか？</a></li>
+          <li><a href="faq.html#visit">見学はできますか？</a></li>
+        </ul>
+        <a href="faq.html" style="display:inline-flex;align-items:center;gap:6px;color:var(--orange);font-weight:900;font-size:13px;margin-top:16px;">
+          よくある質問をすべて見る
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/toplogo.jpg" alt="収納番長" />
+        <p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p>
+      </div>
+      <div class="footer-col">
+        <h4>メニュー</h4>
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="flow.html">利用の流れ</a></li>
+          <li><a href="price.html">料金</a></li>
+          <li><a href="rooms.html">お部屋一覧</a></li>
+          <li><a href="access.html">アクセス</a></li>
+          <li><a href="faq.html">Q&amp;A</a></li>
+          <li><a href="blog.html">ブログ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>店舗情報</h4>
+        <ul>
+          <li>大阪府堺市西区津久野町</li>
+          <li>JR津久野駅 徒歩すぐ</li>
+          <li>ご利用 24時間365日</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>お問い合わせ</h4>
+        <ul>
+          <li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="apply.html">お申し込み</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 トランクルーム収納番長. All Rights Reserved.</span>
+      <span>SAKAI / NISHI-KU / TSUKUNO</span>
+    </div>
+  </div>
+</footer>
+
+<div class="floating-cta">
+  <a href="tel:0120666780" class="floating-line" style="background:var(--orange);box-shadow:0 8px 24px rgba(232,116,26,.4);">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+    <span class="txt">電話する</span>
+  </a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  if (toggle && nav) toggle.addEventListener('click', () => nav.classList.toggle('open'));
+
+  // Form submission (フォームバックエンド未接続の場合はサンクス画面を表示)
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const form = this;
+    const category = form.querySelector('input[name="category"]:checked');
+    const name = form.querySelector('#name').value.trim();
+    const tel = form.querySelector('#tel').value.trim();
+    const message = form.querySelector('#message').value.trim();
+
+    // 簡易バリデーション
+    if (!category) { alert('お問い合わせ種別を選択してください。'); return; }
+    if (!name) { alert('お名前を入力してください。'); return; }
+    if (!tel) { alert('電話番号を入力してください。'); return; }
+    if (!message) { alert('お問い合わせ内容を入力してください。'); return; }
+
+    // TODO: ここにフォーム送信処理を追加（Formspree / メールAPIなど）
+    form.style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>

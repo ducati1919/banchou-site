@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>お申し込み | トランクルーム収納番長</title>
+<meta name="description" content="トランクルーム収納番長のお申し込みはこちら。ご希望のお部屋サイズや開始日をお知らせください。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* ---- Flow steps banner ---- */
+  .apply-flow {
+    background: var(--orange);
+    padding: 28px 24px;
+  }
+  .apply-flow-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .af-step {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 8px;
+    color: white;
+    position: relative;
+  }
+  .af-step::after {
+    content: '';
+    position: absolute; right: -1px; top: 16px;
+    width: 0; height: 0;
+    border-left: 10px solid rgba(255,255,255,.5);
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+  }
+  .af-step:last-child::after { display: none; }
+  .af-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    border: 2px solid rgba(255,255,255,.6);
+    display: grid; place-items: center;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 15px;
+  }
+  .af-step.current .af-num {
+    background: white; color: var(--orange); border-color: white;
+  }
+  .af-label { font-size: 12px; font-weight: 800; opacity: .9; }
+  .af-step.current .af-label { opacity: 1; font-size: 13px; }
+
+  /* ---- Layout ---- */
+  .apply-wrap {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 40px;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  /* ---- Form card ---- */
+  .form-card {
+    background: white; border: 2px solid var(--line);
+    border-radius: 24px; padding: 48px;
+  }
+  .form-section-title {
+    font-size: 16px; font-weight: 900;
+    color: var(--orange);
+    border-left: 4px solid var(--orange);
+    padding-left: 12px;
+    margin: 36px 0 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .form-section-title:first-of-type { margin-top: 0; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-group { margin-bottom: 20px; }
+  .form-label {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 800; font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .form-label .req {
+    background: var(--red); color: white;
+    font-size: 10px; font-weight: 900;
+    padding: 2px 8px; border-radius: 999px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+  }
+  .form-label .opt {
+    background: var(--line); color: var(--ink-3);
+    font-size: 10px; font-weight: 900;
+    padding: 2px 8px; border-radius: 999px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    transition: border-color .2s, box-shadow .2s;
+    appearance: none;
+    outline: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 4px rgba(232,116,26,.1);
+    background: white;
+  }
+  .form-textarea { resize: vertical; min-height: 100px; line-height: 1.8; }
+  .form-select-wrap { position: relative; }
+  .form-select-wrap::after {
+    content: '';
+    position: absolute; right: 16px; top: 50%;
+    transform: translateY(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--ink-3);
+    pointer-events: none;
+  }
+  .form-note { font-size: 12px; color: var(--ink-3); margin-top: 6px; line-height: 1.6; }
+
+  .radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+  .radio-label {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg); border: 2px solid var(--line);
+    border-radius: 999px; padding: 10px 18px;
+    cursor: pointer; font-size: 14px; font-weight: 700;
+    transition: all .2s; user-select: none;
+  }
+  .radio-label input { display: none; }
+  .radio-label:hover { border-color: var(--orange); background: white; }
+  .radio-label:has(input:checked) {
+    background: var(--orange); color: white;
+    border-color: var(--orange);
+    box-shadow: 0 3px 8px rgba(232,116,26,.3);
+  }
+
+  /* Size picker cards */
+  .size-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .size-card-label {
+    display: block; cursor: pointer;
+    border: 2px solid var(--line);
+    border-radius: 16px; padding: 18px 14px;
+    text-align: center;
+    background: var(--bg);
+    transition: all .2s;
+    user-select: none;
+  }
+  .size-card-label input { display: none; }
+  .size-card-label:hover { border-color: var(--orange); background: white; }
+  .size-card-label:has(input:checked) {
+    border-color: var(--orange); background: var(--cream);
+    box-shadow: 0 0 0 3px rgba(232,116,26,.2);
+  }
+  .size-card-label:has(input:checked) .size-ico { background: var(--orange); color: white; }
+  .size-ico {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--line); color: var(--ink-3);
+    display: grid; place-items: center;
+    margin: 0 auto 10px;
+    transition: all .2s;
+  }
+  .size-name { font-weight: 900; font-size: 14px; margin-bottom: 4px; }
+  .size-dim { font-size: 11px; color: var(--ink-3); line-height: 1.5; }
+
+  .privacy-box {
+    background: var(--cream); border: 2px solid var(--line);
+    border-radius: 14px; padding: 18px 20px;
+    font-size: 12px; color: var(--ink-3);
+    line-height: 1.8; margin: 28px 0;
+  }
+  .privacy-box strong { color: var(--ink-2); font-weight: 800; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--orange); color: white;
+    border: none; border-radius: 14px;
+    padding: 20px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 5px 0 var(--orange-deep);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .form-submit:hover { transform: translateY(2px); box-shadow: 0 3px 0 var(--orange-deep); }
+
+  /* Success */
+  .form-success {
+    display: none; text-align: center; padding: 60px 24px;
+  }
+  .form-success .ico-ok {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: #E6F9EC; color: var(--green-deep);
+    display: grid; place-items: center; margin: 0 auto 24px;
+  }
+  .form-success h3 { font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+  .form-success p { font-size: 14px; color: var(--ink-3); line-height: 1.9; }
+
+  /* ---- Sidebar ---- */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  .side-card {
+    background: white; border: 2px solid var(--line);
+    border-radius: 20px; padding: 28px 24px;
+  }
+  .side-card h3 {
+    font-size: 15px; font-weight: 900;
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 2px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
+    color: var(--orange);
+  }
+
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px; line-height: 1.6;
+  }
+  .checklist .ck {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--orange); color: white;
+    display: grid; place-items: center; flex-shrink: 0; margin-top: 1px;
+  }
+
+  .flow-mini-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .flow-mini-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 12px 0; border-bottom: 1px solid var(--line-2);
+    font-size: 13px;
+  }
+  .flow-mini-list li:last-child { border-bottom: none; }
+  .fml-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--orange); color: white;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 12px;
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .fml-body strong { display: block; font-weight: 900; font-size: 13px; margin-bottom: 2px; }
+  .fml-body span { color: var(--ink-3); font-size: 12px; line-height: 1.5; }
+
+  .tel-block-side {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .tel-num-lg {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 26px;
+    display: flex; align-items: center; gap: 8px;
+    color: var(--ink);
+  }
+  .tel-num-lg svg { color: var(--orange); }
+  .tel-note { font-size: 12px; color: var(--ink-3); }
+  .btn-tel-sm {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--orange); color: white;
+    border-radius: 12px; padding: 13px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 900; font-size: 14px;
+    box-shadow: 0 4px 0 var(--orange-deep);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-tel-sm:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--orange-deep); }
+
+  @media (max-width: 900px) {
+    .apply-flow-inner { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .af-step::after { display: none; }
+    .apply-wrap { grid-template-columns: 1fr; }
+    .form-card { padding: 32px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    .size-cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .form-card { padding: 24px 16px; border-radius: 16px; }
+    .size-cards { grid-template-columns: 1fr; }
+    .radio-group { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notice-bar">
+  <strong>★堺市西区最安値</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>24時間利用可能</strong> &nbsp;│&nbsp; <strong>女性も安心</strong>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長" /></a>
+    <nav class="nav">
+      <a href="index.html">ホーム</a>
+      <a href="flow.html">利用の流れ</a>
+      <a href="price.html">料金</a>
+      <a href="rooms.html">お部屋一覧</a>
+      <a href="access.html">アクセス</a>
+      <a href="faq.html">Q&amp;A</a>
+      <a href="blog.html">ブログ</a>
+    </nav>
+    <div class="header-cta">
+      <div class="tel-block">
+        <div class="label">お電話はこちら</div>
+        <a href="tel:0120666780" class="num">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          0120-666-780
+        </a>
+      </div>
+      <a href="contact.html" class="btn-line-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+        お問い合わせ
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<div class="page-header">
+  <p class="crumb"><a href="index.html">ホーム</a> &rsaquo; お申し込み</p>
+  <span class="eyebrow">APPLY</span>
+  <h1><span class="accent">お申し込み</span></h1>
+  <p>ご希望のお部屋サイズや開始日をお知らせください。<br>担当者より折り返しご連絡のうえ、ご契約手続きに進みます。</p>
+</div>
+
+<!-- Progress flow -->
+<div class="apply-flow">
+  <div class="apply-flow-inner">
+    <div class="af-step current">
+      <div class="af-num">1</div>
+      <div class="af-label">申込フォーム記入</div>
+    </div>
+    <div class="af-step">
+      <div class="af-num">2</div>
+      <div class="af-label">担当者よりご連絡</div>
+    </div>
+    <div class="af-step">
+      <div class="af-num">3</div>
+      <div class="af-label">見学・お部屋確認</div>
+    </div>
+    <div class="af-step">
+      <div class="af-num">4</div>
+      <div class="af-label">ご契約・利用開始</div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="apply-wrap">
+
+    <!-- Form -->
+    <div class="form-card">
+      <form id="applyForm" novalidate>
+
+        <!-- お客様情報 -->
+        <p class="form-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          お客様情報
+        </p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="sei">姓 <span class="req">必須</span></label>
+            <input type="text" id="sei" name="sei" class="form-input" placeholder="田中" autocomplete="family-name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mei">名 <span class="req">必須</span></label>
+            <input type="text" id="mei" name="mei" class="form-input" placeholder="太郎" autocomplete="given-name" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="sei_kana">セイ <span class="req">必須</span></label>
+            <input type="text" id="sei_kana" name="sei_kana" class="form-input" placeholder="タナカ" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mei_kana">メイ <span class="req">必須</span></label>
+            <input type="text" id="mei_kana" name="mei_kana" class="form-input" placeholder="タロウ" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="tel">電話番号 <span class="req">必須</span></label>
+          <input type="tel" id="tel" name="tel" class="form-input" placeholder="例：090-1234-5678" autocomplete="tel" required />
+          <p class="form-note">折り返しのご連絡に使用します。</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">メールアドレス <span class="opt">任意</span></label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="例：example@mail.com" autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="address">ご住所 <span class="opt">任意</span></label>
+          <input type="text" id="address" name="address" class="form-input" placeholder="例：大阪府堺市西区○○町1-2-3" autocomplete="street-address" />
+        </div>
+
+        <!-- ご希望のお部屋 -->
+        <p class="form-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 3h18v6H3zM3 15h18v6H3zM3 9v6"/></svg>
+          ご希望のお部屋
+        </p>
+
+        <div class="form-group">
+          <label class="form-label">希望サイズ <span class="req">必須</span></label>
+          <div class="size-cards">
+            <label class="size-card-label">
+              <input type="radio" name="size" value="小サイズ" required>
+              <div class="size-ico">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>
+              </div>
+              <div class="size-name">小サイズ</div>
+              <div class="size-dim">小物・書類・<br>季節家電など</div>
+            </label>
+            <label class="size-card-label">
+              <input type="radio" name="size" value="中サイズ">
+              <div class="size-ico">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              </div>
+              <div class="size-name">中サイズ</div>
+              <div class="size-dim">衣類・趣味用品・<br>家電など</div>
+            </label>
+            <label class="size-card-label">
+              <input type="radio" name="size" value="大サイズ">
+              <div class="size-ico">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20M2 16h20"/></svg>
+              </div>
+              <div class="size-name">大サイズ</div>
+              <div class="size-dim">家具・自転車・<br>大型荷物など</div>
+            </label>
+          </div>
+          <p class="form-note" style="margin-top:10px;">サイズのご相談はお気軽に。見学時に一緒にお決めいただくことも可能です。</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="floor">ご希望の階 <span class="opt">任意</span></label>
+          <div class="form-select-wrap">
+            <select id="floor" name="floor" class="form-select">
+              <option value="">— こだわりなし —</option>
+              <option value="1階">1階（出し入れしやすい）</option>
+              <option value="2階">2階</option>
+              <option value="どちらでもよい">どちらでもよい</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ご利用について -->
+        <p class="form-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          ご利用について
+        </p>
+
+        <div class="form-group">
+          <label class="form-label" for="start">ご希望の利用開始時期 <span class="req">必須</span></label>
+          <div class="form-select-wrap">
+            <select id="start" name="start" class="form-select" required>
+              <option value="">— 選択してください —</option>
+              <option value="すぐにでも">すぐにでも（今月中）</option>
+              <option value="来月中">来月中</option>
+              <option value="2〜3ヶ月以内">2〜3ヶ月以内</option>
+              <option value="まずは見学だけ">まずは見学だけしたい</option>
+              <option value="未定">未定・相談したい</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">主に預けるものは？ <span class="opt">任意</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="items" value="季節家電"> 季節家電</label>
+            <label class="radio-label"><input type="radio" name="items" value="衣類・布団"> 衣類・布団</label>
+            <label class="radio-label"><input type="radio" name="items" value="スポーツ用品"> スポーツ用品</label>
+            <label class="radio-label"><input type="radio" name="items" value="書類・本"> 書類・本</label>
+            <label class="radio-label"><input type="radio" name="items" value="家具"> 家具</label>
+            <label class="radio-label"><input type="radio" name="items" value="その他"> その他</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">見学をご希望ですか？ <span class="req">必須</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="visit" value="ぜひ見学したい" required> ぜひ見学したい</label>
+            <label class="radio-label"><input type="radio" name="visit" value="見学してから決めたい"> 見学してから決めたい</label>
+            <label class="radio-label"><input type="radio" name="visit" value="見学不要・直接契約したい"> 見学不要・直接契約したい</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">何でお知りになりましたか？ <span class="opt">任意</span></label>
+          <div class="form-select-wrap">
+            <select name="source" class="form-select">
+              <option value="">— 選択してください —</option>
+              <option value="Google・Yahoo検索">Google・Yahoo検索</option>
+              <option value="看板・チラシ">看板・チラシ</option>
+              <option value="知人の紹介">知人の紹介</option>
+              <option value="SNS">SNS（Instagram・X など）</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="note">ご要望・ご質問 <span class="opt">任意</span></label>
+          <textarea id="note" name="note" class="form-textarea" placeholder="ご希望のお部屋番号・その他ご要望などがあればご記入ください。"></textarea>
+        </div>
+
+        <div class="privacy-box">
+          <strong>個人情報の取り扱いについて</strong><br>
+          ご入力いただいた個人情報は、お申し込み対応および契約手続きのみに使用し、第三者への提供・開示は行いません。送信ボタンをクリックすることで、個人情報の取り扱いに同意いただいたものとみなします。
+        </div>
+
+        <button type="submit" class="form-submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 2L11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg>
+          お申し込みを送信する
+        </button>
+
+      </form>
+
+      <!-- Success -->
+      <div class="form-success" id="successMsg">
+        <div class="ico-ok">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3>お申し込みを受け付けました</h3>
+        <p>ありがとうございます！<br>担当者より1営業日以内にお電話またはメールにてご連絡いたします。<br><br>お急ぎの場合はお電話（<a href="tel:0120666780" style="color:var(--orange);font-weight:900;">0120-666-780</a>）でもご対応いたします。</p>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+      <!-- 準備するもの -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          ご契約時に必要なもの
+        </h3>
+        <ul class="checklist">
+          <li>
+            <div class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>本人確認書類（運転免許証・マイナンバーカードなど）</span>
+          </li>
+          <li>
+            <div class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>初月分のお支払い</span>
+          </li>
+          <li>
+            <div class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>印鑑（認印可）</span>
+          </li>
+        </ul>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:14px;line-height:1.7;">※ 初期費用（敷金・礼金）は<strong style="color:var(--orange);">¥0</strong>のキャンペーン中。月額賃料のみでご利用いただけます。</p>
+      </div>
+
+      <!-- 申し込みの流れ -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          申し込みの流れ
+        </h3>
+        <ul class="flow-mini-list">
+          <li>
+            <div class="fml-num">1</div>
+            <div class="fml-body">
+              <strong>フォーム送信</strong>
+              <span>このページよりお申し込み</span>
+            </div>
+          </li>
+          <li>
+            <div class="fml-num">2</div>
+            <div class="fml-body">
+              <strong>担当者よりご連絡</strong>
+              <span>1営業日以内にお電話・メールにてご連絡</span>
+            </div>
+          </li>
+          <li>
+            <div class="fml-num">3</div>
+            <div class="fml-body">
+              <strong>見学・お部屋確認</strong>
+              <span>実際のお部屋をご覧いただけます</span>
+            </div>
+          </li>
+          <li>
+            <div class="fml-num">4</div>
+            <div class="fml-body">
+              <strong>ご契約・ご利用開始</strong>
+              <span>書類確認後、すぐにご利用いただけます</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- TEL -->
+      <div class="side-card reveal">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          お電話でのお申し込み
+        </h3>
+        <div class="tel-block-side">
+          <p class="tel-num-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+            0120-666-780
+          </p>
+          <p class="tel-note">通話料無料 / 受付 9:00〜18:00</p>
+          <a href="tel:0120666780" class="btn-tel-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+            今すぐ電話する
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/toplogo.jpg" alt="収納番長" />
+        <p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p>
+      </div>
+      <div class="footer-col">
+        <h4>メニュー</h4>
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="flow.html">利用の流れ</a></li>
+          <li><a href="price.html">料金</a></li>
+          <li><a href="rooms.html">お部屋一覧</a></li>
+          <li><a href="access.html">アクセス</a></li>
+          <li><a href="faq.html">Q&amp;A</a></li>
+          <li><a href="blog.html">ブログ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>店舗情報</h4>
+        <ul>
+          <li>大阪府堺市西区津久野町</li>
+          <li>JR津久野駅 徒歩すぐ</li>
+          <li>ご利用 24時間365日</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>お問い合わせ</h4>
+        <ul>
+          <li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="apply.html">お申し込み</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 トランクルーム収納番長. All Rights Reserved.</span>
+      <span>SAKAI / NISHI-KU / TSUKUNO</span>
+    </div>
+  </div>
+</footer>
+
+<div class="floating-cta">
+  <a href="contact.html" class="floating-line">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+    <span class="txt">お問い合わせ</span>
+  </a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  if (toggle && nav) toggle.addEventListener('click', () => nav.classList.toggle('open'));
+
+  document.getElementById('applyForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = this;
+
+    const size = form.querySelector('input[name="size"]:checked');
+    const sei = form.querySelector('#sei').value.trim();
+    const mei = form.querySelector('#mei').value.trim();
+    const tel = form.querySelector('#tel').value.trim();
+    const start = form.querySelector('#start').value;
+    const visit = form.querySelector('input[name="visit"]:checked');
+
+    if (!sei || !mei) { alert('お名前を入力してください。'); return; }
+    if (!tel) { alert('電話番号を入力してください。'); return; }
+    if (!size) { alert('希望サイズを選択してください。'); return; }
+    if (!start) { alert('ご希望の利用開始時期を選択してください。'); return; }
+    if (!visit) { alert('見学についてご希望を選択してください。'); return; }
+
+    // TODO: ここにフォーム送信処理を追加
+    form.style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
