@@ -3,215 +3,67 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>お部屋一覧 | トランクルーム収納番長</title>
-<meta name="description" content="収納番長のお部屋一覧。1F（101〜134号室）・2F（201〜214号室）全48室。0.4帖〜4.4帖まで豊富なサイズ。月額2,700円〜（税込）。" />
+<title>お部屋一覧・空室状況 | トランクルーム収納番長</title>
+<meta name="description" content="トランクルーム収納番長のお部屋一覧と空室状況。1F・2Fあわせて全48室。空室ありの部屋はLINEまたは電話で見学・申込み相談できます。" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-
-/* ── ページヒーロー ── */
-.rooms-hero {
-  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
-  color: white; text-align: center;
-  padding: 56px 24px 48px;
-  position: relative; overflow: hidden;
-}
-.rooms-hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 2px, transparent 2px 24px);
-}
-.rooms-hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
-.rooms-hero h1 { font-size: clamp(26px,4vw,40px); font-weight: 900; margin-bottom: 10px; }
-.rooms-hero p { opacity: .92; font-size: 15px; line-height: 1.7; }
-.rooms-hero-badges {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;
-}
-.rooms-hero-badge {
-  background: rgba(255,255,255,.2);
-  border: 2px solid rgba(255,255,255,.55);
-  color: white; padding: 7px 18px;
-  border-radius: 999px; font-weight: 700; font-size: 13px;
-}
-.rooms-hero-badge.hl { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
-
-/* ── サイズガイド ── */
-.size-guide {
-  background: var(--cream);
-  border-bottom: 1px solid var(--line);
-}
-.size-cards {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 16px;
-}
-.size-card {
-  background: white; border-radius: 16px;
-  border: 2px solid var(--line);
-  padding: 22px 18px; text-align: center;
-  transition: border-color .2s, transform .2s, box-shadow .2s;
-}
-.size-card:hover {
-  border-color: var(--orange); transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(232,116,26,.12);
-}
-.size-card .size-icon {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--cream); display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 14px; font-size: 26px;
-}
-.size-card .size-label {
-  font-weight: 900; font-size: 13px; color: var(--orange);
-  letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px;
-}
-.size-card .size-range {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 22px; font-weight: 900; color: var(--ink);
-  margin-bottom: 6px;
-}
-.size-card .size-price {
-  font-size: 13px; color: var(--orange); font-weight: 700; margin-bottom: 10px;
-}
-.size-card .size-desc {
-  font-size: 12px; color: var(--ink-3); line-height: 1.6;
-}
-
-/* ── フロアタブ ── */
-.floor-tabs {
-  background: white; border-bottom: 1px solid var(--line);
-}
-.floor-tab-bar {
-  display: flex; gap: 0; border-bottom: 3px solid var(--line);
-  max-width: 640px;
-}
-.floor-tab-btn {
-  flex: 1; padding: 14px 24px;
-  background: none; border: none; cursor: pointer;
-  font-size: 15px; font-weight: 700; color: var(--ink-3);
-  font-family: inherit; position: relative;
-  transition: color .2s;
-}
-.floor-tab-btn.active { color: var(--orange); }
-.floor-tab-btn.active::after {
-  content: '';
-  position: absolute; bottom: -3px; left: 0; right: 0;
-  height: 3px; background: var(--orange); border-radius: 2px 2px 0 0;
-}
-.floor-tab-pane { display: none; }
-.floor-tab-pane.active { display: block; }
-
-/* ── 館内図 ── */
-.floor-plan-wrap {
-  background: var(--cream);
-  border-radius: 16px;
-  border: 2px solid var(--line);
-  overflow: hidden;
-  margin-bottom: 32px;
-}
-.floor-plan-wrap img {
-  width: 100%; height: auto; display: block;
-  max-height: 400px; object-fit: contain;
-}
-.floor-plan-caption {
-  background: var(--ink); color: white;
-  font-size: 12px; font-weight: 700;
-  padding: 10px 16px; text-align: center;
-}
-
-/* ── 部屋カードグリッド ── */
-.rooms-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 14px;
-}
-.room-card {
-  background: white;
-  border: 2px solid var(--line);
-  border-radius: 16px;
-  padding: 18px 14px 16px;
-  text-align: center;
-  transition: border-color .2s, transform .2s, box-shadow .2s;
-  position: relative;
-  display: flex; flex-direction: column; gap: 6px;
-}
-.room-card:hover {
-  border-color: var(--orange);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(232,116,26,.13);
-}
-.room-card .rc-floor {
-  font-size: 10px; font-weight: 700; color: var(--ink-3);
-  letter-spacing: .08em; text-transform: uppercase;
-}
-.room-card .rc-num {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 36px; font-weight: 900; color: var(--ink);
-  line-height: 1;
-}
-.room-card .rc-size-badge {
-  display: inline-block;
-  font-size: 10px; font-weight: 700;
-  padding: 3px 10px; border-radius: 999px;
-  margin: 2px auto;
-}
-.rc-size-badge.s { background: #EEF8FF; color: #2980B9; }
-.rc-size-badge.m { background: #EDF9ED; color: #27AE60; }
-.rc-size-badge.l { background: #FFF4E5; color: #E67E22; }
-.rc-size-badge.ll { background: #FCF0FF; color: #9B59B6; }
-
-.room-card .rc-sqm {
-  font-size: 13px; color: var(--ink-3); font-weight: 500;
-}
-.room-card .rc-tatami {
-  font-size: 12px; color: var(--ink-2); font-weight: 700;
-}
-.room-card .rc-price {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 20px; font-weight: 900; color: var(--orange);
-  margin-top: 4px; line-height: 1;
-}
-.room-card .rc-price span { font-size: 11px; font-weight: 500; color: var(--ink-3); }
-.room-card .rc-btn {
-  display: block; margin-top: 8px;
-  padding: 8px 0; border-radius: 8px;
-  background: var(--orange); color: white;
-  font-size: 12px; font-weight: 700;
-  text-decoration: none;
-  transition: background .2s;
-}
-.room-card .rc-btn:hover { background: var(--orange-deep); }
-
-/* ── 注意書き ── */
-.rooms-notes {
-  background: var(--cream);
-  border: 2px solid var(--line);
-  border-radius: 14px;
-  padding: 20px 24px;
-  margin-top: 32px;
-  font-size: 13px; color: var(--ink-3); line-height: 1.8;
-}
-.rooms-notes ul { list-style: none; padding: 0; margin: 0; }
-.rooms-notes li { padding-left: 1.4em; position: relative; }
-.rooms-notes li::before { content: '※'; position: absolute; left: 0; color: var(--orange); }
-
-/* ── レスポンシブ ── */
-@media (max-width: 960px) {
-  .size-cards { grid-template-columns: repeat(2,1fr); }
+.rooms-hero { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%); color: white; padding: 58px 24px; text-align: center; }
+.rooms-hero h1 { font-size: clamp(30px,4vw,44px); font-weight: 900; margin-bottom: 10px; }
+.rooms-hero p { opacity: .95; font-size: 15px; line-height: 1.8; }
+.status-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 900px; margin: 28px auto 0; }
+.status-card { background: rgba(255,255,255,.16); border: 2px solid rgba(255,255,255,.35); border-radius: 14px; padding: 16px; }
+.status-card strong { display: block; font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 26px; line-height: 1; margin-bottom: 6px; }
+.status-card span { font-size: 12px; font-weight: 700; opacity: .92; }
+.rooms-main { background: white; padding: 64px 24px; }
+.rooms-wrap { max-width: 1180px; margin: 0 auto; }
+.avail-lead { background: var(--cream); border: 2px solid var(--line); border-radius: 18px; padding: 24px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; margin-bottom: 28px; }
+.avail-lead h2 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.avail-lead p { color: var(--ink-2); font-size: 14px; }
+.avail-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.avail-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 12px 18px; color: white; font-weight: 900; font-size: 13px; white-space: nowrap; }
+.avail-btn.line { background: var(--green); }
+.avail-btn.tel { background: var(--orange); }
+.filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0; }
+.filter-btn { border: 2px solid var(--line); background: white; color: var(--ink-2); border-radius: 999px; padding: 10px 18px; font-weight: 900; font-size: 13px; }
+.filter-btn.active { background: var(--orange); border-color: var(--orange); color: white; }
+.floor-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 34px 0 16px; padding-bottom: 10px; border-bottom: 3px solid var(--line); }
+.floor-title h2 { font-size: 24px; font-weight: 900; }
+.floor-title span { color: var(--ink-3); font-size: 13px; font-weight: 700; }
+.rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.room-card { border: 2px solid var(--line); border-radius: 14px; background: white; padding: 16px 14px; min-height: 160px; display: flex; flex-direction: column; gap: 8px; transition: transform .18s, box-shadow .18s, border-color .18s; }
+.room-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.room-card.vacant { border-color: rgba(6,199,85,.45); background: linear-gradient(180deg, #F4FFF8 0%, white 60%); }
+.room-card.occupied { opacity: .72; background: #FAF7F2; }
+.room-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.room-num { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 28px; font-weight: 900; line-height: 1; }
+.status-badge { border-radius: 999px; padding: 4px 9px; font-size: 11px; font-weight: 900; white-space: nowrap; }
+.status-badge.vacant { background: var(--green); color: white; }
+.status-badge.occupied { background: #DDD2C2; color: var(--ink-2); }
+.room-floor { color: var(--ink-3); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+.room-note { color: var(--ink-2); font-size: 12px; line-height: 1.5; flex: 1; }
+.room-cta { display: block; text-align: center; background: var(--orange); color: white; border-radius: 9px; padding: 8px 10px; font-size: 12px; font-weight: 900; }
+.room-card.occupied .room-cta { background: #C8B9A5; pointer-events: none; }
+.note-box { margin-top: 28px; border: 2px solid var(--line); border-radius: 16px; background: var(--bg); padding: 20px; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
+@media (max-width: 860px) {
+  .status-strip { grid-template-columns: repeat(2, 1fr); }
+  .avail-lead { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
-  .size-cards { grid-template-columns: repeat(2,1fr); gap: 10px; }
-  .rooms-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-  .room-card .rc-num { font-size: 28px; }
-  .room-card .rc-price { font-size: 16px; }
-  .floor-tab-btn { font-size: 13px; padding: 12px 16px; }
+  .rooms-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .room-card { min-height: 150px; padding: 14px 12px; }
+  .room-num { font-size: 24px; }
+  .status-strip { gap: 10px; }
+  .status-card { padding: 12px; }
 }
-
 </style>
 </head>
 <body>
 
 <div class="notice-bar">
-  <strong>★堺市西区最安値</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>24時間利用可能</strong> &nbsp;│&nbsp; <strong>女性も安心</strong>
+  <strong>★堺市西区最安水準</strong> &nbsp;│&nbsp; <strong>初期費用0円</strong> &nbsp;│&nbsp; <strong>月額2,700円から</strong> &nbsp;│&nbsp; <strong>空室あり</strong>
 </div>
 
 <header class="header">
@@ -227,679 +79,125 @@
       <a href="blog.html">ブログ</a>
     </nav>
     <div class="header-cta">
-      <div class="tel-block">
-        <div class="label">お電話はこちら</div>
-        <a href="tel:0120666780" class="num">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-          0120-666-780
-        </a>
-      </div>
-      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="btn-line-sm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
-        LINE
-      </a>
-      <a href="contact.html" class="btn-contact-sm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-        お問い合わせ
-      </a>
+      <div class="tel-block"><div class="label">お電話はこちら</div><a href="tel:0120666780" class="num">0120-666-780</a></div>
+      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="btn-line-sm">LINE</a>
+      <a href="contact.html" class="btn-contact-sm">お問い合わせ</a>
     </div>
     <button class="menu-toggle" aria-label="メニュー"><span></span></button>
   </div>
 </header>
 
-<!-- パンくず -->
-<div style="background:var(--cream);border-bottom:1px solid var(--line);padding:10px 24px;font-size:12px;color:var(--ink-3);">
-  <div class="container" style="padding:0;">
-    <a href="index.html" style="color:var(--ink-3);text-decoration:none;">ホーム</a>
-    <span style="margin:0 8px;">›</span>お部屋一覧
-  </div>
-</div>
-
-<!-- ヒーロー -->
-<div class="rooms-hero">
-  <div class="rooms-hero-inner">
-    <div class="section-eyebrow" style="color:rgba(255,255,255,.8);margin-bottom:8px;">— ROOMS —</div>
-    <h1>お部屋一覧</h1>
-    <p>1F・2F合わせて全48室。<br>小さなスペースから大型収納まで、ご用途に合わせてお選びいただけます。</p>
-    <div class="rooms-hero-badges">
-      <span class="rooms-hero-badge hl">🎉 初期費用 ¥0</span>
-      <span class="rooms-hero-badge">📦 0.4帖〜4.4帖</span>
-      <span class="rooms-hero-badge">💰 月額2,700円〜</span>
-      <span class="rooms-hero-badge">🔑 最短即日利用</span>
-    </div>
-  </div>
-</div>
-
-<!-- サイズガイド -->
-<section class="size-guide">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="section-eyebrow">サイズガイド</span>
-      <h2 class="section-title">どのサイズが合ってる？</h2>
-      <p class="section-lead">収納したいものに合わせてサイズを選べます。迷ったらお気軽にご相談ください。</p>
-    </div>
-    <div class="size-cards reveal">
-      <div class="size-card">
-        <div class="size-icon">📄</div>
-        <div class="size-label">S サイズ</div>
-        <div class="size-range">〜0.9帖</div>
-        <div class="size-price">2,700円〜/月</div>
-        <div class="size-desc">書類・小物・<br>季節小物・<br>スーツケース</div>
-      </div>
-      <div class="size-card">
-        <div class="size-icon">📺</div>
-        <div class="size-label">M サイズ</div>
-        <div class="size-range">1.0〜1.9帖</div>
-        <div class="size-price">9,350円〜/月</div>
-        <div class="size-desc">衣類・家電・<br>趣味グッズ・<br>自転車</div>
-      </div>
-      <div class="size-card">
-        <div class="size-icon">🛋️</div>
-        <div class="size-label">L サイズ</div>
-        <div class="size-range">2.0〜2.9帖</div>
-        <div class="size-price">14,400円〜/月</div>
-        <div class="size-desc">ソファ・ベッド・<br>家具一式・<br>大型荷物</div>
-      </div>
-      <div class="size-card">
-        <div class="size-icon">🏭</div>
-        <div class="size-label">LL サイズ</div>
-        <div class="size-range">3.0帖〜</div>
-        <div class="size-price">24,200円〜/月</div>
-        <div class="size-desc">法人在庫・<br>引越し荷物・<br>大量保管</div>
+<main>
+  <section class="rooms-hero">
+    <div class="container">
+      <span class="section-eyebrow" style="color:rgba(255,255,255,.86);">ROOMS</span>
+      <h1>お部屋一覧・空室状況</h1>
+      <p>現在の空室をわかりやすく表示しています。気になる部屋があれば、LINEかお電話で空き確認・見学予約できます。</p>
+      <div class="status-strip">
+        <div class="status-card"><strong>48</strong><span>全室数</span></div>
+        <div class="status-card"><strong>23</strong><span>空室</span></div>
+        <div class="status-card"><strong>25</strong><span>契約中</span></div>
+        <div class="status-card"><strong>52%</strong><span>稼働率目安</span></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 部屋一覧 フロアタブ -->
-<section class="floor-tabs">
-  <div class="container">
-
-    <div class="section-head reveal">
-      <span class="section-eyebrow">全室一覧</span>
-      <h2 class="section-title">1F・2F 全お部屋</h2>
-      <p class="section-lead">空き状況はお電話またはLINEにてご確認ください。</p>
-    </div>
-
-    <div class="floor-tab-bar">
-      <button class="floor-tab-btn active" onclick="switchFloor('f1', this)">
-        🏠 1F（101〜134号室）
-      </button>
-      <button class="floor-tab-btn" onclick="switchFloor('f2', this)">
-        🏢 2F（201〜214号室）
-      </button>
-    </div>
-
-    <!-- 1F -->
-    <div class="floor-tab-pane active" id="ftab-f1">
-      <div style="padding-top:28px;">
-        <!-- 館内図 -->
-        <div class="floor-plan-wrap reveal">
-          <img src="assets/１階白紙.jpg" alt="1階 館内図" />
-          <div class="floor-plan-caption">1F 館内図（101〜134号室）</div>
+  <section class="rooms-main">
+    <div class="rooms-wrap">
+      <div class="avail-lead">
+        <div>
+          <h2>今なら空室あり。1階の空きもあります。</h2>
+          <p>空室状況は変動します。気になる部屋番号をLINEで送っていただくと、最新状況を確認してご案内します。</p>
         </div>
-        <!-- 部屋カード -->
-        <div class="rooms-grid reveal">
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">101</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.2帖</div>
-            <div class="rc-sqm">2.00㎡</div>
-            <div class="rc-price">11,000<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">102</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.1帖</div>
-            <div class="rc-sqm">1.80㎡</div>
-            <div class="rc-price">9,900<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">103</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.4帖</div>
-            <div class="rc-sqm">0.50㎡</div>
-            <div class="rc-price">2,700<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">104</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.4帖</div>
-            <div class="rc-sqm">0.50㎡</div>
-            <div class="rc-price">2,700<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">105</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.7帖</div>
-            <div class="rc-sqm">2.80㎡</div>
-            <div class="rc-price">15,400<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">106</div>
-            <span class="rc-size-badge l">L</span>
-            <div class="rc-tatami">約2.0帖</div>
-            <div class="rc-sqm">3.20㎡</div>
-            <div class="rc-price">17,600<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">107</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.4帖</div>
-            <div class="rc-sqm">2.30㎡</div>
-            <div class="rc-price">12,650<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">108</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.2帖</div>
-            <div class="rc-sqm">2.00㎡</div>
-            <div class="rc-price">11,000<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">109</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.4帖</div>
-            <div class="rc-sqm">0.50㎡</div>
-            <div class="rc-price">2,700<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">110</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.4帖</div>
-            <div class="rc-sqm">0.50㎡</div>
-            <div class="rc-price">2,700<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">111</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.3帖</div>
-            <div class="rc-sqm">2.10㎡</div>
-            <div class="rc-price">11,550<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">112</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.4帖</div>
-            <div class="rc-sqm">2.30㎡</div>
-            <div class="rc-price">12,650<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">113</div>
-            <span class="rc-size-badge l">L</span>
-            <div class="rc-tatami">約2.8帖</div>
-            <div class="rc-sqm">4.50㎡</div>
-            <div class="rc-price">24,750<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">114</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.2帖</div>
-            <div class="rc-sqm">2.00㎡</div>
-            <div class="rc-price">11,000<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">115</div>
-            <span class="rc-size-badge ll">LL</span>
-            <div class="rc-tatami">約3.0帖</div>
-            <div class="rc-sqm">4.90㎡</div>
-            <div class="rc-price">26,950<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">116</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.0帖</div>
-            <div class="rc-sqm">1.70㎡</div>
-            <div class="rc-price">9,350<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">117</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.6帖</div>
-            <div class="rc-sqm">0.90㎡</div>
-            <div class="rc-price">4,950<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">118</div>
-            <span class="rc-size-badge ll">LL</span>
-            <div class="rc-tatami">約4.4帖</div>
-            <div class="rc-sqm">7.20㎡</div>
-            <div class="rc-price">39,600<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">119</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.5帖</div>
-            <div class="rc-sqm">2.40㎡</div>
-            <div class="rc-price">13,200<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">120</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.8帖</div>
-            <div class="rc-sqm">1.30㎡</div>
-            <div class="rc-price">7,150<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">121</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.1帖</div>
-            <div class="rc-sqm">1.80㎡</div>
-            <div class="rc-price">9,900<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">122</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.8帖</div>
-            <div class="rc-sqm">1.30㎡</div>
-            <div class="rc-price">7,150<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">123</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.9帖</div>
-            <div class="rc-sqm">3.10㎡</div>
-            <div class="rc-price">17,050<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">124</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.2帖</div>
-            <div class="rc-sqm">2.00㎡</div>
-            <div class="rc-price">11,000<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">125</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.0帖</div>
-            <div class="rc-sqm">1.70㎡</div>
-            <div class="rc-price">9,350<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">126</div>
-            <span class="rc-size-badge l">L</span>
-            <div class="rc-tatami">約2.2帖</div>
-            <div class="rc-sqm">3.60㎡</div>
-            <div class="rc-price">19,800<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">127</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.9帖</div>
-            <div class="rc-sqm">1.40㎡</div>
-            <div class="rc-price">7,700<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">128</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.7帖</div>
-            <div class="rc-sqm">2.80㎡</div>
-            <div class="rc-price">15,400<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">129</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.2帖</div>
-            <div class="rc-sqm">1.90㎡</div>
-            <div class="rc-price">10,450<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">130</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.9帖</div>
-            <div class="rc-sqm">3.00㎡</div>
-            <div class="rc-price">16,500<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">131</div>
-            <span class="rc-size-badge l">L</span>
-            <div class="rc-tatami">約2.4帖</div>
-            <div class="rc-sqm">3.90㎡</div>
-            <div class="rc-price">21,450<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">132</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.8帖</div>
-            <div class="rc-sqm">1.30㎡</div>
-            <div class="rc-price">7,150<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">133</div>
-            <span class="rc-size-badge l">L</span>
-            <div class="rc-tatami">約2.7帖</div>
-            <div class="rc-sqm">4.40㎡</div>
-            <div class="rc-price">24,200<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">1F</div>
-            <div class="rc-num">134</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.4帖</div>
-            <div class="rc-sqm">2.30㎡</div>
-            <div class="rc-price">12,650<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-        </div><!-- /rooms-grid -->
-
-        <div class="rooms-notes reveal">
-          <ul>
-            <li>表示価格はすべて税込です。</li>
-            <li>空き状況は変動します。最新情報はお電話またはLINEにてご確認ください。</li>
-            <li>初期費用¥0キャンペーンは予告なく終了する場合があります。</li>
-          </ul>
+        <div class="avail-actions">
+          <a class="avail-btn line" href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener">LINEで空室確認</a>
+          <a class="avail-btn tel" href="tel:0120666780">電話する</a>
         </div>
       </div>
-    </div><!-- /ftab-f1 -->
 
-    <!-- 2F -->
-    <div class="floor-tab-pane" id="ftab-f2">
-      <div style="padding-top:28px;">
-        <!-- 館内図 -->
-        <div class="floor-plan-wrap reveal">
-          <img src="assets/２階白紙.jpg" alt="2階 館内図" />
-          <div class="floor-plan-caption">2F 館内図（201〜214号室）</div>
-        </div>
-        <!-- 部屋カード -->
-        <div class="rooms-grid reveal">
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">201</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.6帖</div>
-            <div class="rc-sqm">0.90㎡</div>
-            <div class="rc-price">4,050<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">202</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.6帖</div>
-            <div class="rc-sqm">1.00㎡</div>
-            <div class="rc-price">4,500<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">203</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.6帖</div>
-            <div class="rc-sqm">0.90㎡</div>
-            <div class="rc-price">4,050<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">204</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.5帖</div>
-            <div class="rc-sqm">0.80㎡</div>
-            <div class="rc-price">3,600<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">205</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.9帖</div>
-            <div class="rc-sqm">3.10㎡</div>
-            <div class="rc-price">13,950<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">206</div>
-            <span class="rc-size-badge l">L</span>
-            <div class="rc-tatami">約2.0帖</div>
-            <div class="rc-sqm">3.20㎡</div>
-            <div class="rc-price">14,400<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">207</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.6帖</div>
-            <div class="rc-sqm">1.00㎡</div>
-            <div class="rc-price">4,500<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">208</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.6帖</div>
-            <div class="rc-sqm">0.90㎡</div>
-            <div class="rc-price">4,050<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">209</div>
-            <span class="rc-size-badge l">L</span>
-            <div class="rc-tatami">約2.1帖</div>
-            <div class="rc-sqm">3.40㎡</div>
-            <div class="rc-price">15,300<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">210</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.2帖</div>
-            <div class="rc-sqm">1.90㎡</div>
-            <div class="rc-price">8,550<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">211</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.9帖</div>
-            <div class="rc-sqm">1.50㎡</div>
-            <div class="rc-price">6,750<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">212</div>
-            <span class="rc-size-badge s">S</span>
-            <div class="rc-tatami">約0.7帖</div>
-            <div class="rc-sqm">1.10㎡</div>
-            <div class="rc-price">4,950<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">213</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.7帖</div>
-            <div class="rc-sqm">2.80㎡</div>
-            <div class="rc-price">12,600<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-          <div class="room-card">
-            <div class="rc-floor">2F</div>
-            <div class="rc-num">214</div>
-            <span class="rc-size-badge m">M</span>
-            <div class="rc-tatami">約1.0帖</div>
-            <div class="rc-sqm">1.70㎡</div>
-            <div class="rc-price">7,650<span>円/月</span></div>
-            <a href="contact.html" class="rc-btn">空き確認</a>
-          </div>
-        </div><!-- /rooms-grid -->
-
-        <div class="rooms-notes reveal">
-          <ul>
-            <li>表示価格はすべて税込です。</li>
-            <li>空き状況は変動します。最新情報はお電話またはLINEにてご確認ください。</li>
-            <li>初期費用¥0キャンペーンは予告なく終了する場合があります。</li>
-          </ul>
-        </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="vacant">空室のみ</button>
+        <button class="filter-btn" data-filter="1f">1階のみ</button>
+        <button class="filter-btn" data-filter="2f">2階のみ</button>
       </div>
-    </div><!-- /ftab-f2 -->
 
-  </div><!-- /container -->
-</section>
+      <div class="floor-title"><h2>1階</h2><span>101〜134号室 / 空室 20室</span></div>
+      <div class="rooms-grid" id="rooms1f"></div>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-inner">
-    <span class="cta-eyebrow">◎ 空き確認・見学予約</span>
-    <h2>気になるお部屋があれば<br><span class="hl">お気軽に</span>ご連絡を！</h2>
-    <p>見学無料・予約不要。実際のお部屋のサイズ感を確認してからご契約いただけます。</p>
-    <div class="cta-buttons">
-      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="cta-card line">
-        <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg></div>
-        <div class="cta-label">LINE / 24時間受付</div>
-        <div class="cta-value">LINEで相談</div>
-        <div class="cta-sub">空き状況・見学予約・お見積りまで</div>
-        <div class="cta-arrow" style="background:#E6F9EC;color:var(--green-deep)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </a>
-      <a href="tel:0120666780" class="cta-card tel">
-        <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></div>
-        <div class="cta-label">TEL / お気軽にお電話ください</div>
-        <div class="cta-value">0120-666-780</div>
-        <div class="cta-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </a>
+      <div class="floor-title"><h2>2階</h2><span>201〜214号室 / 空室 3室</span></div>
+      <div class="rooms-grid" id="rooms2f"></div>
+
+      <div class="note-box">
+        表示は目安です。空室状況は日々変動します。満室表示の部屋でも、近いサイズの空室をご提案できる場合があります。料金の詳細は<a href="price.html" style="color:var(--orange);font-weight:900;">料金ページ</a>をご確認ください。
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand">
-        <img src="assets/toplogo.jpg" alt="収納番長" />
-        <p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p>
-      </div>
-      <div class="footer-col">
-        <h4>メニュー</h4>
-        <ul>
-          <li><a href="index.html">ホーム</a></li>
-          <li><a href="flow.html">利用の流れ</a></li>
-          <li><a href="price.html">料金</a></li>
-          <li><a href="rooms.html">お部屋一覧</a></li>
-          <li><a href="access.html">アクセス</a></li>
-          <li><a href="faq.html">Q&amp;A</a></li>
-          <li><a href="blog.html">ブログ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>店舗情報</h4>
-        <ul>
-          <li>大阪府堺市西区津久野町</li>
-          <li>JR津久野駅 徒歩すぐ</li>
-          <li>ご利用 24時間365日</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>お問い合わせ</h4>
-        <ul>
-          <li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
-          <li><a href="apply.html">お申し込み</a></li>
-        </ul>
-      </div>
+      <div class="footer-brand"><img src="assets/toplogo.jpg" alt="収納番長" /><p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p></div>
+      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="flow.html">利用の流れ</a></li><li><a href="price.html">料金</a></li><li><a href="rooms.html">お部屋一覧</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li></ul></div>
+      <div class="footer-col"><h4>お問い合わせ</h4><ul><li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li><li><a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener">LINEで空室確認</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 トランクルーム収納番長 All Rights Reserved.</p>
-    </div>
+    <div class="footer-bottom"><span>© 2026 トランクルーム収納番長. All Rights Reserved.</span></div>
   </div>
 </footer>
 
-<!-- 浮かぶLINEボタン -->
-<a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="float-line" aria-label="LINEで問い合わせ">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
-</a>
+<div class="floating-cta">
+  <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="floating-line"><span class="txt">LINEで空室確認</span></a>
+</div>
 
 <script>
-function switchFloor(id, btn) {
-  document.querySelectorAll('.floor-tab-pane').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.floor-tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('ftab-' + id).classList.add('active');
-  btn.classList.add('active');
+const occupied = new Set([101,103,104,108,110,116,117,120,122,123,127,131,132,134,201,202,203,204,207,208,209,210,211,212,214]);
+const rooms1 = Array.from({length: 34}, (_, i) => i + 101);
+const rooms2 = Array.from({length: 14}, (_, i) => i + 201);
+
+function roomHint(num) {
+  if ([105,106,113,126,128,130,133,205,206,213].includes(num)) return '大きめ荷物・家具にも相談しやすい部屋';
+  if ([102,107,111,112,121,124,125,129].includes(num)) return '使いやすい中サイズの候補';
+  if ([109,114,115,118,119].includes(num)) return '小物・書類・季節用品におすすめ';
+  return 'サイズや料金はお問い合わせください';
 }
 
-// スクロールリビール
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('in'), i * 80);
-      observer.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+function createCard(num, floor) {
+  const isVacant = !occupied.has(num);
+  const card = document.createElement('article');
+  card.className = `room-card ${isVacant ? 'vacant' : 'occupied'}`;
+  card.dataset.status = isVacant ? 'vacant' : 'occupied';
+  card.dataset.floor = floor;
+  card.innerHTML = `
+    <div class="room-top">
+      <div class="room-num">${num}</div>
+      <span class="status-badge ${isVacant ? 'vacant' : 'occupied'}">${isVacant ? '空室あり' : '契約中'}</span>
+    </div>
+    <div class="room-floor">${floor === '1f' ? '1F' : '2F'}</div>
+    <div class="room-note">${isVacant ? roomHint(num) : '現在ご契約中です'}</div>
+    <a class="room-cta" href="${isVacant ? 'https://lin.ee/oBfOqFR' : '#'}" ${isVacant ? 'target="_blank" rel="noopener"' : ''}>${isVacant ? 'この部屋を確認' : '満室'}</a>
+  `;
+  return card;
+}
 
-// ハンバーガーメニュー
+document.getElementById('rooms1f').append(...rooms1.map(num => createCard(num, '1f')));
+document.getElementById('rooms2f').append(...rooms2.map(num => createCard(num, '2f')));
+
+function applyFilter(filter) {
+  document.querySelectorAll('.room-card').forEach(card => {
+    const show = filter === 'all' || card.dataset.status === filter || card.dataset.floor === filter;
+    card.style.display = show ? '' : 'none';
+  });
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilter(btn.dataset.filter);
+  });
+});
+
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 if (toggle && nav) {
@@ -909,6 +207,5 @@ if (toggle && nav) {
   });
 }
 </script>
-
 </body>
 </html>
