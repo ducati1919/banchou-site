@@ -3,246 +3,123 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>トランクルーム収納番長 | 堺市西区・津久野駅すぐ・24時間利用可能</title>
-<meta name="description" content="堺市西区・JR津久野駅すぐのトランクルーム収納番長。24時間利用可能・女性も安心。" />
+<title>トランクルーム収納番長 | 堺市西区・津久野駅すぐ・月額2,700円から</title>
+<meta name="description" content="堺市西区・JR津久野駅すぐの室内型トランクルーム収納番長。月額2,700円から、初期費用0円、24時間365日利用可能。駐車スペース・台車・電子ロック・防犯カメラあり。" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-  .hero { position: relative; background: var(--cream); overflow: hidden; padding: 48px 24px 0; }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background-image:
-      radial-gradient(circle at 12% 18%, rgba(232,116,26,.08) 0, transparent 28%),
-      radial-gradient(circle at 88% 82%, rgba(251,192,45,.15) 0, transparent 30%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    max-width: 1240px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px;
-    align-items: center; position: relative; min-height: 520px;
-  }
-  .hero-content { padding: 40px 0; }
-  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .hero-badge {
-    background: white; color: var(--orange-deep);
-    border: 2px solid var(--orange);
-    padding: 6px 14px; font-size: 12px; font-weight: 900;
-    border-radius: 999px;
-    display: inline-flex; align-items: center; gap: 6px;
-  }
+  .hero { position: relative; background: linear-gradient(135deg, var(--cream) 0%, #fff 52%, var(--cream-2) 100%); overflow: hidden; padding: 44px 24px 0; }
+  .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 10% 18%, rgba(232,116,26,.10) 0, transparent 28%), radial-gradient(circle at 92% 84%, rgba(251,192,45,.18) 0, transparent 30%); pointer-events: none; }
+  .hero-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.02fr .98fr; gap: 42px; align-items: center; position: relative; min-height: 560px; }
+  .hero-content { padding: 36px 0 44px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .hero-badge { background: white; color: var(--orange-deep); border: 2px solid var(--orange); padding: 6px 14px; font-size: 12px; font-weight: 900; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; box-shadow: var(--shadow-sm); }
   .hero-badge.filled { background: var(--orange); color: white; }
-  .hero h1 {
-    font-size: clamp(34px, 5vw, 60px);
-    font-weight: 900; letter-spacing: -.01em;
-    margin-bottom: 18px; line-height: 1.25;
-  }
-  .hero h1 .mark {
-    display: inline-block;
-    background: linear-gradient(transparent 60%, var(--yellow-light) 60%);
-    padding: 0 6px;
-  }
+  .hero h1 { font-size: clamp(34px, 5vw, 62px); font-weight: 900; letter-spacing: 0; margin-bottom: 18px; line-height: 1.22; }
+  .hero h1 .mark { display: inline-block; background: linear-gradient(transparent 62%, var(--yellow-light) 62%); padding: 0 6px; }
   .hero h1 .accent { color: var(--orange); }
-  .hero-lead { font-size: 16px; color: var(--ink-2); margin-bottom: 28px; max-width: 520px; }
-  .hero-ask {
-    background: white; border: 3px solid var(--orange);
-    border-radius: 16px; padding: 18px 24px;
-    margin-bottom: 24px; max-width: 540px;
-    display: flex; align-items: center; gap: 16px;
-    position: relative;
-    box-shadow: 0 6px 0 rgba(232,116,26,.18);
-  }
-  .hero-ask::before {
-    content: '料金について';
-    position: absolute; top: -12px; left: 20px;
-    background: var(--red); color: white;
-    font-size: 11px; font-weight: 900;
-    padding: 3px 12px; border-radius: 999px;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-  }
-  .hero-ask .ico {
-    width: 52px; height: 52px; border-radius: 50%;
-    background: var(--cream); color: var(--orange);
-    display: grid; place-items: center; flex-shrink: 0;
-  }
-  .hero-ask .t {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 900; font-size: 22px;
-  }
-  .hero-ask .d { font-size: 12px; color: var(--ink-3); font-weight: 600; }
+  .hero-lead { font-size: 16px; color: var(--ink-2); margin-bottom: 24px; max-width: 560px; }
+  .price-panel { background: white; border: 3px solid var(--orange); border-radius: 18px; padding: 18px; margin-bottom: 22px; max-width: 580px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; box-shadow: 0 8px 0 rgba(232,116,26,.16); }
+  .price-main { grid-row: span 2; background: var(--cream); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; justify-content: center; }
+  .price-main .label, .price-mini .label { font-size: 11px; color: var(--ink-3); font-weight: 900; letter-spacing: .08em; }
+  .price-main .value { font-family: 'M PLUS Rounded 1c', sans-serif; color: var(--red); font-size: 42px; font-weight: 900; line-height: 1.1; }
+  .price-main .value span { font-size: 17px; color: var(--ink); }
+  .price-mini { border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; background: white; }
+  .price-mini .value { font-family: 'M PLUS Rounded 1c', sans-serif; color: var(--ink); font-size: 24px; font-weight: 900; line-height: 1.15; }
   .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
-  .hero-visual { position: relative; height: 100%; min-height: 480px; }
-  .hero-photo {
-    position: absolute; border-radius: 18px; overflow: hidden;
-    box-shadow: var(--shadow-lg); border: 6px solid white;
-  }
+  .hero-visual { position: relative; min-height: 500px; }
+  .hero-photo { position: absolute; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-lg); border: 6px solid white; background: white; }
   .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-photo-main { top: 20px; left: 0; right: 60px; bottom: 60px; transform: rotate(-2deg); }
-  .hero-photo-sub { bottom: 20px; right: 0; width: 240px; height: 200px; transform: rotate(3deg); z-index: 2; }
-  .hero-sticker {
-    position: absolute; top: -10px; right: -10px;
-    width: 130px; height: 130px;
-    background: var(--yellow); color: var(--ink);
-    border-radius: 50%;
-    display: grid; place-items: center;
-    text-align: center;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 900; font-size: 14px; line-height: 1.3;
-    transform: rotate(-8deg);
-    box-shadow: 0 6px 16px rgba(42,29,20,.15);
-    z-index: 3; border: 4px solid white;
-  }
-  .hero-sticker .big { font-size: 22px; color: var(--red); display: block; }
-
-  .keypoints {
-    background: var(--orange); color: white;
-    padding: 24px; margin: 40px auto 0; max-width: 1240px;
-    border-radius: 20px 20px 0 0;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
-    position: relative; z-index: 1; overflow: hidden;
-  }
-  .keypoint {
-    padding: 12px 16px; text-align: center;
-    border-right: 1px dashed rgba(255,255,255,.35);
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-  }
+  .hero-photo-main { top: 16px; left: 0; right: 82px; bottom: 74px; transform: rotate(-1.5deg); }
+  .hero-photo-sub { bottom: 26px; right: 0; width: 250px; height: 190px; transform: rotate(2deg); z-index: 2; }
+  .hero-photo-third { top: 0; right: 20px; width: 180px; height: 150px; transform: rotate(4deg); z-index: 2; }
+  .hero-sticker { position: absolute; top: 150px; right: 8px; width: 132px; height: 132px; background: var(--yellow); color: var(--ink); border-radius: 50%; display: grid; place-items: center; text-align: center; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; font-size: 14px; line-height: 1.3; transform: rotate(-8deg); box-shadow: 0 6px 16px rgba(42,29,20,.15); z-index: 3; border: 4px solid white; }
+  .hero-sticker .big { font-size: 24px; color: var(--red); display: block; }
+  .keypoints { background: var(--orange); color: white; padding: 24px; margin: 36px auto 0; max-width: 1240px; border-radius: 20px 20px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; position: relative; z-index: 1; overflow: hidden; }
+  .keypoint { padding: 12px 16px; text-align: center; border-right: 1px dashed rgba(255,255,255,.35); display: flex; flex-direction: column; align-items: center; gap: 8px; }
   .keypoint:last-child { border-right: none; }
-  .keypoint-ico {
-    width: 44px; height: 44px;
-    background: rgba(255,255,255,.18);
-    border-radius: 50%;
-    display: grid; place-items: center;
-  }
+  .keypoint-ico { width: 44px; height: 44px; background: rgba(255,255,255,.18); border-radius: 50%; display: grid; place-items: center; }
   .keypoint-title { font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; font-size: 16px; }
   .keypoint-desc { font-size: 11px; opacity: .9; line-height: 1.4; }
 
-  /* Reasons */
   .reasons { background: white; border-top: 1px solid var(--line); }
-  .reason-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .reason {
-    background: var(--cream); border: 2px solid var(--line);
-    border-radius: 18px; padding: 28px 24px;
-    position: relative;
-    transition: transform .2s, box-shadow .2s, border-color .2s;
-  }
-  .reason:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--orange); }
-  .reason-num {
-    position: absolute; top: -16px; left: 20px;
-    width: 40px; height: 40px;
-    background: var(--orange); color: white; border-radius: 50%;
-    display: grid; place-items: center;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 900; font-size: 16px;
-    box-shadow: 0 4px 10px rgba(232,116,26,.4);
-  }
-  .reason-ico {
-    width: 64px; height: 64px; background: white;
-    border-radius: 16px; display: grid; place-items: center;
-    color: var(--orange); margin: 10px 0 20px;
-    border: 2px solid var(--line);
-  }
-  .reason h3 { font-size: 19px; font-weight: 900; margin-bottom: 10px; }
-  .reason p { font-size: 13px; color: var(--ink-2); line-height: 1.8; }
+  .reason-showcase { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .reason-card { background: var(--cream); border: 2px solid var(--line); border-radius: 18px; overflow: hidden; display: grid; grid-template-columns: 42% 58%; min-height: 260px; box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .reason-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--orange); }
+  .reason-card figure { position: relative; min-height: 100%; overflow: hidden; }
+  .reason-card figure img { width: 100%; height: 100%; object-fit: cover; }
+  .reason-card figure::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(42,29,20,.48)); }
+  .reason-body { padding: 26px 26px 24px; display: flex; flex-direction: column; justify-content: center; }
+  .reason-label { display: inline-flex; align-items: center; gap: 8px; color: var(--orange); font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; font-size: 13px; margin-bottom: 10px; }
+  .reason-label .num { width: 30px; height: 30px; border-radius: 50%; background: var(--orange); color: white; display: grid; place-items: center; }
+  .reason-body h3 { font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+  .reason-body p { font-size: 13px; color: var(--ink-2); line-height: 1.8; }
+  .proof-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .proof { display: inline-flex; align-items: center; background: white; border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 11px; font-weight: 900; color: var(--ink-2); }
 
-  /* Flow mini */
-  .flow-mini { background: var(--cream); }
-  .flow-steps {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    margin-bottom: 32px;
-  }
-  .flow-step {
-    background: white; border: 2px solid var(--line);
-    border-radius: 16px; padding: 24px 20px;
-    position: relative; text-align: center;
-  }
-  .flow-step::after {
-    content: ''; position: absolute;
-    right: -12px; top: 50%;
-    width: 0; height: 0;
-    border-left: 12px solid var(--orange);
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    transform: translateY(-50%); z-index: 2;
-  }
+  .gallery { background: var(--cream); border-top: 1px solid var(--line); }
+  .gallery-grid { display: grid; grid-template-columns: 1.2fr .8fr .8fr; gap: 16px; }
+  .gallery-item { position: relative; min-height: 230px; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-md); background: var(--ink); }
+  .gallery-item.large { grid-row: span 2; min-height: 476px; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; opacity: .96; }
+  .gallery-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 42px 18px 16px; color: white; background: linear-gradient(180deg, transparent, rgba(42,29,20,.82)); }
+  .gallery-caption strong { display: block; font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 18px; font-weight: 900; }
+  .gallery-caption span { display: block; font-size: 12px; opacity: .9; }
+
+  .flow-mini { background: white; }
+  .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .flow-step { background: var(--cream); border: 2px solid var(--line); border-radius: 16px; padding: 24px 20px; position: relative; text-align: center; }
+  .flow-step::after { content: ''; position: absolute; right: -12px; top: 50%; width: 0; height: 0; border-left: 12px solid var(--orange); border-top: 8px solid transparent; border-bottom: 8px solid transparent; transform: translateY(-50%); z-index: 2; }
   .flow-step:last-child::after { display: none; }
-  .flow-step-num {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: var(--orange); color: white;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 900; font-size: 16px;
-    display: grid; place-items: center;
-    margin: 0 auto 12px;
-    box-shadow: 0 4px 10px rgba(232,116,26,.3);
-  }
-  .flow-step-title {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 900; font-size: 17px;
-    margin-bottom: 6px;
-  }
+  .flow-step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--orange); color: white; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; font-size: 16px; display: grid; place-items: center; margin: 0 auto 12px; box-shadow: 0 4px 10px rgba(232,116,26,.3); }
+  .flow-step-title { font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; font-size: 17px; margin-bottom: 6px; }
   .flow-step-desc { font-size: 12px; color: var(--ink-3); line-height: 1.6; }
   .flow-link { text-align: center; }
-  .flow-link a {
-    display: inline-flex; align-items: center; gap: 8px;
-    color: var(--orange); font-weight: 900;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    padding: 12px 24px; border: 2px solid var(--orange);
-    border-radius: 999px;
-    transition: all .2s;
-  }
+  .flow-link a { display: inline-flex; align-items: center; gap: 8px; color: var(--orange); font-weight: 900; font-family: 'M PLUS Rounded 1c', sans-serif; padding: 12px 24px; border: 2px solid var(--orange); border-radius: 999px; transition: all .2s; }
   .flow-link a:hover { background: var(--orange); color: white; }
 
-  /* Quick nav cards */
-  .quick-nav { background: white; border-top: 1px solid var(--line); }
-  .qnav-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
-  }
-  .qnav {
-    background: var(--cream); border-radius: 18px;
-    padding: 32px 24px; text-align: center;
-    border: 2px solid var(--line);
-    transition: all .2s;
-    position: relative; overflow: hidden;
-  }
+  .quick-nav { background: var(--cream); border-top: 1px solid var(--line); }
+  .qnav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .qnav { background: white; border-radius: 18px; padding: 28px 22px; text-align: center; border: 2px solid var(--line); transition: all .2s; position: relative; overflow: hidden; }
   .qnav:hover { transform: translateY(-4px); border-color: var(--orange); box-shadow: var(--shadow-md); }
-  .qnav-ico {
-    width: 64px; height: 64px; border-radius: 16px;
-    background: var(--orange); color: white;
-    display: grid; place-items: center;
-    margin: 0 auto 16px;
-  }
+  .qnav-ico { width: 64px; height: 64px; border-radius: 16px; background: var(--orange); color: white; display: grid; place-items: center; margin: 0 auto 16px; }
   .qnav h3 { font-size: 18px; font-weight: 900; margin-bottom: 6px; }
   .qnav p { font-size: 12px; color: var(--ink-3); }
-  .qnav .arrow {
-    position: absolute; top: 16px; right: 16px;
-    color: var(--orange); opacity: .4;
-  }
+  .qnav .arrow { position: absolute; top: 16px; right: 16px; color: var(--orange); opacity: .4; }
 
   @media (max-width: 960px) {
     .hero-inner { grid-template-columns: 1fr; gap: 20px; }
-    .hero-visual { min-height: 400px; max-width: 540px; margin: 0 auto; width: 100%; }
+    .hero-visual { min-height: 440px; max-width: 600px; margin: 0 auto; width: 100%; }
     .keypoints { grid-template-columns: repeat(2, 1fr); }
     .keypoint:nth-child(2) { border-right: none; }
-    .keypoint:nth-child(1), .keypoint:nth-child(2) {
-      border-bottom: 1px dashed rgba(255,255,255,.35); padding-bottom: 20px;
-    }
-    .reason-grid, .flow-steps, .qnav-grid { grid-template-columns: repeat(2, 1fr); }
+    .keypoint:nth-child(1), .keypoint:nth-child(2) { border-bottom: 1px dashed rgba(255,255,255,.35); padding-bottom: 20px; }
+    .reason-showcase, .flow-steps, .qnav-grid { grid-template-columns: repeat(2, 1fr); }
     .flow-step:nth-child(2)::after { display: none; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item.large { grid-column: 1 / -1; min-height: 360px; }
   }
   @media (max-width: 560px) {
-    .hero { padding: 32px 16px 0; }
+    .hero { padding: 30px 16px 0; }
     .hero h1 { font-size: 30px; }
+    .price-panel { grid-template-columns: 1fr; }
+    .price-main { grid-row: auto; }
     .hero-photo-sub { width: 170px; height: 140px; }
-    .hero-sticker { width: 100px; height: 100px; font-size: 11px; }
-    .reason-grid, .flow-steps, .qnav-grid { grid-template-columns: 1fr; }
+    .hero-photo-third { width: 140px; height: 116px; }
+    .hero-sticker { width: 104px; height: 104px; top: 124px; font-size: 11px; }
+    .reason-showcase, .flow-steps, .qnav-grid, .gallery-grid { grid-template-columns: 1fr; }
+    .reason-card { grid-template-columns: 1fr; }
+    .reason-card figure { min-height: 190px; }
     .flow-step::after { display: none; }
+    .gallery-item, .gallery-item.large { min-height: 250px; }
   }
 </style>
 </head>
 <body>
 
 <div class="notice-bar">
-  <strong>★堺市西区最安値</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>24時間利用可能</strong> &nbsp;│&nbsp; <strong>女性も安心</strong>
+  <strong>★堺市西区 最安水準</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>初期費用0円</strong> &nbsp;│&nbsp; <strong>24時間365日利用OK</strong>
 </div>
 
 <header class="header">
@@ -265,199 +142,165 @@
           0120-666-780
         </a>
       </div>
-      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="btn-line-sm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
-        LINE
-      </a>
-      <a href="contact.html" class="btn-contact-sm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-        お問い合わせ
-      </a>
+      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="btn-line-sm">LINE</a>
+      <a href="contact.html" class="btn-contact-sm">お問い合わせ</a>
     </div>
     <button class="menu-toggle" aria-label="メニュー"><span></span></button>
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-badges">
-        <span class="hero-badge filled">★ 堺市西区最安値</span>
+        <span class="hero-badge filled">堺市西区 最安水準</span>
         <span class="hero-badge">JR津久野駅すぐ</span>
-        <span class="hero-badge">24時間利用OK</span>
+        <span class="hero-badge">初期費用0円</span>
         <span class="hero-badge">女性にも安心</span>
       </div>
       <h1>
-        あなたの<span class="mark">「置き場所」</span>を、<br>
-        <span class="accent">津久野駅すぐ</span>に。
+        月額<span class="mark">2,700円から</span>、<br>
+        <span class="accent">津久野駅すぐ</span>の室内型収納。
       </h1>
       <p class="hero-lead">
-        JR阪和線「津久野駅」徒歩すぐの地域密着型トランクルーム。季節家電・ゴルフ用品・書類・コレクションまで、24時間いつでも、安心してお預けください。
+        トランクルーム収納番長は、堺市西区・JR津久野駅近くの地域密着型トランクルームです。季節家電、書類、趣味用品、法人備品まで、清潔な室内で24時間いつでも出し入れできます。
       </p>
-      <a href="price.html" class="hero-ask" style="cursor:pointer;">
-        <div class="ico">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+      <div class="price-panel">
+        <div class="price-main">
+          <div class="label">月額利用料</div>
+          <div class="value">2,700<span>円〜/月</span></div>
+          <div class="label">税込・0.4帖から</div>
         </div>
-        <div>
-          <div class="t">料金はお気軽にお問い合わせを</div>
-          <div class="d">サイズ・お部屋の位置により変動します ▶</div>
+        <div class="price-mini">
+          <div class="label">初期費用</div>
+          <div class="value">0円</div>
         </div>
-      </a>
+        <div class="price-mini">
+          <div class="label">利用時間</div>
+          <div class="value">24時間</div>
+        </div>
+      </div>
       <div class="hero-cta">
-        <a href="contact.html" class="btn btn-line">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
-          お問い合わせ
-        </a>
-        <a href="tel:0120666780" class="btn btn-tel">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-          電話で予約
-        </a>
+        <a href="contact.html" class="btn btn-line">空室確認・見学予約</a>
+        <a href="tel:0120666780" class="btn btn-tel">電話で相談</a>
+        <a href="price.html" class="btn btn-ghost">料金を見る</a>
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-photo hero-photo-main"><img src="assets/P2120291.JPG" alt="清潔な収納ユニット通路" /></div>
+      <div class="hero-photo hero-photo-main"><img src="assets/P2120291.JPG" alt="明るく清潔な室内通路" /></div>
       <div class="hero-photo hero-photo-sub"><img src="assets/P2120283.JPG" alt="店舗外観" /></div>
-      <div class="hero-sticker">初期<br>費用<br><span class="big">¥0</span></div>
+      <div class="hero-photo hero-photo-third"><img src="assets/P2120290.JPG" alt="館内の台車" /></div>
+      <div class="hero-sticker">見学<br>無料<br><span class="big">受付中</span></div>
     </div>
   </div>
 
   <div class="keypoints">
-    <div class="keypoint">
-      <div class="keypoint-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-      <div class="keypoint-title">堺市西区最安値</div>
-      <div class="keypoint-desc">エリア最安水準の賃料</div>
-    </div>
-    <div class="keypoint">
-      <div class="keypoint-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-      <div class="keypoint-title">24時間365日</div>
-      <div class="keypoint-desc">早朝・深夜も出し入れ自由</div>
-    </div>
-    <div class="keypoint">
-      <div class="keypoint-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div class="keypoint-title">女性も安心</div>
-      <div class="keypoint-desc">電子ロック・防犯カメラ</div>
-    </div>
-    <div class="keypoint">
-      <div class="keypoint-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="4" width="16" height="14" rx="2"/><path d="M4 10h16M8 18v3M16 18v3"/></svg></div>
-      <div class="keypoint-title">津久野駅すぐ</div>
-      <div class="keypoint-desc">JR阪和線 徒歩圏内</div>
-    </div>
+    <div class="keypoint"><div class="keypoint-ico">¥</div><div class="keypoint-title">月額2,700円〜</div><div class="keypoint-desc">小さな荷物から使いやすい料金</div></div>
+    <div class="keypoint"><div class="keypoint-ico">0</div><div class="keypoint-title">初期費用0円</div><div class="keypoint-desc">敷金・礼金・保証金なし</div></div>
+    <div class="keypoint"><div class="keypoint-ico">24</div><div class="keypoint-title">24時間365日</div><div class="keypoint-desc">早朝・深夜も出し入れ自由</div></div>
+    <div class="keypoint"><div class="keypoint-ico">駅</div><div class="keypoint-title">津久野駅すぐ</div><div class="keypoint-desc">駐車スペース・台車あり</div></div>
   </div>
 </section>
 
-<!-- REASONS -->
 <section class="reasons">
   <div class="container">
     <div class="section-head reveal">
       <span class="section-eyebrow">選ばれる理由</span>
-      <h2 class="section-title">収納番長が、ずっと選ばれる4つのワケ。</h2>
-      <p class="section-lead">大手にはない、地域密着の小規模トランクルームだからできる安心とお得。</p>
+      <h2 class="section-title">写真と数字でわかる、収納番長の使いやすさ。</h2>
+      <p class="section-lead">料金の安さだけでなく、通いやすさ、館内の明るさ、出し入れのしやすさまで。初めての方にも選びやすい室内型トランクルームです。</p>
     </div>
-    <div class="reason-grid">
-      <div class="reason reveal">
-        <div class="reason-num">1</div>
-        <div class="reason-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3>地域最安値の<br>賃料</h3>
-        <p>シンプルな料金体系で、同エリア最安水準を実現。初期費用も¥0のキャンペーン中。</p>
-      </div>
-      <div class="reason reveal">
-        <div class="reason-num">2</div>
-        <div class="reason-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="14" rx="2"/><path d="M4 10h16M8 18v3M16 18v3"/></svg></div>
-        <h3>津久野駅から<br>徒歩すぐ</h3>
-        <p>JR阪和線「津久野駅」から歩いてスグ。お車でのご利用も便利、荷物の出し入れもラクラク。</p>
-      </div>
-      <div class="reason reveal">
-        <div class="reason-num">3</div>
-        <div class="reason-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <h3>女性も安心の<br>セキュリティ</h3>
-        <p>電子ロック・24時間防犯カメラ・明るい館内照明。お一人様でも安心してご利用いただけます。</p>
-      </div>
-      <div class="reason reveal">
-        <div class="reason-num">4</div>
-        <div class="reason-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <h3>24時間365日<br>利用OK</h3>
-        <p>早朝も深夜も、ご自分のペースで自由に出し入れ。お忙しい方にもご好評です。</p>
-      </div>
+    <div class="reason-showcase">
+      <article class="reason-card reveal">
+        <figure><img src="assets/P2120291.JPG" alt="清潔な室内通路" /></figure>
+        <div class="reason-body">
+          <div class="reason-label"><span class="num">1</span>料金がわかりやすい</div>
+          <h3>月額2,700円〜、初期費用0円。</h3>
+          <p>小型スペースから大型スペースまで、用途に合わせて選べます。敷金・礼金・保証金なしで、毎月の費用を抑えやすい料金体系です。</p>
+          <div class="proof-row"><span class="proof">税込表示</span><span class="proof">初期費用0円</span><span class="proof">0.4帖〜4.4帖</span></div>
+        </div>
+      </article>
+      <article class="reason-card reveal">
+        <figure><img src="assets/P2120283.JPG" alt="店舗外観" /></figure>
+        <div class="reason-body">
+          <div class="reason-label"><span class="num">2</span>駅近で通いやすい</div>
+          <h3>JR津久野駅すぐ。駐車スペースもあります。</h3>
+          <p>電車でも車でも立ち寄りやすい立地です。荷物の出し入れを日常のついでに済ませやすく、法人備品や趣味用品の保管にも向いています。</p>
+          <div class="proof-row"><span class="proof">津久野駅近く</span><span class="proof">駐車スペースあり</span><span class="proof">地域密着</span></div>
+        </div>
+      </article>
+      <article class="reason-card reveal">
+        <figure><img src="assets/P2120301.JPG" alt="駐車スペース" /></figure>
+        <div class="reason-body">
+          <div class="reason-label"><span class="num">3</span>出し入れしやすい</div>
+          <h3>24時間365日、好きなタイミングで。</h3>
+          <p>早朝や夜間でも荷物を取りに行けるので、仕事前後や週末の予定にも合わせやすいです。台車も利用でき、重い荷物の移動も助かります。</p>
+          <div class="proof-row"><span class="proof">24時間利用OK</span><span class="proof">365日利用OK</span><span class="proof">台車あり</span></div>
+        </div>
+      </article>
+      <article class="reason-card reveal">
+        <figure><img src="assets/P2120290.JPG" alt="台車と館内設備" /></figure>
+        <div class="reason-body">
+          <div class="reason-label"><span class="num">4</span>室内型で安心</div>
+          <h3>明るい館内、防犯設備つき。</h3>
+          <p>完全室内型で、電子ロックや防犯カメラを備えています。女性お一人でも利用しやすい、明るく清潔な保管環境を整えています。</p>
+          <div class="proof-row"><span class="proof">電子ロック</span><span class="proof">防犯カメラ</span><span class="proof">室内型</span></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- FLOW MINI -->
+<section class="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">施設写真</span>
+      <h2 class="section-title">見学前に、館内の雰囲気をチェック。</h2>
+      <p class="section-lead">写真で伝わる清潔感と使いやすさは、トランクルーム選びの大事な判断材料です。</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <figure class="gallery-item large"><img src="assets/P2120291.JPG" alt="明るい館内通路" /><figcaption class="gallery-caption"><strong>明るく清潔な館内通路</strong><span>室内型で天候を気にせず出し入れできます。</span></figcaption></figure>
+      <figure class="gallery-item"><img src="assets/P2120283.JPG" alt="店舗外観" /><figcaption class="gallery-caption"><strong>店舗外観</strong><span>津久野駅近くで立ち寄りやすい立地。</span></figcaption></figure>
+      <figure class="gallery-item"><img src="assets/P2120290.JPG" alt="台車" /><figcaption class="gallery-caption"><strong>台車あり</strong><span>重い荷物の移動もスムーズ。</span></figcaption></figure>
+      <figure class="gallery-item"><img src="assets/P2120301.JPG" alt="駐車スペース" /><figcaption class="gallery-caption"><strong>駐車スペース</strong><span>車での搬入・搬出にも便利です。</span></figcaption></figure>
+      <figure class="gallery-item"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長ロゴ" /><figcaption class="gallery-caption"><strong>地域密着</strong><span>堺市西区・津久野の収納番長。</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <section class="flow-mini">
   <div class="container">
     <div class="section-head reveal">
       <span class="section-eyebrow">ご利用までの流れ</span>
-      <h2 class="section-title">たった4ステップで、すぐご利用開始。</h2>
+      <h2 class="section-title">見学から利用開始まで、かんたん4ステップ。</h2>
     </div>
     <div class="flow-steps">
-      <div class="flow-step reveal">
-        <div class="flow-step-num">1</div>
-        <div class="flow-step-title">見学</div>
-        <div class="flow-step-desc">実際のお部屋をご確認ください。</div>
-      </div>
-      <div class="flow-step reveal">
-        <div class="flow-step-num">2</div>
-        <div class="flow-step-title">お申込み</div>
-        <div class="flow-step-desc">ご希望のお部屋をお選びください。</div>
-      </div>
-      <div class="flow-step reveal">
-        <div class="flow-step-num">3</div>
-        <div class="flow-step-title">ご契約</div>
-        <div class="flow-step-desc">書類の確認・お手続き。</div>
-      </div>
-      <div class="flow-step reveal">
-        <div class="flow-step-num">4</div>
-        <div class="flow-step-title">ご利用開始</div>
-        <div class="flow-step-desc">すぐにお使いいただけます。</div>
-      </div>
+      <div class="flow-step reveal"><div class="flow-step-num">1</div><div class="flow-step-title">見学</div><div class="flow-step-desc">実際のお部屋と館内をご確認ください。</div></div>
+      <div class="flow-step reveal"><div class="flow-step-num">2</div><div class="flow-step-title">お申込み</div><div class="flow-step-desc">用途に合うサイズを一緒に選べます。</div></div>
+      <div class="flow-step reveal"><div class="flow-step-num">3</div><div class="flow-step-title">ご契約</div><div class="flow-step-desc">必要書類を確認してお手続き。</div></div>
+      <div class="flow-step reveal"><div class="flow-step-num">4</div><div class="flow-step-title">利用開始</div><div class="flow-step-desc">24時間いつでも出し入れできます。</div></div>
     </div>
-    <div class="flow-link">
-      <a href="flow.html">詳しい流れを見る <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
+    <div class="flow-link"><a href="flow.html">詳しい流れを見る <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </section>
 
-<!-- QUICK NAV -->
 <section class="quick-nav">
   <div class="container">
     <div class="section-head reveal">
       <span class="section-eyebrow">メニュー</span>
-      <h2 class="section-title">お探しの情報はこちら</h2>
+      <h2 class="section-title">気になる情報をすぐ確認できます。</h2>
     </div>
     <div class="qnav-grid">
-      <a href="rooms.html" class="qnav reveal">
-        <div class="arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></div>
-        <div class="qnav-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h18v6H3zM3 15h18v6H3zM3 9v6"/></svg></div>
-        <h3>お部屋一覧</h3>
-        <p>館内図から空き部屋を確認</p>
-      </a>
-      <a href="price.html" class="qnav reveal">
-        <div class="arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></div>
-        <div class="qnav-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3>料金について</h3>
-        <p>お見積りはお気軽に</p>
-      </a>
-      <a href="access.html" class="qnav reveal">
-        <div class="arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></div>
-        <div class="qnav-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <h3>アクセス</h3>
-        <p>堺市西区・津久野駅すぐ</p>
-      </a>
-      <a href="faq.html" class="qnav reveal">
-        <div class="arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></div>
-        <div class="qnav-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
-        <h3>よくある質問</h3>
-        <p>はじめての方へ</p>
-      </a>
+      <a href="rooms.html" class="qnav reveal"><div class="arrow">›</div><div class="qnav-ico">室</div><h3>お部屋一覧</h3><p>サイズと料金を確認</p></a>
+      <a href="price.html" class="qnav reveal"><div class="arrow">›</div><div class="qnav-ico">¥</div><h3>料金</h3><p>月額2,700円〜</p></a>
+      <a href="access.html" class="qnav reveal"><div class="arrow">›</div><div class="qnav-ico">駅</div><h3>アクセス</h3><p>津久野駅すぐ</p></a>
+      <a href="faq.html" class="qnav reveal"><div class="arrow">›</div><div class="qnav-ico">?</div><h3>Q&amp;A</h3><p>はじめての方へ</p></a>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
   <div class="cta-inner">
-    <span class="cta-eyebrow">◎ お問い合わせ</span>
+    <span class="cta-eyebrow">◎ 空室確認・見学予約</span>
     <h2>まずは <span class="hl">お気軽に</span> ご連絡ください！</h2>
     <p>空き状況・お見積り・見学予約まで、お問い合わせフォームまたはお電話で承ります。</p>
     <div class="cta-buttons">
@@ -465,14 +308,14 @@
         <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg></div>
         <div class="cta-label">お問い合わせフォーム / 24時間受付</div>
         <div class="cta-value">フォームで相談</div>
-        <div class="cta-sub">お見積り・ご質問まで、お気軽にお問い合わせください</div>
-        <div class="cta-arrow" style="background:#E6F9EC;color:var(--green-deep)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="cta-sub">空き状況・お見積り・見学予約まで</div>
+        <div class="cta-arrow" style="background:#E6F9EC;color:var(--green-deep)">→</div>
       </a>
       <a href="tel:0120666780" class="cta-card tel">
         <div class="cta-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg></div>
         <div class="cta-label">TEL / お気軽にお電話ください</div>
         <div class="cta-value">0120-666-780</div>
-        <div class="cta-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="cta-arrow">→</div>
       </a>
     </div>
   </div>
@@ -481,55 +324,18 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand">
-        <img src="assets/toplogo.jpg" alt="収納番長" />
-        <p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p>
-      </div>
-      <div class="footer-col">
-        <h4>メニュー</h4>
-        <ul>
-          <li><a href="index.html">ホーム</a></li>
-          <li><a href="flow.html">利用の流れ</a></li>
-          <li><a href="price.html">料金</a></li>
-          <li><a href="rooms.html">お部屋一覧</a></li>
-          <li><a href="access.html">アクセス</a></li>
-          <li><a href="faq.html">Q&amp;A</a></li>
-          <li><a href="blog.html">ブログ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>店舗情報</h4>
-        <ul>
-          <li>大阪府堺市西区津久野町</li>
-          <li>JR津久野駅 徒歩すぐ</li>
-          <li>ご利用 24時間365日</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>お問い合わせ</h4>
-        <ul>
-          <li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
-          <li><a href="apply.html">お申し込み</a></li>
-        </ul>
-      </div>
+      <div class="footer-brand"><img src="assets/toplogo.jpg" alt="収納番長" /><p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p></div>
+      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="flow.html">利用の流れ</a></li><li><a href="price.html">料金</a></li><li><a href="rooms.html">お部屋一覧</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li><li><a href="blog.html">ブログ</a></li></ul></div>
+      <div class="footer-col"><h4>店舗情報</h4><ul><li>大阪府堺市西区津久野町</li><li>JR津久野駅 徒歩すぐ</li><li>ご利用 24時間365日</li></ul></div>
+      <div class="footer-col"><h4>お問い合わせ</h4><ul><li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li><li><a href="contact.html">お問い合わせ</a></li><li><a href="apply.html">お申し込み</a></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 トランクルーム収納番長. All Rights Reserved.</span>
-      <span>SAKAI / NISHI-KU / TSUKUNO</span>
-    </div>
+    <div class="footer-bottom"><span>© 2026 トランクルーム収納番長. All Rights Reserved.</span><span>SAKAI / NISHI-KU / TSUKUNO</span></div>
   </div>
 </footer>
 
-<div class="floating-cta">
-  <a href="contact.html" class="floating-line">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
-    <span class="txt">お問い合わせ</span>
-  </a>
-</div>
+<div class="floating-cta"><a href="contact.html" class="floating-line"><span class="txt">空室確認・見学予約</span></a></div>
 
 <script>
-  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -540,7 +346,6 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Mobile menu toggle
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.nav');
   if (toggle && nav) {
