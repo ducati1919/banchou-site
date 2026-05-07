@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>お部屋一覧・空室状況 | トランクルーム収納番長</title>
-<meta name="description" content="トランクルーム収納番長のお部屋一覧と空室状況。1F・2Fあわせて全48室。空室ありの部屋はLINEまたは電話で見学・申込み相談できます。" />
+<meta name="description" content="トランクルーム収納番長のお部屋一覧と空室状況。1F・2Fあわせて全48室。配置図で部屋の場所を確認しながら、空室ありの部屋はLINEまたは電話で見学・申込み相談できます。" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
@@ -26,6 +26,16 @@
 .avail-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 12px 18px; color: white; font-weight: 900; font-size: 13px; white-space: nowrap; }
 .avail-btn.line { background: var(--green); }
 .avail-btn.tel { background: var(--orange); }
+.plan-section { margin: 32px 0 30px; }
+.plan-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+.plan-head h2 { font-size: 24px; font-weight: 900; }
+.plan-head p { color: var(--ink-3); font-size: 13px; font-weight: 700; line-height: 1.7; max-width: 560px; }
+.plan-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.plan-card { background: white; border: 2px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-sm); }
+.plan-card h3 { padding: 16px 18px 12px; font-size: 17px; font-weight: 900; border-bottom: 1px solid var(--line); }
+.plan-img { background: #fffaf2; padding: 14px; }
+.plan-img img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); }
+.plan-note { padding: 0 18px 16px; color: var(--ink-2); font-size: 12px; line-height: 1.7; }
 .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0; }
 .filter-btn { border: 2px solid var(--line); background: white; color: var(--ink-2); border-radius: 999px; padding: 10px 18px; font-weight: 900; font-size: 13px; }
 .filter-btn.active { background: var(--orange); border-color: var(--orange); color: white; }
@@ -48,14 +58,16 @@
 .room-card.occupied .room-cta { background: #C8B9A5; pointer-events: none; }
 .note-box { margin-top: 28px; border: 2px solid var(--line); border-radius: 16px; background: var(--bg); padding: 20px; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
 @media (max-width: 860px) {
-  .status-strip { grid-template-columns: repeat(2, 1fr); }
+  .status-strip, .plan-grid { grid-template-columns: repeat(2, 1fr); }
   .avail-lead { grid-template-columns: 1fr; }
+  .plan-head { display: block; }
+  .plan-head h2 { margin-bottom: 8px; }
 }
 @media (max-width: 560px) {
-  .rooms-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rooms-grid, .plan-grid { grid-template-columns: 1fr; }
   .room-card { min-height: 150px; padding: 14px 12px; }
   .room-num { font-size: 24px; }
-  .status-strip { gap: 10px; }
+  .status-strip { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .status-card { padding: 12px; }
 }
 </style>
@@ -92,7 +104,7 @@
     <div class="container">
       <span class="section-eyebrow" style="color:rgba(255,255,255,.86);">ROOMS</span>
       <h1>お部屋一覧・空室状況</h1>
-      <p>現在の空室をわかりやすく表示しています。気になる部屋があれば、LINEかお電話で空き確認・見学予約できます。</p>
+      <p>現在の空室をわかりやすく表示しています。配置図で場所を確認して、気になる部屋があればLINEかお電話で空き確認・見学予約できます。</p>
       <div class="status-strip">
         <div class="status-card"><strong>48</strong><span>全室数</span></div>
         <div class="status-card"><strong>23</strong><span>空室</span></div>
@@ -114,6 +126,25 @@
           <a class="avail-btn tel" href="tel:0120666780">電話する</a>
         </div>
       </div>
+
+      <section class="plan-section" aria-labelledby="plan-title">
+        <div class="plan-head">
+          <h2 id="plan-title">配置図で部屋の場所を確認</h2>
+          <p>番号だけでは分かりにくいので、1階・2階の配置図を戻しました。空室番号と照らし合わせて、搬入しやすい場所を選べます。</p>
+        </div>
+        <div class="plan-grid">
+          <article class="plan-card">
+            <h3>1階配置図（101〜134号室）</h3>
+            <div class="plan-img"><img src="assets/１階白紙.jpg" alt="1階配置図" /></div>
+            <p class="plan-note">1階は搬入しやすく、家具・家電・重い荷物の保管を検討される方に人気です。</p>
+          </article>
+          <article class="plan-card">
+            <h3>2階配置図（201〜214号室）</h3>
+            <div class="plan-img"><img src="assets/２階白紙.jpg" alt="2階配置図" /></div>
+            <p class="plan-note">2階にも空室があります。保管内容やご予算に合わせて候補をご案内できます。</p>
+          </article>
+        </div>
+      </section>
 
       <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">すべて</button>
