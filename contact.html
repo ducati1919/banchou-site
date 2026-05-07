@@ -69,6 +69,10 @@
 .message-sample { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 14px; font-size: 13px; color: var(--ink-2); line-height: 1.7; }
 .notice-fix { background: var(--ink); color: white; padding: 8px 20px; font-size: 12px; text-align: center; }
 .notice-fix strong { color: var(--yellow); }
+.contact-photo-grid { max-width: 1040px; margin: 28px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.contact-photo-grid figure { border-radius: 14px; overflow: hidden; background: var(--ink); box-shadow: var(--shadow-sm); }
+.contact-photo-grid img { width: 100%; height: 190px; object-fit: cover; }
+.contact-photo-grid figcaption { color: white; padding: 10px 14px; text-align: center; font-size: 12px; font-weight: 700; }
 @media (max-width: 960px) {
   .nav.open { display: flex; position: absolute; left: 16px; right: 16px; top: calc(100% + 8px); flex-direction: column; align-items: stretch; gap: 0; background: white; border: 2px solid var(--line); border-radius: 14px; padding: 10px; box-shadow: var(--shadow-lg); }
   .nav.open a { padding: 12px 14px; border-radius: 10px; }
@@ -78,7 +82,7 @@
   .menu-toggle.open span::before { top: 0; transform: rotate(45deg); }
   .menu-toggle.open span::after { top: 0; transform: rotate(-45deg); }
   .contact-hero-inner, .contact-grid { grid-template-columns: 1fr; }
-  .message-samples { grid-template-columns: 1fr; }
+  .message-samples, .contact-photo-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -167,6 +171,12 @@
         <div class="message-sample">105号室くらいの広さで空きはありますか？今月から使いたいです。</div>
         <div class="message-sample">料金と初期費用を確認したいです。見学も希望します。</div>
       </div>
+    </div>
+
+    <div class="contact-photo-grid">
+      <figure><img src="assets/P2120284.JPG" alt="店舗外観" /><figcaption>店舗外観</figcaption></figure>
+      <figure><img src="assets/P2120301.JPG" alt="駐車スペース" /><figcaption>駐車スペース</figcaption></figure>
+      <figure><img src="assets/P2120290.JPG" alt="台車" /><figcaption>台車無料貸出</figcaption></figure>
     </div>
   </section>
 </main>

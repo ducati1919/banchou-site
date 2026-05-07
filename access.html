@@ -34,8 +34,10 @@
 .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px; }
 .photo-grid figure { border-radius: 14px; overflow: hidden; background: var(--ink); box-shadow: var(--shadow-sm); }
 .photo-grid img { width: 100%; height: 210px; object-fit: cover; }
+.photo-grid figure:first-child { grid-column: span 2; }
+.photo-grid figure:first-child img { height: 300px; }
 .photo-grid figcaption { color: white; padding: 10px 14px; text-align: center; font-size: 12px; font-weight: 700; }
-@media (max-width: 820px) { .info-grid, .route-grid, .photo-grid { grid-template-columns: 1fr; } .map-box iframe { height: 320px; } }
+@media (max-width: 820px) { .info-grid, .route-grid, .photo-grid { grid-template-columns: 1fr; } .photo-grid figure:first-child { grid-column: auto; } .photo-grid figure:first-child img { height: 210px; } .map-box iframe { height: 320px; } }
 </style>
 </head>
 <body>
@@ -52,7 +54,7 @@
   </div>
   <div class="map-box"><iframe src="https://maps.google.com/maps?q=大阪府堺市西区津久野町&t=&z=16&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="トランクルーム収納番長 地図"></iframe></div>
   <div class="action-row"><a class="map-btn map" href="https://maps.google.com/maps?q=大阪府堺市西区津久野町" target="_blank" rel="noopener">Googleマップで開く</a><a class="map-btn line" href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener">LINEで道順を聞く</a><a class="map-btn map" href="tel:0120666780">電話する</a></div>
-  <div class="photo-grid"><figure><img src="assets/P2120283.JPG" alt="店舗外観" /><figcaption>店舗外観</figcaption></figure><figure><img src="assets/P2120301.JPG" alt="駐車スペース" /><figcaption>駐車スペース</figcaption></figure><figure><img src="assets/P2120290.JPG" alt="台車" /><figcaption>台車無料貸出</figcaption></figure></div>
+  <div class="photo-grid"><figure><img src="assets/P2120284.JPG" alt="店舗外観" /><figcaption>店舗外観</figcaption></figure><figure><img src="assets/P2120301.JPG" alt="駐車スペース" /><figcaption>駐車スペース</figcaption></figure><figure><img src="assets/P2120287.JPG" alt="入口" /><figcaption>入口</figcaption></figure><figure><img src="assets/P2120290.JPG" alt="台車" /><figcaption>台車無料貸出</figcaption></figure></div>
 </div></section>
 <section class="route-section"><div class="route-grid">
   <div class="route-card"><h2>電車でお越しの方</h2><ul><li><strong>✓</strong><span>JR阪和線「津久野駅」からすぐです。</span></li><li><strong>✓</strong><span>初めての方はLINEまたは電話で場所をご案内します。</span></li></ul></div>

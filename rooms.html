@@ -57,6 +57,10 @@
 .room-cta { display: block; text-align: center; background: var(--orange); color: white; border-radius: 9px; padding: 8px 10px; font-size: 12px; font-weight: 900; }
 .room-card.occupied .room-cta { background: #C8B9A5; pointer-events: none; }
 .note-box { margin-top: 28px; border: 2px solid var(--line); border-radius: 16px; background: var(--bg); padding: 20px; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
+.room-photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0 34px; }
+.room-photo-grid figure { border-radius: 14px; overflow: hidden; background: var(--ink); box-shadow: var(--shadow-sm); }
+.room-photo-grid img { width: 100%; height: 210px; object-fit: cover; }
+.room-photo-grid figcaption { color: white; padding: 10px 14px; text-align: center; font-size: 12px; font-weight: 700; }
 @media (max-width: 860px) {
   .status-strip, .plan-grid { grid-template-columns: repeat(2, 1fr); }
   .avail-lead { grid-template-columns: 1fr; }
@@ -64,7 +68,7 @@
   .plan-head h2 { margin-bottom: 8px; }
 }
 @media (max-width: 560px) {
-  .rooms-grid, .plan-grid { grid-template-columns: 1fr; }
+  .rooms-grid, .plan-grid, .room-photo-grid { grid-template-columns: 1fr; }
   .room-card { min-height: 150px; padding: 14px 12px; }
   .room-num { font-size: 24px; }
   .status-strip { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -145,6 +149,12 @@
           </article>
         </div>
       </section>
+
+      <div class="room-photo-grid">
+        <figure><img src="assets/P2120294.JPG" alt="1階室内通路" /><figcaption>1階の明るい通路</figcaption></figure>
+        <figure><img src="assets/P2120297.JPG" alt="2階室内通路" /><figcaption>2階の収納スペース</figcaption></figure>
+        <figure><img src="assets/P2120300.JPG" alt="2階配置図" /><figcaption>現地の配置図も確認できます</figcaption></figure>
+      </div>
 
       <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">すべて</button>

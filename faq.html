@@ -151,6 +151,11 @@
   background: var(--orange); color: white;
 }
 .still-btn.tel:hover { background: var(--orange-deep); }
+.faq-photo-strip { background: white; border-bottom: 1px solid var(--line); padding: 24px; }
+.faq-photo-grid { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.faq-photo-grid figure { border-radius: 14px; overflow: hidden; background: var(--ink); box-shadow: var(--shadow-sm); }
+.faq-photo-grid img { width: 100%; height: 180px; object-fit: cover; }
+.faq-photo-grid figcaption { color: white; padding: 10px 14px; text-align: center; font-size: 12px; font-weight: 700; }
 
 /* ── レスポンシブ ── */
 @media (max-width: 640px) {
@@ -159,6 +164,7 @@
   .faq-cat-btn { font-size: 12px; padding: 7px 14px; }
   .still-help-btns { flex-direction: column; }
   .still-btn { justify-content: center; }
+  .faq-photo-grid { grid-template-columns: 1fr; }
 }
 
 </style>
@@ -216,6 +222,14 @@
     <div class="section-eyebrow" style="color:rgba(255,255,255,.8);margin-bottom:8px;">— FAQ —</div>
     <h1>よくある質問</h1>
     <p>ご利用前に気になる疑問をまとめました。<br>解決しない場合はお気軽にLINE・お電話でお問い合わせください。</p>
+  </div>
+</div>
+
+<div class="faq-photo-strip" aria-label="施設写真">
+  <div class="faq-photo-grid">
+    <figure><img src="assets/P2120294.JPG" alt="室内通路" /><figcaption>室内型の明るい通路</figcaption></figure>
+    <figure><img src="assets/P2120292.JPG" alt="空調と防犯カメラ" /><figcaption>空調・防犯設備</figcaption></figure>
+    <figure><img src="assets/P2120290.JPG" alt="台車" /><figcaption>台車も利用できます</figcaption></figure>
   </div>
 </div>
 
