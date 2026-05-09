@@ -40,7 +40,8 @@
   .keypoints { background: var(--orange); color: white; padding: 24px; margin: 36px auto 0; max-width: 1240px; border-radius: 20px 20px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; position: relative; z-index: 1; overflow: hidden; }
   .keypoint { padding: 12px 16px; text-align: center; border-right: 1px dashed rgba(255,255,255,.35); display: flex; flex-direction: column; align-items: center; gap: 8px; }
   .keypoint:last-child { border-right: none; }
-  .keypoint-ico { width: 44px; height: 44px; background: rgba(255,255,255,.18); border-radius: 50%; display: grid; place-items: center; font-weight: 900; }
+  .keypoint-ico { width: 50px; height: 50px; background: rgba(255,255,255,.2); border: 2px solid rgba(255,255,255,.28); border-radius: 50%; display: grid; place-items: center; color: white; }
+  .keypoint-ico svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; fill: none; }
   .keypoint-title { font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; font-size: 16px; }
   .keypoint-desc { font-size: 11px; opacity: .9; line-height: 1.4; }
 
@@ -132,6 +133,8 @@
       <a href="flow.html">利用の流れ</a>
       <a href="price.html">料金</a>
       <a href="rooms.html">お部屋一覧</a>
+      
+      <a href="apply.html">?????</a>
       <a href="access.html">アクセス</a>
       <a href="faq.html">Q&amp;A</a>
       <a href="blog.html">ブログ</a>
@@ -164,7 +167,7 @@
       <div class="hero-cta">
         <a href="rooms.html" class="btn btn-line">空室を見る</a>
         <a href="tel:0120666780" class="btn btn-tel">電話で相談</a>
-        <a href="price.html" class="btn btn-ghost">料金を見る</a>
+        <a href="apply.html" class="btn btn-ghost">申し込みへ</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -176,10 +179,10 @@
   </div>
 
   <div class="keypoints">
-    <div class="keypoint"><div class="keypoint-ico">￥</div><div class="keypoint-title">月額2,700円〜</div><div class="keypoint-desc">小さな荷物から使いやすい料金</div></div>
-    <div class="keypoint"><div class="keypoint-ico">0</div><div class="keypoint-title">初期費用0円</div><div class="keypoint-desc">敷金・礼金・保証金なし</div></div>
-    <div class="keypoint"><div class="keypoint-ico">24</div><div class="keypoint-title">24時間365日</div><div class="keypoint-desc">早朝・深夜も出し入れ自由</div></div>
-    <div class="keypoint"><div class="keypoint-ico">駅</div><div class="keypoint-title">津久野駅すぐ</div><div class="keypoint-desc">駐車スペース・台車あり</div></div>
+    <div class="keypoint"><div class="keypoint-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M9 8h6"></path><path d="M10 12h4"></path><path d="M12 8v9"></path></svg></div><div class="keypoint-title">月額2,700円〜</div><div class="keypoint-desc">小さな荷物から使いやすい料金</div></div>
+    <div class="keypoint"><div class="keypoint-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 8.5c1-1.2 2.3-2 4-2 3.1 0 5 2.4 5 5.5s-1.9 5.5-5 5.5c-1.7 0-3-.8-4-2"></path><path d="M7 8.5v-3"></path><path d="M7 8.5h3"></path><path d="M8.5 13.5c.8 1 2 1.6 3.5 1.6s2.7-.6 3.5-1.6"></path></svg></div><div class="keypoint-title">初期費用0円</div><div class="keypoint-desc">敷金・礼金・保証金なし</div></div>
+    <div class="keypoint"><div class="keypoint-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 7v5l3 2"></path><path d="M4 4l3 3"></path><path d="M20 4l-3 3"></path></svg></div><div class="keypoint-title">24時間365日</div><div class="keypoint-desc">早朝・深夜も出し入れ自由</div></div>
+    <div class="keypoint"><div class="keypoint-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 20V7.5L12 4l6 3.5V20"></path><path d="M9 20v-5h6v5"></path><path d="M9 10h6"></path><path d="M5 20h14"></path></svg></div><div class="keypoint-title">津久野駅すぐ</div><div class="keypoint-desc">駐車スペース・台車あり</div></div>
   </div>
 </section>
 
