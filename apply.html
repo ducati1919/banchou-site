@@ -37,6 +37,27 @@
 .check-list { list-style: none; display: grid; gap: 12px; }
 .check-list li { display: flex; gap: 10px; }
 .check-list strong { color: var(--orange); }
+.apply-form-panel { margin-top: 32px; border: 2px solid var(--orange); border-radius: 22px; padding: 30px; background: linear-gradient(180deg, #FFF9ED 0%, #fff 68%); box-shadow: var(--shadow-sm); }
+.apply-form-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
+.apply-form-head h2 { font-size: 24px; font-weight: 900; color: var(--ink); line-height: 1.35; }
+.apply-form-head p { color: var(--ink-2); font-size: 13px; line-height: 1.8; margin-top: 6px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.form-field { display: grid; gap: 7px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label { font-size: 13px; font-weight: 900; color: var(--ink); }
+.form-field label span { color: var(--red); margin-left: 4px; }
+.form-field input, .form-field select, .form-field textarea { width: 100%; border: 2px solid var(--line); border-radius: 12px; background: white; padding: 12px 14px; font: inherit; font-size: 14px; color: var(--ink); outline: none; transition: border-color .18s, box-shadow .18s; }
+.form-field textarea { min-height: 118px; resize: vertical; line-height: 1.7; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(239,111,22,.12); }
+.form-help { color: var(--ink-3); font-size: 12px; line-height: 1.7; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 20px; }
+.form-submit, .form-line-link { border: 0; border-radius: 999px; min-height: 48px; padding: 12px 20px; font-weight: 900; font-family: 'M PLUS Rounded 1c', sans-serif; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.form-submit { background: #06C755; color: white; box-shadow: 0 4px 0 var(--green-deep); }
+.form-line-link { background: white; color: var(--green-deep); border: 2px solid rgba(6,199,85,.42); }
+.form-result { display: none; margin-top: 20px; border: 2px solid rgba(6,199,85,.34); background: #F2FFF6; border-radius: 16px; padding: 18px; }
+.form-result.open { display: block; }
+.form-result strong { display: block; color: var(--green-deep); margin-bottom: 8px; }
+.form-result pre { white-space: pre-wrap; font: inherit; font-size: 13px; line-height: 1.75; color: var(--ink-2); background: white; border: 1px solid rgba(6,199,85,.22); border-radius: 12px; padding: 14px; max-height: 260px; overflow: auto; }
 .photo-row { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; margin: 32px 0; }
 .photo-row figure { border-radius: 16px; overflow: hidden; background: var(--ink); box-shadow: var(--shadow-sm); }
 .photo-row img { width: 100%; height: 260px; object-fit: cover; }
@@ -56,6 +77,9 @@
   .menu-toggle.open span::before { top: 0; transform: rotate(45deg); }
   .menu-toggle.open span::after { top: 0; transform: rotate(-45deg); }
   .apply-hero-inner, .apply-grid, .photo-row { grid-template-columns: 1fr; }
+  .apply-form-head { display: block; }
+  .form-grid { grid-template-columns: 1fr; }
+  .apply-form-panel { padding: 22px 18px; }
 }
 </style>
 </head>
@@ -71,8 +95,7 @@
     <nav class="nav">
       <a href="index.html">ホーム</a>
       <a href="flow.html">利用の流れ</a>
-      <a href="price.html">料金</a>
-      <a href="rooms.html">お部屋一覧</a>
+      <a href="rooms.html">料金・お部屋一覧</a>
       <a href="apply.html" class="active">お申し込み</a>
       <a href="access.html">アクセス</a>
       <a href="faq.html">Q&amp;A</a>
@@ -138,6 +161,81 @@
         </div>
       </div>
 
+      <section class="apply-form-panel" aria-labelledby="apply-form-title">
+        <div class="apply-form-head">
+          <div>
+            <span class="section-eyebrow">FORM</span>
+            <h2 id="apply-form-title">お申し込みフォーム</h2>
+            <p>入力内容をまとめてLINEへ送れるようにします。空き確認・見学予約だけでも大丈夫です。</p>
+          </div>
+          <a class="form-line-link" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEを開く</a>
+        </div>
+
+        <form id="applyForm">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="name">お名前<span>必須</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" required placeholder="例：山田 太郎">
+            </div>
+            <div class="form-field">
+              <label for="kana">ふりがな</label>
+              <input id="kana" name="kana" type="text" placeholder="例：やまだ たろう">
+            </div>
+            <div class="form-field">
+              <label for="tel">電話番号<span>必須</span></label>
+              <input id="tel" name="tel" type="tel" autocomplete="tel" required placeholder="例：090-1234-5678">
+            </div>
+            <div class="form-field">
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="例：name@example.com">
+            </div>
+            <div class="form-field">
+              <label for="room">希望の部屋・サイズ</label>
+              <input id="room" name="room" type="text" placeholder="例：105号室、1帖くらい、空いている部屋">
+            </div>
+            <div class="form-field">
+              <label for="start">利用開始希望日</label>
+              <input id="start" name="start" type="date">
+            </div>
+            <div class="form-field">
+              <label for="visit">見学希望</label>
+              <select id="visit" name="visit">
+                <option value="未定">未定</option>
+                <option value="見学したい">見学したい</option>
+                <option value="空きがあれば申込みたい">空きがあれば申込みたい</option>
+                <option value="まず相談したい">まず相談したい</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="contactTime">連絡しやすい時間帯</label>
+              <input id="contactTime" name="contactTime" type="text" placeholder="例：平日18時以降">
+            </div>
+            <div class="form-field full">
+              <label for="items">預けたい荷物</label>
+              <textarea id="items" name="items" placeholder="例：衣装ケース10個、季節家電、段ボールなど"></textarea>
+            </div>
+            <div class="form-field full">
+              <label for="message">その他ご希望・ご質問</label>
+              <textarea id="message" name="message" placeholder="例：できれば1階希望、駐車スペースを使いたい、料金を確認したいなど"></textarea>
+              <div class="form-help">送信ボタンを押すと入力内容が画面にまとまります。コピーしてLINEで送ってください。</div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="form-submit" type="submit">入力内容をまとめる</button>
+            <a class="form-line-link" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで送る</a>
+          </div>
+        </form>
+
+        <div class="form-result" id="formResult" aria-live="polite">
+          <strong id="formResultTitle">入力内容をまとめました</strong>
+          <pre id="formSummary"></pre>
+          <div class="form-actions">
+            <button class="form-submit" type="button" id="copySummary">この内容をコピー</button>
+            <a class="form-line-link" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEを開く</a>
+          </div>
+        </div>
+      </section>
+
       <div class="photo-row">
         <figure><img src="assets/P2120287.JPG" alt="店舗入口" /><figcaption>入口で場所を確認できます</figcaption></figure>
         <figure><img src="assets/P2120294.JPG" alt="室内通路" /><figcaption>室内型で明るい保管環境</figcaption></figure>
@@ -163,7 +261,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand"><img src="assets/toplogo.jpg" alt="収納番長" /><p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p></div>
-      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="flow.html">利用の流れ</a></li><li><a href="price.html">料金</a></li><li><a href="rooms.html">お部屋一覧</a></li><li><a href="apply.html">お申し込み</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li></ul></div>
+      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="flow.html">利用の流れ</a></li><li><a href="rooms.html">料金・お部屋一覧</a></li><li><a href="apply.html">お申し込み</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li></ul></div>
       <div class="footer-col"><h4>お問い合わせ</h4><ul><li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li><li><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで空室確認</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span>© 2026 トランクルーム収納番長. All Rights Reserved.</span></div>
@@ -179,6 +277,54 @@ if (toggle && nav) {
   toggle.addEventListener('click', () => {
     nav.classList.toggle('open');
     toggle.classList.toggle('open');
+  });
+}
+
+const applyForm = document.getElementById('applyForm');
+const formResult = document.getElementById('formResult');
+const formResultTitle = document.getElementById('formResultTitle');
+const formSummary = document.getElementById('formSummary');
+const copySummary = document.getElementById('copySummary');
+
+function valueOf(formData, key) {
+  return (formData.get(key) || '').toString().trim() || '未入力';
+}
+
+if (applyForm && formResult && formSummary) {
+  applyForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(applyForm);
+    const summary = [
+      'トランクルーム収納番長 申込み・空き確認',
+      '',
+      `お名前：${valueOf(formData, 'name')}`,
+      `ふりがな：${valueOf(formData, 'kana')}`,
+      `電話番号：${valueOf(formData, 'tel')}`,
+      `メール：${valueOf(formData, 'email')}`,
+      `希望の部屋・サイズ：${valueOf(formData, 'room')}`,
+      `利用開始希望日：${valueOf(formData, 'start')}`,
+      `見学希望：${valueOf(formData, 'visit')}`,
+      `連絡しやすい時間帯：${valueOf(formData, 'contactTime')}`,
+      '',
+      `預けたい荷物：${valueOf(formData, 'items')}`,
+      '',
+      `その他：${valueOf(formData, 'message')}`
+    ].join('\n');
+
+    formSummary.textContent = summary;
+    formResult.classList.add('open');
+    formResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
+if (copySummary && formSummary && formResultTitle) {
+  copySummary.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(formSummary.textContent);
+      formResultTitle.textContent = 'コピーしました。LINEで貼り付けて送ってください';
+    } catch (error) {
+      formResultTitle.textContent = 'コピーできない場合は、下の内容を選択してLINEへ貼り付けてください';
+    }
   });
 }
 </script>

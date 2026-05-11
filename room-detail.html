@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>お部屋詳細 | トランクルーム収納番長</title>
+<meta name="description" content="トランクルーム収納番長の各部屋詳細。広さ、料金、空室状況を確認できます。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.detail-hero { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%); color: white; padding: 54px 24px; }
+.detail-hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
+.detail-hero h1 { font-size: clamp(34px,5vw,58px); font-weight: 900; line-height: 1; margin-top: 8px; }
+.detail-hero p { opacity: .95; font-size: 14px; line-height: 1.8; margin-top: 12px; }
+.hero-price { background: white; color: var(--ink); border-radius: 18px; padding: 22px 26px; box-shadow: 0 8px 0 rgba(0,0,0,.18); min-width: 260px; }
+.hero-price .label { color: var(--ink-3); font-size: 12px; font-weight: 900; margin-bottom: 6px; }
+.hero-price strong { display: block; color: var(--orange); font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 34px; line-height: 1; }
+.detail-main { padding: 64px 24px; background: white; }
+.detail-wrap { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: start; }
+.photo-placeholder { min-height: 390px; border: 2px dashed var(--line); border-radius: 20px; background: linear-gradient(135deg, #FFF7E8 0%, #fff 100%); display: grid; place-items: center; text-align: center; color: var(--ink-2); padding: 28px; }
+.photo-placeholder strong { display: block; font-size: 24px; color: var(--ink); margin-bottom: 8px; font-family: 'M PLUS Rounded 1c', sans-serif; }
+.detail-panel { border: 2px solid var(--line); border-radius: 20px; padding: 26px; background: var(--bg); }
+.detail-panel h2 { font-size: 22px; font-weight: 900; margin-bottom: 18px; }
+.spec-list { display: grid; gap: 12px; }
+.spec-row { display: grid; grid-template-columns: 110px 1fr; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.spec-row dt { color: var(--ink-3); font-size: 12px; font-weight: 900; }
+.spec-row dd { color: var(--ink); font-weight: 900; }
+.status-text.vacant { color: var(--green-deep); }
+.status-text.occupied { color: var(--ink-3); }
+.detail-actions { display: grid; gap: 12px; margin-top: 22px; }
+.detail-btn { display: flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 999px; color: white; font-weight: 900; font-family: 'M PLUS Rounded 1c', sans-serif; }
+.detail-btn.line { background: #06C755; box-shadow: 0 4px 0 var(--green-deep); }
+.detail-btn.tel { background: var(--orange); box-shadow: 0 4px 0 var(--orange-deep); }
+.detail-btn.back { background: white; color: var(--ink); border: 2px solid var(--line); box-shadow: none; }
+.detail-note { margin-top: 22px; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
+@media (max-width: 860px) {
+  .detail-hero-inner, .detail-wrap { grid-template-columns: 1fr; }
+  .hero-price { min-width: 0; }
+  .photo-placeholder { min-height: 280px; }
+}
+</style>
+</head>
+<body>
+<div class="notice-bar">
+  <strong>堺市西区・津久野駅すぐ</strong> &nbsp;|&nbsp; <strong>初期費用0円</strong> &nbsp;|&nbsp; <strong>24時間利用OK</strong>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長" /></a>
+    <nav class="nav">
+      <a href="index.html">ホーム</a>
+      <a href="flow.html">利用の流れ</a>
+      <a href="rooms.html" class="active">料金・お部屋一覧</a>
+      <a href="apply.html">お申し込み</a>
+      <a href="access.html">アクセス</a>
+      <a href="faq.html">Q&amp;A</a>
+      <a href="blog.html">ブログ</a>
+    </nav>
+    <div class="header-cta">
+      <div class="tel-block"><div class="label">お電話はこちら</div><a href="tel:0120666780" class="num">0120-666-780</a></div>
+      <a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="btn-line-sm">LINE</a>
+      <a href="contact.html" class="btn-contact-sm">お問い合わせ</a>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<main id="detailRoot">
+  <section class="detail-hero">
+    <div class="detail-hero-inner">
+      <div>
+        <span class="section-eyebrow" style="color:rgba(255,255,255,.86);">ROOM DETAIL</span>
+        <h1 id="roomTitle">お部屋詳細</h1>
+        <p id="roomLead">広さ・料金・空室状況を確認できます。</p>
+      </div>
+      <div class="hero-price">
+        <div class="label">月額税込</div>
+        <strong id="roomPrice">-</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail-main">
+    <div class="detail-wrap">
+      <div class="photo-placeholder">
+        <div>
+          <strong>写真準備中</strong>
+          <p>各部屋の写真をいただいたら、この枠に部屋写真を表示します。</p>
+        </div>
+      </div>
+      <aside class="detail-panel">
+        <h2>部屋情報</h2>
+        <dl class="spec-list">
+          <div class="spec-row"><dt>部屋番号</dt><dd id="specNo">-</dd></div>
+          <div class="spec-row"><dt>階数</dt><dd id="specFloor">-</dd></div>
+          <div class="spec-row"><dt>広さ</dt><dd id="specSize">-</dd></div>
+          <div class="spec-row"><dt>月額料金</dt><dd id="specPrice">-</dd></div>
+          <div class="spec-row"><dt>空室状況</dt><dd id="specStatus">-</dd></div>
+        </dl>
+        <div class="detail-actions">
+          <a class="detail-btn line" id="lineLink" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEでこの部屋を確認</a>
+          <a class="detail-btn tel" href="tel:0120666780">電話で確認する</a>
+          <a class="detail-btn back" href="rooms.html">一覧に戻る</a>
+        </div>
+        <p class="detail-note">空室状況は変動します。LINEまたは電話で部屋番号を伝えていただくと、最新状況を確認できます。</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/toplogo.jpg" alt="収納番長" /><p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p></div>
+      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="flow.html">利用の流れ</a></li><li><a href="rooms.html">料金・お部屋一覧</a></li><li><a href="apply.html">お申し込み</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li></ul></div>
+      <div class="footer-col"><h4>お問い合わせ</h4><ul><li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li><li><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで空き確認</a></li><li><a href="apply.html">お申し込み</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 トランクルーム収納番長. All Rights Reserved.</span></div>
+  </div>
+</footer>
+
+<div class="floating-cta"><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="floating-line"><span class="txt">🐕 LINEで空き確認</span></a></div>
+
+<script src="rooms-data.js"></script>
+<script>
+function yen(value) {
+  return `${value.toLocaleString('ja-JP')}円`;
+}
+
+const params = new URLSearchParams(location.search);
+const roomNo = Number(params.get('room'));
+const room = (window.BANCHOU_ROOMS || []).find(item => item.no === roomNo);
+
+if (!room) {
+  document.getElementById('detailRoot').innerHTML = `
+    <section class="detail-main">
+      <div class="detail-wrap" style="display:block;">
+        <div class="detail-panel">
+          <h1>部屋が見つかりません</h1>
+          <p class="detail-note">一覧ページから部屋を選び直してください。</p>
+          <div class="detail-actions"><a class="detail-btn back" href="rooms.html">一覧に戻る</a></div>
+        </div>
+      </div>
+    </section>`;
+} else {
+  document.title = `${room.no}号室 | トランクルーム収納番長`;
+  document.getElementById('roomTitle').textContent = `${room.no}号室`;
+  document.getElementById('roomLead').textContent = `${room.floor}階の収納スペースです。料金と広さを確認して、気になる場合はLINEで空き状況を確認してください。`;
+  document.getElementById('roomPrice').textContent = yen(room.price);
+  document.getElementById('specNo').textContent = `${room.no}号室`;
+  document.getElementById('specFloor').textContent = `${room.floor}階`;
+  document.getElementById('specSize').textContent = room.size;
+  document.getElementById('specPrice').textContent = `${yen(room.price)} / 月`;
+  const status = document.getElementById('specStatus');
+  status.textContent = room.vacant ? '空室あり' : '満室';
+  status.className = `status-text ${room.vacant ? 'vacant' : 'occupied'}`;
+}
+
+const toggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
+if (toggle && nav) {
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+}
+</script>
+</body>
+</html>

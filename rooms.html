@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>お部屋一覧・空室状況 | トランクルーム収納番長</title>
-<meta name="description" content="トランクルーム収納番長のお部屋一覧と空室状況。1F・2Fあわせて全48室。配置図で部屋の場所を確認しながら、空室ありの部屋はLINEまたは電話で見学・申込み相談できます。" />
+<title>料金・お部屋一覧 | トランクルーム収納番長</title>
+<meta name="description" content="トランクルーム収納番長の料金とお部屋一覧。各部屋の広さ・月額料金・空室状況を一覧で確認できます。" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
@@ -12,20 +12,20 @@
 <style>
 .rooms-hero { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%); color: white; padding: 58px 24px; text-align: center; }
 .rooms-hero h1 { font-size: clamp(30px,4vw,44px); font-weight: 900; margin-bottom: 10px; }
-.rooms-hero p { opacity: .95; font-size: 15px; line-height: 1.8; }
-.status-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 900px; margin: 28px auto 0; }
-.status-card { background: rgba(255,255,255,.16); border: 2px solid rgba(255,255,255,.35); border-radius: 14px; padding: 16px; }
-.status-card strong { display: block; font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 26px; line-height: 1; margin-bottom: 6px; }
-.status-card span { font-size: 12px; font-weight: 700; opacity: .92; }
+.rooms-hero p { opacity: .95; font-size: 15px; line-height: 1.8; max-width: 720px; margin: 0 auto; }
+.price-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 880px; margin: 28px auto 0; }
+.price-card { background: rgba(255,255,255,.16); border: 2px solid rgba(255,255,255,.35); border-radius: 14px; padding: 16px; }
+.price-card strong { display: block; font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 28px; line-height: 1; margin-bottom: 6px; }
+.price-card span { font-size: 12px; font-weight: 800; opacity: .92; }
 .rooms-main { background: white; padding: 64px 24px; }
 .rooms-wrap { max-width: 1180px; margin: 0 auto; }
-.avail-lead { background: var(--cream); border: 2px solid var(--line); border-radius: 18px; padding: 24px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; margin-bottom: 28px; }
-.avail-lead h2 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
-.avail-lead p { color: var(--ink-2); font-size: 14px; }
-.avail-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.avail-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 12px 18px; color: white; font-weight: 900; font-size: 13px; white-space: nowrap; }
-.avail-btn.line { background: var(--green); }
-.avail-btn.tel { background: var(--orange); }
+.summary-panel { background: var(--cream); border: 2px solid var(--line); border-radius: 18px; padding: 24px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; margin-bottom: 28px; }
+.summary-panel h2 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.summary-panel p { color: var(--ink-2); font-size: 14px; line-height: 1.8; }
+.summary-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.summary-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 12px 18px; color: white; font-weight: 900; font-size: 13px; white-space: nowrap; }
+.summary-btn.line { background: var(--green); }
+.summary-btn.tel { background: var(--orange); }
 .plan-section { margin: 32px 0 30px; }
 .plan-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
 .plan-head h2 { font-size: 24px; font-weight: 900; }
@@ -36,50 +36,54 @@
 .plan-img { background: #fffaf2; padding: 14px; }
 .plan-img img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); }
 .plan-note { padding: 0 18px 16px; color: var(--ink-2); font-size: 12px; line-height: 1.7; }
+.room-photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0 34px; }
+.room-photo-grid figure { border-radius: 14px; overflow: hidden; background: var(--ink); box-shadow: var(--shadow-sm); }
+.room-photo-grid img { width: 100%; height: 210px; object-fit: cover; }
+.room-photo-grid figcaption { color: white; padding: 10px 14px; text-align: center; font-size: 12px; font-weight: 700; }
 .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0; }
 .filter-btn { border: 2px solid var(--line); background: white; color: var(--ink-2); border-radius: 999px; padding: 10px 18px; font-weight: 900; font-size: 13px; }
 .filter-btn.active { background: var(--orange); border-color: var(--orange); color: white; }
 .floor-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 34px 0 16px; padding-bottom: 10px; border-bottom: 3px solid var(--line); }
 .floor-title h2 { font-size: 24px; font-weight: 900; }
 .floor-title span { color: var(--ink-3); font-size: 13px; font-weight: 700; }
-.rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-.room-card { border: 2px solid var(--line); border-radius: 14px; background: white; padding: 16px 14px; min-height: 160px; display: flex; flex-direction: column; gap: 8px; transition: transform .18s, box-shadow .18s, border-color .18s; }
+.rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.room-card { border: 2px solid var(--line); border-radius: 14px; background: white; padding: 16px 14px; min-height: 220px; display: flex; flex-direction: column; gap: 10px; transition: transform .18s, box-shadow .18s, border-color .18s; }
 .room-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.room-card.vacant { border-color: rgba(6,199,85,.45); background: linear-gradient(180deg, #F4FFF8 0%, white 60%); }
-.room-card.occupied { opacity: .72; background: #FAF7F2; }
+.room-card.vacant { border-color: rgba(6,199,85,.45); background: linear-gradient(180deg, #F4FFF8 0%, white 58%); }
+.room-card.occupied { background: #FAF7F2; }
 .room-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.room-num { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 28px; font-weight: 900; line-height: 1; }
+.room-num { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 30px; font-weight: 900; line-height: 1; }
 .status-badge { border-radius: 999px; padding: 4px 9px; font-size: 11px; font-weight: 900; white-space: nowrap; }
 .status-badge.vacant { background: var(--green); color: white; }
 .status-badge.occupied { background: #DDD2C2; color: var(--ink-2); }
-.room-floor { color: var(--ink-3); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
-.room-note { color: var(--ink-2); font-size: 12px; line-height: 1.5; flex: 1; }
-.room-cta { display: block; text-align: center; background: var(--orange); color: white; border-radius: 9px; padding: 8px 10px; font-size: 12px; font-weight: 900; }
-.room-card.occupied .room-cta { background: #C8B9A5; pointer-events: none; }
+.room-floor { color: var(--ink-3); font-size: 11px; font-weight: 900; letter-spacing: .08em; }
+.room-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.room-spec { border: 1px solid var(--line); border-radius: 10px; background: white; padding: 9px 10px; }
+.room-spec .label { color: var(--ink-3); font-size: 10px; font-weight: 900; margin-bottom: 3px; }
+.room-spec .value { color: var(--ink); font-size: 14px; font-weight: 900; line-height: 1.35; }
+.room-price { font-family: 'M PLUS Rounded 1c', sans-serif; color: var(--orange); font-size: 24px; font-weight: 900; line-height: 1; }
+.room-price small { font-size: 12px; }
+.room-note { color: var(--ink-2); font-size: 12px; line-height: 1.6; flex: 1; }
+.room-cta { display: block; text-align: center; background: var(--orange); color: white; border-radius: 10px; padding: 10px 12px; font-size: 13px; font-weight: 900; }
+.room-card.vacant .room-cta { background: var(--green); }
 .note-box { margin-top: 28px; border: 2px solid var(--line); border-radius: 16px; background: var(--bg); padding: 20px; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
-.room-photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0 34px; }
-.room-photo-grid figure { border-radius: 14px; overflow: hidden; background: var(--ink); box-shadow: var(--shadow-sm); }
-.room-photo-grid img { width: 100%; height: 210px; object-fit: cover; }
-.room-photo-grid figcaption { color: white; padding: 10px 14px; text-align: center; font-size: 12px; font-weight: 700; }
 @media (max-width: 860px) {
-  .status-strip, .plan-grid { grid-template-columns: repeat(2, 1fr); }
-  .avail-lead { grid-template-columns: 1fr; }
+  .price-strip, .plan-grid { grid-template-columns: 1fr; }
+  .summary-panel { grid-template-columns: 1fr; }
   .plan-head { display: block; }
   .plan-head h2 { margin-bottom: 8px; }
 }
 @media (max-width: 560px) {
-  .rooms-grid, .plan-grid, .room-photo-grid { grid-template-columns: 1fr; }
-  .room-card { min-height: 150px; padding: 14px 12px; }
-  .room-num { font-size: 24px; }
-  .status-strip { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .status-card { padding: 12px; }
+  .rooms-grid, .room-photo-grid { grid-template-columns: 1fr; }
+  .room-card { min-height: 0; }
+  .room-num { font-size: 26px; }
 }
 </style>
 </head>
 <body>
 
 <div class="notice-bar">
-  <strong>★堺市西区最安水準</strong> &nbsp;│&nbsp; <strong>初期費用0円</strong> &nbsp;│&nbsp; <strong>月額2,700円から</strong> &nbsp;│&nbsp; <strong>空室あり</strong>
+  <strong>堺市西区・津久野駅すぐ</strong> &nbsp;|&nbsp; <strong>月額2,700円〜</strong> &nbsp;|&nbsp; <strong>初期費用0円</strong> &nbsp;|&nbsp; <strong>24時間利用OK</strong>
 </div>
 
 <header class="header">
@@ -88,10 +92,8 @@
     <nav class="nav">
       <a href="index.html">ホーム</a>
       <a href="flow.html">利用の流れ</a>
-      <a href="price.html">料金</a>
-      <a href="rooms.html" class="active">お部屋一覧</a>
-      
-      <a href="apply.html">?????</a>
+      <a href="rooms.html" class="active">料金・お部屋一覧</a>
+      <a href="apply.html">お申し込み</a>
       <a href="access.html">アクセス</a>
       <a href="faq.html">Q&amp;A</a>
       <a href="blog.html">ブログ</a>
@@ -108,35 +110,34 @@
 <main>
   <section class="rooms-hero">
     <div class="container">
-      <span class="section-eyebrow" style="color:rgba(255,255,255,.86);">ROOMS</span>
-      <h1>お部屋一覧・空室状況</h1>
-      <p>現在の空室をわかりやすく表示しています。配置図で場所を確認して、気になる部屋があればLINEかお電話で空き確認・見学予約できます。</p>
-      <div class="status-strip">
-        <div class="status-card"><strong>48</strong><span>全室数</span></div>
-        <div class="status-card"><strong>23</strong><span>空室</span></div>
-        <div class="status-card"><strong>25</strong><span>契約中</span></div>
-        <div class="status-card"><strong>52%</strong><span>稼働率目安</span></div>
+      <span class="section-eyebrow" style="color:rgba(255,255,255,.86);">ROOMS & PRICE</span>
+      <h1>料金・お部屋一覧</h1>
+      <p>各部屋の広さ、月額料金、空室状況を一覧で確認できます。気になる部屋は詳細ページで確認して、LINEから空き確認・見学予約へ進めます。</p>
+      <div class="price-strip">
+        <div class="price-card"><strong>2,700円〜</strong><span>月額料金</span></div>
+        <div class="price-card"><strong>0円</strong><span>初期費用</span></div>
+        <div class="price-card"><strong>48室</strong><span>1階・2階合計</span></div>
       </div>
     </div>
   </section>
 
   <section class="rooms-main">
     <div class="rooms-wrap">
-      <div class="avail-lead">
+      <div class="summary-panel">
         <div>
-          <h2>今なら空室あり。1階の空きもあります。</h2>
-          <p>空室状況は変動します。気になる部屋番号をLINEで送っていただくと、最新状況を確認してご案内します。</p>
+          <h2>部屋番号ごとに料金と大きさがすぐ分かります</h2>
+          <p>空室状況は変動します。詳細ページの「LINEでこの部屋を確認」から、部屋番号を送って空き確認・見学予約できます。</p>
         </div>
-        <div class="avail-actions">
-          <a class="avail-btn line" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで空室確認</a>
-          <a class="avail-btn tel" href="tel:0120666780">電話する</a>
+        <div class="summary-actions">
+          <a class="summary-btn line" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで空き確認</a>
+          <a class="summary-btn tel" href="tel:0120666780">電話する</a>
         </div>
       </div>
 
       <section class="plan-section" aria-labelledby="plan-title">
         <div class="plan-head">
-          <h2 id="plan-title">配置図で部屋の場所を確認</h2>
-          <p>番号だけでは分かりにくいので、1階・2階の配置図を戻しました。空室番号と照らし合わせて、搬入しやすい場所を選べます。</p>
+          <h2 id="plan-title">配置図で場所も確認</h2>
+          <p>後で各部屋の写真を追加できるように、詳細ページには画像枠を用意しています。</p>
         </div>
         <div class="plan-grid">
           <article class="plan-card">
@@ -147,32 +148,34 @@
           <article class="plan-card">
             <h3>2階配置図（201〜214号室）</h3>
             <div class="plan-img"><img src="assets/２階白紙.jpg" alt="2階配置図" /></div>
-            <p class="plan-note">2階にも空室があります。保管内容やご予算に合わせて候補をご案内できます。</p>
+            <p class="plan-note">2階にも複数サイズの部屋があります。予算や保管量に合わせて選べます。</p>
           </article>
         </div>
       </section>
 
       <div class="room-photo-grid">
-        <figure><img src="assets/P2120294.JPG" alt="1階室内通路" /><figcaption>1階の明るい通路</figcaption></figure>
-        <figure><img src="assets/P2120297.JPG" alt="2階室内通路" /><figcaption>2階の収納スペース</figcaption></figure>
+        <figure><img src="assets/P2120294.JPG" alt="室内通路" /><figcaption>明るい室内通路</figcaption></figure>
+        <figure><img src="assets/P2120297.JPG" alt="収納スペース" /><figcaption>清潔な収納スペース</figcaption></figure>
         <figure><img src="assets/P2120300.JPG" alt="2階配置図" /><figcaption>現地の配置図も確認できます</figcaption></figure>
       </div>
 
-      <div class="filter-bar">
+      <div class="filter-bar" aria-label="部屋一覧フィルター">
         <button class="filter-btn active" data-filter="all">すべて</button>
         <button class="filter-btn" data-filter="vacant">空室のみ</button>
-        <button class="filter-btn" data-filter="1f">1階のみ</button>
-        <button class="filter-btn" data-filter="2f">2階のみ</button>
+        <button class="filter-btn" data-filter="1">1階のみ</button>
+        <button class="filter-btn" data-filter="2">2階のみ</button>
+        <button class="filter-btn" data-filter="small">1帖以下</button>
+        <button class="filter-btn" data-filter="large">2帖以上</button>
       </div>
 
-      <div class="floor-title"><h2>1階</h2><span>101〜134号室 / 空室 20室</span></div>
+      <div class="floor-title"><h2>1階</h2><span>101〜134号室</span></div>
       <div class="rooms-grid" id="rooms1f"></div>
 
-      <div class="floor-title"><h2>2階</h2><span>201〜214号室 / 空室 3室</span></div>
+      <div class="floor-title"><h2>2階</h2><span>201〜214号室</span></div>
       <div class="rooms-grid" id="rooms2f"></div>
 
       <div class="note-box">
-        表示は目安です。空室状況は日々変動します。満室表示の部屋でも、近いサイズの空室をご提案できる場合があります。料金の詳細は<a href="price.html" style="color:var(--orange);font-weight:900;">料金ページ</a>をご確認ください。
+        表示は税込月額です。空室状況は日々変動します。満室表示の部屋でも、近いサイズの空室をご提案できる場合があります。
       </div>
     </div>
   </section>
@@ -182,8 +185,8 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand"><img src="assets/toplogo.jpg" alt="収納番長" /><p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p></div>
-      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="flow.html">利用の流れ</a></li><li><a href="price.html">料金</a></li><li><a href="rooms.html">お部屋一覧</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li></ul></div>
-      <div class="footer-col"><h4>お問い合わせ</h4><ul><li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li><li><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで空室確認</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
+      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="flow.html">利用の流れ</a></li><li><a href="rooms.html">料金・お部屋一覧</a></li><li><a href="apply.html">お申し込み</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li></ul></div>
+      <div class="footer-col"><h4>お問い合わせ</h4><ul><li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li><li><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで空き確認</a></li><li><a href="apply.html">お申し込み</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span>© 2026 トランクルーム収納番長. All Rights Reserved.</span></div>
   </div>
@@ -191,42 +194,54 @@
 
 <div class="floating-cta"><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="floating-line"><span class="txt">🐕 LINEで空き確認</span></a></div>
 
+<script src="rooms-data.js"></script>
 <script>
-const occupied = new Set([101,103,104,108,110,116,117,120,122,123,127,131,132,134,201,202,203,204,207,208,209,210,211,212,214]);
-const rooms1 = Array.from({length: 34}, (_, i) => i + 101);
-const rooms2 = Array.from({length: 14}, (_, i) => i + 201);
-
-function roomHint(num) {
-  if ([105,106,113,126,128,130,133,205,206,213].includes(num)) return '大きめ荷物・家具にも相談しやすい部屋';
-  if ([102,107,111,112,121,124,125,129].includes(num)) return '使いやすい中サイズの候補';
-  if ([109,114,115,118,119].includes(num)) return '小物・書類・季節用品におすすめ';
-  return 'サイズや料金はお問い合わせください';
+function yen(value) {
+  return value.toLocaleString('ja-JP');
 }
 
-function createCard(num, floor) {
-  const isVacant = !occupied.has(num);
+function roomHint(room) {
+  if (room.tatami <= 0.6) return '書類・小物・季節用品に向いたコンパクト部屋です。';
+  if (room.tatami <= 1.2) return '衣装ケースや段ボール保管に使いやすいサイズです。';
+  if (room.tatami < 2) return '家電や趣味用品も入れやすい標準サイズです。';
+  return '家具や大きめの荷物も検討しやすい広めの部屋です。';
+}
+
+function createCard(room) {
   const card = document.createElement('article');
-  card.className = `room-card ${isVacant ? 'vacant' : 'occupied'}`;
-  card.dataset.status = isVacant ? 'vacant' : 'occupied';
-  card.dataset.floor = floor;
+  card.className = `room-card ${room.vacant ? 'vacant' : 'occupied'}`;
+  card.dataset.status = room.vacant ? 'vacant' : 'occupied';
+  card.dataset.floor = String(room.floor);
+  card.dataset.tatami = String(room.tatami);
   card.innerHTML = `
     <div class="room-top">
-      <div class="room-num">${num}</div>
-      <span class="status-badge ${isVacant ? 'vacant' : 'occupied'}">${isVacant ? '空室あり' : '契約中'}</span>
+      <div class="room-num">${room.no}</div>
+      <span class="status-badge ${room.vacant ? 'vacant' : 'occupied'}">${room.vacant ? '空室あり' : '満室'}</span>
     </div>
-    <div class="room-floor">${floor === '1f' ? '1F' : '2F'}</div>
-    <div class="room-note">${isVacant ? roomHint(num) : '現在ご契約中です'}</div>
-    <a class="room-cta" href="${isVacant ? 'https://lin.ee/R9sF0Qmn' : '#'}" ${isVacant ? 'target="_blank" rel="noopener"' : ''}>${isVacant ? 'この部屋を確認' : '満室'}</a>
+    <div class="room-floor">${room.floor}F</div>
+    <div class="room-specs">
+      <div class="room-spec"><div class="label">広さ</div><div class="value">${room.size}</div></div>
+      <div class="room-spec"><div class="label">月額税込</div><div class="value room-price">${yen(room.price)}<small>円</small></div></div>
+    </div>
+    <div class="room-note">${roomHint(room)}</div>
+    <a class="room-cta" href="room-detail.html?room=${room.no}">この部屋の詳細を見る</a>
   `;
   return card;
 }
 
-document.getElementById('rooms1f').append(...rooms1.map(num => createCard(num, '1f')));
-document.getElementById('rooms2f').append(...rooms2.map(num => createCard(num, '2f')));
+const rooms = window.BANCHOU_ROOMS || [];
+document.getElementById('rooms1f').append(...rooms.filter(room => room.floor === 1).map(createCard));
+document.getElementById('rooms2f').append(...rooms.filter(room => room.floor === 2).map(createCard));
 
 function applyFilter(filter) {
   document.querySelectorAll('.room-card').forEach(card => {
-    const show = filter === 'all' || card.dataset.status === filter || card.dataset.floor === filter;
+    const tatami = Number(card.dataset.tatami);
+    const show =
+      filter === 'all' ||
+      card.dataset.status === filter ||
+      card.dataset.floor === filter ||
+      (filter === 'small' && tatami <= 1) ||
+      (filter === 'large' && tatami >= 2);
     card.style.display = show ? '' : 'none';
   });
 }
