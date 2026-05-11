@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>配置図プレビュー比較 | トランクルーム収納番長</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── Page hero ─────────────────────────────── */
+.fp-hero {
+  background: linear-gradient(135deg, var(--ink) 0%, #3D2C1E 100%);
+  color: white;
+  padding: 48px 24px 40px;
+  text-align: center;
+}
+.fp-hero .eyebrow { font-size: 12px; font-weight: 900; letter-spacing: .14em; opacity: .65; margin-bottom: 10px; }
+.fp-hero h1 { font-size: clamp(24px, 3.5vw, 38px); font-weight: 900; margin-bottom: 10px; }
+.fp-hero p { font-size: 14px; opacity: .82; max-width: 600px; margin: 0 auto; }
+
+/* ── Mode / floor toggles ───────────────────── */
+.fp-controls {
+  background: white;
+  border-bottom: 2px solid var(--line);
+  padding: 16px 24px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 62px; /* below sticky header */
+  z-index: 50;
+}
+.toggle-group { display: flex; gap: 4px; }
+.toggle-label { font-size: 12px; font-weight: 900; color: var(--ink-3); align-self: center; margin-right: 8px; }
+.toggle-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  background: white;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 900;
+  transition: all .15s;
+}
+.toggle-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+.toggle-btn.floor-btn.active {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* ── Legend ─────────────────────────────────── */
+.fp-legend {
+  max-width: 1080px;
+  margin: 24px auto 0;
+  padding: 0 24px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 900;
+}
+.legend-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-s  { background: #4A9EFF; }
+.dot-m  { background: #2ECC71; }
+.dot-l  { background: #E8741A; }
+.dot-ll { background: #9B59B6; }
+.legend-note {
+  max-width: 1080px;
+  margin: 10px auto 0;
+  padding: 0 24px;
+  font-size: 12px;
+  color: var(--ink-3);
+  font-weight: 700;
+}
+
+/* ── Floor plan wrap ────────────────────────── */
+.fp-section {
+  max-width: 1080px;
+  margin: 20px auto 40px;
+  padding: 0 24px;
+}
+.fp-floor-pane { display: none; }
+.fp-floor-pane.active { display: block; }
+
+.fp-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--line);
+}
+.fp-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Room dots ──────────────────────────────── */
+.room-dot {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  transition: transform .15s, box-shadow .15s;
+  /* size set per-category via inline style */
+}
+
+/* Option B: make clickable */
+.mode-b .room-dot {
+  cursor: pointer;
+}
+.mode-b .room-dot:hover {
+  transform: translate(-50%, -50%) scale(1.18);
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  z-index: 10;
+}
+
+/* Vacant ring indicator (Option A only) */
+.mode-a .room-dot.vacant::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.9);
+  pointer-events: none;
+}
+
+/* ── Popup (Option B) ────────────────────────── */
+.fp-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(42,29,20,.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.fp-overlay.open { display: flex; }
+
+.fp-popup {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 26px;
+  max-width: 340px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  position: relative;
+  animation: popIn .2s ease;
+}
+@keyframes popIn {
+  from { transform: scale(.85); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.popup-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  font-size: 18px;
+  color: var(--ink-3);
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 999px;
+  transition: background .15s;
+}
+.popup-close:hover { background: var(--cream); }
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.popup-num {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1;
+}
+.popup-floor-badge {
+  font-size: 12px;
+  font-weight: 900;
+  background: var(--cream);
+  color: var(--ink-2);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.popup-status {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+.popup-status.vacant { background: var(--green); color: white; }
+.popup-status.occupied { background: #DDD2C2; color: var(--ink-2); }
+
+.popup-size-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+.popup-rows { display: grid; gap: 10px; margin-bottom: 20px; }
+.popup-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-2);
+  font-size: 14px;
+}
+.popup-row span { color: var(--ink-3); font-size: 12px; font-weight: 900; }
+.popup-row strong { font-size: 15px; font-weight: 900; }
+.popup-price { color: var(--orange); font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 22px !important; }
+
+.popup-cta {
+  display: block;
+  text-align: center;
+  background: var(--green);
+  color: white;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.popup-cta-sub {
+  display: block;
+  text-align: center;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--ink-2);
+}
+
+/* ── Mode panels ─────────────────────────────── */
+.mode-panel { display: none; }
+.mode-panel.active { display: block; }
+
+/* ── Info note ───────────────────────────────── */
+.fp-note {
+  max-width: 1080px;
+  margin: 0 auto 60px;
+  padding: 0 24px;
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.8;
+}
+.fp-note strong { color: var(--ink-2); }
+
+@media (max-width: 640px) {
+  .fp-controls { top: 0; gap: 12px; }
+  .fp-legend { gap: 6px; }
+  .toggle-btn { padding: 7px 14px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="notice-bar">
+  <strong>堺市西区・津久野駅すぐ</strong> &nbsp;|&nbsp; <strong>月額2,700円〜</strong> &nbsp;|&nbsp; <strong>初期費用0円</strong> &nbsp;|&nbsp; <strong>24時間利用OK</strong>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長" /></a>
+    <nav class="nav">
+      <a href="index.html">ホーム</a>
+      <a href="flow.html">利用の流れ</a>
+      <a href="rooms.html" class="active">料金・お部屋一覧</a>
+      <a href="apply.html">お申し込み</a>
+      <a href="access.html">アクセス</a>
+      <a href="faq.html">Q&amp;A</a>
+      <a href="blog.html">ブログ</a>
+    </nav>
+    <div class="header-cta">
+      <div class="tel-block"><div class="label">お電話はこちら</div><a href="tel:0120666780" class="num">0120-666-780</a></div>
+      <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="btn-line-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.4.3.1.8.2 1 .5.1.3.1.7.1.9l-.2 1.1c0 .3-.2 1.3 1.1.7 1.3-.6 7.1-4.2 9.7-7.2C23.7 13.1 22 10.5 12 2z"/></svg>
+        LINE
+      </a>
+      <a href="contact.html" class="btn-contact-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        お問い合わせ
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<main>
+  <section class="fp-hero">
+    <div class="eyebrow">FLOOR PLAN</div>
+    <h1>配置図プレビュー比較</h1>
+    <p>Aタイプ（静的・サイズ色分け）とBタイプ（タップで詳細表示）の2種類を比較できます。</p>
+  </section>
+
+  <!-- Controls -->
+  <div class="fp-controls">
+    <div class="toggle-group">
+      <span class="toggle-label">表示スタイル</span>
+      <button class="toggle-btn active" data-mode="a" onclick="switchMode('a')">🅐 静的カラー</button>
+      <button class="toggle-btn" data-mode="b" onclick="switchMode('b')">🅑 タップ詳細</button>
+    </div>
+    <div class="toggle-group">
+      <span class="toggle-label">フロア</span>
+      <button class="toggle-btn floor-btn active" data-floor="1" onclick="switchFloor(1)">1F（34室）</button>
+      <button class="toggle-btn floor-btn" data-floor="2" onclick="switchFloor(2)">2F（14室）</button>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="fp-legend">
+    <div class="legend-item"><div class="legend-dot dot-s"></div>S（〜0.9帖）</div>
+    <div class="legend-item"><div class="legend-dot dot-m"></div>M（1.0〜1.9帖）</div>
+    <div class="legend-item"><div class="legend-dot dot-l"></div>L（2.0〜2.9帖）</div>
+    <div class="legend-item"><div class="legend-dot dot-ll"></div>LL（3.0帖〜）</div>
+    <span id="legend-hint" style="font-size:12px;color:var(--ink-3);font-weight:700;align-self:center;">
+      Aタイプ：白いリングは空室を示します
+    </span>
+  </div>
+
+  <!-- Floor plans -->
+  <section class="fp-section">
+
+    <!-- Mode A: Static -->
+    <div id="mode-a" class="mode-panel active">
+      <div id="fp1f-a" class="fp-floor-pane active">
+        <div class="fp-wrap" id="wrap-1f-a">
+          <img src="assets/１階白紙.jpg" alt="1階配置図" />
+        </div>
+      </div>
+      <div id="fp2f-a" class="fp-floor-pane">
+        <div class="fp-wrap" id="wrap-2f-a">
+          <img src="assets/２階白紙.jpg" alt="2階配置図" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Mode B: Interactive -->
+    <div id="mode-b" class="mode-panel">
+      <div id="fp1f-b" class="fp-floor-pane active">
+        <div class="fp-wrap" id="wrap-1f-b">
+          <img src="assets/１階白紙.jpg" alt="1階配置図" />
+        </div>
+      </div>
+      <div id="fp2f-b" class="fp-floor-pane">
+        <div class="fp-wrap" id="wrap-2f-b">
+          <img src="assets/２階白紙.jpg" alt="2階配置図" />
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <p class="fp-note">
+    <strong>※ 位置はおおよその目安です。</strong>実際の部屋番号と位置は現地配置図をご確認ください。
+    空室状況は日々変動します。詳細はLINEまたはお電話でお問い合わせください。
+  </p>
+</main>
+
+<!-- Popup (Mode B) -->
+<div class="fp-overlay" id="fp-overlay" onclick="handleOverlayClick(event)">
+  <div class="fp-popup" id="fp-popup">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div class="popup-header">
+      <span class="popup-num" id="pp-num"></span>
+      <div>
+        <div class="popup-floor-badge" id="pp-floor"></div>
+      </div>
+    </div>
+    <div class="popup-size-badge" id="pp-size-badge"></div>
+    <div class="popup-rows">
+      <div class="popup-row"><span>広さ</span><strong id="pp-size"></strong></div>
+      <div class="popup-row"><span>月額料金（税込）</span><strong class="popup-price" id="pp-price"></strong></div>
+      <div class="popup-row" style="border:none;padding:0;"><span>空室状況</span><span class="popup-status" id="pp-status"></span></div>
+    </div>
+    <a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="popup-cta">
+      LINEでこの部屋を空き確認
+    </a>
+    <a href="contact.html" class="popup-cta-sub">お問い合わせフォーム</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/toplogo.jpg" alt="収納番長" /><p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p></div>
+      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="flow.html">利用の流れ</a></li><li><a href="rooms.html">料金・お部屋一覧</a></li><li><a href="apply.html">お申し込み</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li></ul></div>
+      <div class="footer-col"><h4>お問い合わせ</h4><ul><li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li><li><a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener">LINEで空き確認</a></li><li><a href="apply.html">お申し込み</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 トランクルーム収納番長. All Rights Reserved.</span></div>
+  </div>
+</footer>
+
+<div class="floating-cta"><a href="https://lin.ee/oBfOqFR" target="_blank" rel="noopener" class="floating-line"><span class="txt">🐕 LINEで空き確認</span></a></div>
+
+<script>
+/* ─────────────────────────────────────────────────
+   Room data
+───────────────────────────────────────────────── */
+const ROOMS = [
+  // ── 1F ──────────────────────────────────────
+  // right column (near 出入口 right side), reading right→left then top→bottom
+  { no:101, floor:1, tatami:1.2, area:2.00, price:11000, vacant:false, x:92.0, y:59.3 },
+  { no:102, floor:1, tatami:1.1, area:1.80, price:9900,  vacant:true,  x:92.0, y:71.8 },
+  { no:103, floor:1, tatami:0.4, area:0.50, price:2700,  vacant:false, x:84.0, y:59.3 },
+  { no:104, floor:1, tatami:0.4, area:0.50, price:2700,  vacant:false, x:84.0, y:67.7 },
+  { no:105, floor:1, tatami:1.7, area:2.80, price:15400, vacant:true,  x:77.1, y:74.5 },
+  { no:106, floor:1, tatami:2.0, area:3.20, price:17600, vacant:true,  x:77.1, y:63.1 },
+  { no:107, floor:1, tatami:1.4, area:2.30, price:12650, vacant:true,  x:69.0, y:63.1 },
+  { no:108, floor:1, tatami:1.2, area:2.00, price:11000, vacant:false, x:69.0, y:74.5 },
+  { no:109, floor:1, tatami:0.4, area:0.50, price:2700,  vacant:true,  x:61.0, y:59.3 },
+  { no:110, floor:1, tatami:0.4, area:0.50, price:2700,  vacant:false, x:61.0, y:67.7 },
+  { no:111, floor:1, tatami:1.3, area:2.10, price:11550, vacant:true,  x:54.0, y:74.5 },
+  { no:112, floor:1, tatami:1.4, area:2.30, price:12650, vacant:true,  x:54.0, y:59.3 },
+  { no:113, floor:1, tatami:2.8, area:4.50, price:24750, vacant:true,  x:47.0, y:64.2 },
+  { no:114, floor:1, tatami:1.2, area:2.00, price:11000, vacant:true,  x:40.2, y:64.2 },
+  { no:115, floor:1, tatami:3.0, area:4.90, price:26950, vacant:true,  x:33.1, y:64.2 },
+  { no:116, floor:1, tatami:1.0, area:1.70, price:9350,  vacant:false, x:24.2, y:66.9 },
+  { no:117, floor:1, tatami:0.6, area:0.90, price:4950,  vacant:false, x:26.9, y:59.3 },
+  { no:118, floor:1, tatami:4.4, area:7.20, price:39600, vacant:true,  x:22.7, y:31.0 },
+  { no:119, floor:1, tatami:1.5, area:2.40, price:13200, vacant:true,  x:21.2, y:44.1 },
+  { no:120, floor:1, tatami:0.8, area:1.30, price:7150,  vacant:false, x:28.0, y:44.1 },
+  { no:121, floor:1, tatami:1.1, area:1.80, price:9900,  vacant:true,  x:33.9, y:31.6 },
+  { no:122, floor:1, tatami:0.8, area:1.30, price:7150,  vacant:false, x:38.3, y:26.1 },
+  { no:123, floor:1, tatami:1.9, area:3.10, price:17050, vacant:false, x:46.0, y:31.6 },
+  { no:124, floor:1, tatami:1.2, area:2.00, price:11000, vacant:true,  x:46.0, y:44.1 },
+  { no:125, floor:1, tatami:1.0, area:1.70, price:9350,  vacant:true,  x:53.0, y:48.4 },
+  { no:126, floor:1, tatami:2.2, area:3.60, price:19800, vacant:true,  x:53.6, y:31.6 },
+  { no:127, floor:1, tatami:0.9, area:1.40, price:7700,  vacant:false, x:59.5, y:26.1 },
+  { no:128, floor:1, tatami:1.7, area:2.80, price:15400, vacant:true,  x:66.8, y:31.6 },
+  { no:129, floor:1, tatami:1.2, area:1.90, price:10450, vacant:true,  x:66.8, y:44.1 },
+  { no:130, floor:1, tatami:1.9, area:3.00, price:16500, vacant:true,  x:75.0, y:44.1 },
+  { no:131, floor:1, tatami:2.4, area:3.90, price:21450, vacant:false, x:75.8, y:31.6 },
+  { no:132, floor:1, tatami:0.8, area:1.30, price:7150,  vacant:false, x:83.0, y:26.1 },
+  { no:133, floor:1, tatami:2.7, area:4.40, price:24200, vacant:true,  x:92.8, y:31.6 },
+  { no:134, floor:1, tatami:1.4, area:2.30, price:12650, vacant:false, x:90.0, y:44.1 },
+  // ── 2F ──────────────────────────────────────
+  { no:201, floor:2, tatami:0.6, area:0.90, price:4050,  vacant:false, x:48.0, y:60.3 },
+  { no:202, floor:2, tatami:0.6, area:1.00, price:4500,  vacant:false, x:37.1, y:60.3 },
+  { no:203, floor:2, tatami:0.6, area:0.90, price:4050,  vacant:false, x:37.1, y:52.8 },
+  { no:204, floor:2, tatami:0.5, area:0.80, price:3600,  vacant:false, x:37.1, y:44.1 },
+  { no:205, floor:2, tatami:1.9, area:3.10, price:13950, vacant:true,  x:37.1, y:29.9 },
+  { no:206, floor:2, tatami:2.0, area:3.20, price:14400, vacant:true,  x:46.0, y:38.0 },
+  { no:207, floor:2, tatami:0.6, area:1.00, price:4500,  vacant:false, x:51.7, y:47.3 },
+  { no:208, floor:2, tatami:0.6, area:0.90, price:4050,  vacant:false, x:58.1, y:47.3 },
+  { no:209, floor:2, tatami:2.1, area:3.40, price:15300, vacant:false, x:56.8, y:29.9 },
+  { no:210, floor:2, tatami:1.2, area:1.90, price:8550,  vacant:false, x:72.8, y:24.6 },
+  { no:211, floor:2, tatami:0.9, area:1.50, price:6750,  vacant:false, x:79.6, y:35.5 },
+  { no:212, floor:2, tatami:0.7, area:1.10, price:4950,  vacant:false, x:79.6, y:45.2 },
+  { no:213, floor:2, tatami:1.7, area:2.80, price:12600, vacant:true,  x:79.6, y:57.0 },
+  { no:214, floor:2, tatami:1.0, area:1.70, price:7650,  vacant:false, x:59.1, y:63.3 },
+];
+
+/* ─────────────────────────────────────────────────
+   Size category helpers
+───────────────────────────────────────────────── */
+function getCategory(tatami) {
+  if (tatami <= 0.9) return 'S';
+  if (tatami <= 1.9) return 'M';
+  if (tatami <= 2.9) return 'L';
+  return 'LL';
+}
+const CAT_COLOR = { S:'#4A9EFF', M:'#2ECC71', L:'#E8741A', LL:'#9B59B6' };
+const CAT_LABEL = { S:'S〜0.9帖', M:'M 1〜1.9帖', L:'L 2〜2.9帖', LL:'LL 3帖〜' };
+// Circle diameter as % of image width
+const CAT_SIZE  = { S:'4.8%', M:'5.8%', L:'6.8%', LL:'8.2%' };
+// Font size inside circle (roughly scales with diameter)
+const CAT_FONT  = { S:'clamp(7px,1vw,11px)', M:'clamp(8px,1.1vw,12px)', L:'clamp(8px,1.2vw,13px)', LL:'clamp(9px,1.3vw,14px)' };
+
+/* ─────────────────────────────────────────────────
+   Build circles
+───────────────────────────────────────────────── */
+function buildCircles(mode) {
+  ['1f','2f'].forEach(f => {
+    const floor = f === '1f' ? 1 : 2;
+    const wrap = document.getElementById(`wrap-${f}-${mode}`);
+    // Remove old circles
+    wrap.querySelectorAll('.room-dot').forEach(el => el.remove());
+
+    const floorRooms = ROOMS.filter(r => r.floor === floor);
+    floorRooms.forEach(room => {
+      const cat = getCategory(room.tatami);
+      const dot = document.createElement('div');
+      dot.className = 'room-dot' + (room.vacant ? ' vacant' : '');
+      dot.setAttribute('data-no', room.no);
+      dot.style.left   = room.x + '%';
+      dot.style.top    = room.y + '%';
+      dot.style.width  = CAT_SIZE[cat];
+      dot.style.aspectRatio = '1';
+      dot.style.background  = CAT_COLOR[cat];
+      dot.style.fontSize    = CAT_FONT[cat];
+      dot.textContent = room.no;
+
+      if (mode === 'b') {
+        dot.onclick = () => openPopup(room);
+      }
+      wrap.appendChild(dot);
+    });
+
+    // Apply mode class to wrap
+    wrap.classList.remove('mode-a','mode-b');
+    wrap.classList.add('mode-' + mode);
+  });
+}
+
+/* ─────────────────────────────────────────────────
+   Mode & Floor switching
+───────────────────────────────────────────────── */
+let currentMode  = 'a';
+let currentFloor = 1;
+
+function switchMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('[data-mode]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+  document.getElementById('mode-a').classList.toggle('active', mode === 'a');
+  document.getElementById('mode-b').classList.toggle('active', mode === 'b');
+  document.getElementById('legend-hint').textContent =
+    mode === 'a'
+      ? 'Aタイプ：白いリングは空室を示します'
+      : 'Bタイプ：丸をタップすると詳細が表示されます';
+  buildCircles(mode);
+  switchFloor(currentFloor); // re-apply floor visibility
+}
+
+function switchFloor(floor) {
+  currentFloor = floor;
+  document.querySelectorAll('[data-floor]').forEach(btn => {
+    btn.classList.toggle('active', Number(btn.dataset.floor) === floor);
+  });
+  ['a','b'].forEach(mode => {
+    const p1 = document.getElementById(`fp1f-${mode}`);
+    const p2 = document.getElementById(`fp2f-${mode}`);
+    if (p1) p1.classList.toggle('active', floor === 1);
+    if (p2) p2.classList.toggle('active', floor === 2);
+  });
+}
+
+/* ─────────────────────────────────────────────────
+   Popup
+───────────────────────────────────────────────── */
+function openPopup(room) {
+  const cat = getCategory(room.tatami);
+  document.getElementById('pp-num').textContent   = room.no;
+  document.getElementById('pp-floor').textContent = room.floor + 'F';
+
+  const badge = document.getElementById('pp-size-badge');
+  badge.textContent = CAT_LABEL[cat];
+  badge.style.background = CAT_COLOR[cat] + '22'; // transparent tint
+  badge.style.color      = CAT_COLOR[cat];
+  badge.style.border     = '2px solid ' + CAT_COLOR[cat];
+
+  document.getElementById('pp-size').textContent  = `約${room.tatami}帖 / ${room.area}㎡`;
+  document.getElementById('pp-price').textContent = room.price.toLocaleString('ja-JP') + '円/月';
+
+  const statusEl = document.getElementById('pp-status');
+  statusEl.textContent  = room.vacant ? '空室あり' : '満室';
+  statusEl.className    = 'popup-status ' + (room.vacant ? 'vacant' : 'occupied');
+
+  document.getElementById('fp-overlay').classList.add('open');
+}
+
+function closePopup() {
+  document.getElementById('fp-overlay').classList.remove('open');
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('fp-overlay')) closePopup();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePopup();
+});
+
+/* ─────────────────────────────────────────────────
+   Init
+───────────────────────────────────────────────── */
+buildCircles('a');
+buildCircles('b');
+switchFloor(1);
+</script>
+</body>
+</html>
