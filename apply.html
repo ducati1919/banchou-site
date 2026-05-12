@@ -41,6 +41,12 @@
 .apply-form-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
 .apply-form-head h2 { font-size: 24px; font-weight: 900; color: var(--ink); line-height: 1.35; }
 .apply-form-head p { color: var(--ink-2); font-size: 13px; line-height: 1.8; margin-top: 6px; }
+.applicant-type { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.applicant-type input { position: absolute; opacity: 0; pointer-events: none; }
+.type-pill { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 18px; border: 2px solid var(--line); border-radius: 999px; background: white; color: var(--ink-2); font-weight: 900; cursor: pointer; }
+.applicant-type input:checked + .type-pill { background: var(--orange); border-color: var(--orange); color: white; box-shadow: 0 4px 0 var(--orange-deep); }
+.corporate-fields[hidden] { display: none; }
+.corporate-fields { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; border: 2px solid rgba(239,111,22,.22); border-radius: 16px; padding: 16px; background: #FFF7E8; }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .form-field { display: grid; gap: 7px; }
 .form-field.full { grid-column: 1 / -1; }
@@ -50,10 +56,25 @@
 .form-field textarea { min-height: 118px; resize: vertical; line-height: 1.7; }
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(239,111,22,.12); }
 .form-help { color: var(--ink-3); font-size: 12px; line-height: 1.7; }
+.identity-box { grid-column: 1 / -1; border: 2px solid rgba(6,199,85,.28); border-radius: 16px; padding: 16px; background: #F4FFF8; display: grid; gap: 14px; }
+.identity-box h3 { font-size: 17px; font-weight: 900; color: var(--green-deep); }
+.identity-box p { color: var(--ink-2); font-size: 13px; line-height: 1.8; }
+.identity-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.identity-options label { display: flex; align-items: center; gap: 8px; background: white; border: 1px solid rgba(6,199,85,.24); border-radius: 12px; padding: 10px 12px; font-size: 13px; font-weight: 800; color: var(--ink-2); }
+.identity-options input { width: auto; }
+.send-choice { grid-column: 1 / -1; border: 2px solid rgba(239,111,22,.25); border-radius: 16px; padding: 16px; background: white; display: grid; gap: 12px; }
+.send-choice-title { font-size: 14px; font-weight: 900; color: var(--ink); }
+.send-choice-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.send-choice-options input { position: absolute; opacity: 0; pointer-events: none; }
+.send-choice-options label { cursor: pointer; }
+.send-choice-options span { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 16px; border: 2px solid var(--line); border-radius: 999px; background: var(--cream); color: var(--ink-2); font-weight: 900; }
+.send-choice-options input:checked + span { background: var(--green); border-color: var(--green); color: white; box-shadow: 0 4px 0 var(--green-deep); }
+.send-choice-note { color: var(--ink-3); font-size: 12px; line-height: 1.7; }
 .form-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 20px; }
-.form-submit, .form-line-link { border: 0; border-radius: 999px; min-height: 48px; padding: 12px 20px; font-weight: 900; font-family: 'M PLUS Rounded 1c', sans-serif; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.form-submit, .form-line-link, .form-mail-link { border: 0; border-radius: 999px; min-height: 48px; padding: 12px 20px; font-weight: 900; font-family: 'M PLUS Rounded 1c', sans-serif; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
 .form-submit { background: #06C755; color: white; box-shadow: 0 4px 0 var(--green-deep); }
 .form-line-link { background: white; color: var(--green-deep); border: 2px solid rgba(6,199,85,.42); }
+.form-mail-link { background: var(--orange); color: white; box-shadow: 0 4px 0 var(--orange-deep); }
 .form-result { display: none; margin-top: 20px; border: 2px solid rgba(6,199,85,.34); background: #F2FFF6; border-radius: 16px; padding: 18px; }
 .form-result.open { display: block; }
 .form-result strong { display: block; color: var(--green-deep); margin-bottom: 8px; }
@@ -79,6 +100,8 @@
   .apply-hero-inner, .apply-grid, .photo-row { grid-template-columns: 1fr; }
   .apply-form-head { display: block; }
   .form-grid { grid-template-columns: 1fr; }
+  .corporate-fields { grid-template-columns: 1fr; }
+  .identity-options { grid-template-columns: 1fr; }
   .apply-form-panel { padding: 22px 18px; }
 }
 </style>
@@ -172,6 +195,16 @@
         </div>
 
         <form id="applyForm">
+          <div class="applicant-type" aria-label="申込区分">
+            <label>
+              <input type="radio" name="applicantType" value="個人" checked>
+              <span class="type-pill">個人で申し込む</span>
+            </label>
+            <label>
+              <input type="radio" name="applicantType" value="法人">
+              <span class="type-pill">法人で申し込む</span>
+            </label>
+          </div>
           <div class="form-grid">
             <div class="form-field">
               <label for="name">お名前<span>必須</span></label>
@@ -180,6 +213,24 @@
             <div class="form-field">
               <label for="kana">ふりがな</label>
               <input id="kana" name="kana" type="text" placeholder="例：やまだ たろう">
+            </div>
+            <div class="corporate-fields" id="corporateFields" hidden>
+              <div class="form-field">
+                <label for="company">法人名・屋号<span>必須</span></label>
+                <input id="company" name="company" type="text" autocomplete="organization" placeholder="例：株式会社〇〇">
+              </div>
+              <div class="form-field">
+                <label for="department">部署名</label>
+                <input id="department" name="department" type="text" placeholder="例：総務部">
+              </div>
+              <div class="form-field">
+                <label for="representative">代表者名</label>
+                <input id="representative" name="representative" type="text" placeholder="例：山田 太郎">
+              </div>
+              <div class="form-field">
+                <label for="invoiceName">請求書宛名</label>
+                <input id="invoiceName" name="invoiceName" type="text" placeholder="例：株式会社〇〇">
+              </div>
             </div>
             <div class="form-field">
               <label for="tel">電話番号<span>必須</span></label>
@@ -198,6 +249,17 @@
               <input id="start" name="start" type="date">
             </div>
             <div class="form-field">
+              <label for="period">利用期間</label>
+              <select id="period" name="period">
+                <option value="未定">未定</option>
+                <option value="1ヶ月以内">1ヶ月以内</option>
+                <option value="1〜3ヶ月">1〜3ヶ月</option>
+                <option value="3〜6ヶ月">3〜6ヶ月</option>
+                <option value="6ヶ月〜1年">6ヶ月〜1年</option>
+                <option value="1年以上">1年以上</option>
+              </select>
+            </div>
+            <div class="form-field">
               <label for="visit">見学希望</label>
               <select id="visit" name="visit">
                 <option value="未定">未定</option>
@@ -210,6 +272,48 @@
               <label for="contactTime">連絡しやすい時間帯</label>
               <input id="contactTime" name="contactTime" type="text" placeholder="例：平日18時以降">
             </div>
+            <div class="form-field">
+              <label for="guarantor">保証人の有無</label>
+              <select id="guarantor" name="guarantor">
+                <option value="未定">未定</option>
+                <option value="あり">あり</option>
+                <option value="なし">なし</option>
+                <option value="必要なら用意できます">必要なら用意できます</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="guarantorName">保証人のお名前</label>
+              <input id="guarantorName" name="guarantorName" type="text" placeholder="例：山田 花子">
+            </div>
+            <div class="form-field">
+              <label for="guarantorTel">保証人の電話番号</label>
+              <input id="guarantorTel" name="guarantorTel" type="tel" placeholder="例：090-0000-0000">
+            </div>
+            <div class="form-field">
+              <label for="guarantorRelation">申込者との関係</label>
+              <input id="guarantorRelation" name="guarantorRelation" type="text" placeholder="例：親族、代表者、上司">
+            </div>
+            <div class="identity-box">
+              <h3>本人確認書類の画像提出</h3>
+              <p>契約時に本人確認書類の画像提出をお願いします。フォーム送信後、LINEで表面・裏面の写真を送ってください。</p>
+              <div class="form-field">
+                <label for="identityDocument">提出予定の本人確認書類</label>
+                <select id="identityDocument" name="identityDocument">
+                  <option value="未定">未定</option>
+                  <option value="運転免許証">運転免許証</option>
+                  <option value="マイナンバーカード">マイナンバーカード</option>
+                  <option value="健康保険証">健康保険証</option>
+                  <option value="在留カード">在留カード</option>
+                  <option value="その他">その他</option>
+                </select>
+              </div>
+              <div class="identity-options" aria-label="画像提出予定">
+                <label><input type="checkbox" name="identityImage" value="表面画像をLINEで送付予定">表面画像</label>
+                <label><input type="checkbox" name="identityImage" value="裏面画像をLINEで送付予定">裏面画像</label>
+                <label><input type="checkbox" name="identityImage" value="法人書類も送付予定">法人書類</label>
+              </div>
+              <div class="form-help">マイナンバーカードは番号面ではなく、本人確認に必要な面だけを送ってください。必要書類はLINEで確認します。</div>
+            </div>
             <div class="form-field full">
               <label for="items">預けたい荷物</label>
               <textarea id="items" name="items" placeholder="例：衣装ケース10個、季節家電、段ボールなど"></textarea>
@@ -219,9 +323,23 @@
               <textarea id="message" name="message" placeholder="例：できれば1階希望、駐車スペースを使いたい、料金を確認したいなど"></textarea>
               <div class="form-help">送信ボタンを押すと入力内容が画面にまとまります。コピーしてLINEで送ってください。</div>
             </div>
+            <div class="send-choice">
+              <div class="send-choice-title">送信方法を選んでください</div>
+              <div class="send-choice-options" aria-label="送信方法">
+                <label>
+                  <input type="radio" name="sendMethod" value="line" checked>
+                  <span>LINEで送る</span>
+                </label>
+                <label>
+                  <input type="radio" name="sendMethod" value="mail">
+                  <span>メールで送る</span>
+                </label>
+              </div>
+              <div class="send-choice-note">LINEは入力内容を送信文として開きます。メールは room.banchou@gmail.com 宛のメール作成画面を開きます。</div>
+            </div>
           </div>
           <div class="form-actions">
-            <button class="form-submit" type="submit">入力内容をまとめる</button>
+            <button class="form-submit" type="submit">選んだ方法で送る準備をする</button>
             <a class="form-line-link" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで送る</a>
           </div>
         </form>
@@ -231,7 +349,9 @@
           <pre id="formSummary"></pre>
           <div class="form-actions">
             <button class="form-submit" type="button" id="copySummary">この内容をコピー</button>
-            <a class="form-line-link" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEを開く</a>
+            <a class="form-line-link" href="https://line.me/R/share?text=" target="_blank" rel="noopener" id="sendLineSummary">LINEで送る</a>
+            <a class="form-mail-link" href="mailto:room.banchou@gmail.com" id="sendMailSummary">メールで送る</a>
+            <a class="form-line-link" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">公式LINEを開く</a>
           </div>
         </div>
       </section>
@@ -285,26 +405,91 @@ const formResult = document.getElementById('formResult');
 const formResultTitle = document.getElementById('formResultTitle');
 const formSummary = document.getElementById('formSummary');
 const copySummary = document.getElementById('copySummary');
+const sendLineSummary = document.getElementById('sendLineSummary');
+const sendMailSummary = document.getElementById('sendMailSummary');
+const corporateFields = document.getElementById('corporateFields');
+const companyInput = document.getElementById('company');
+const mailTo = 'room.banchou@gmail.com';
+const lineShareBase = 'https://line.me/R/share?text=';
 
 function valueOf(formData, key) {
   return (formData.get(key) || '').toString().trim() || '未入力';
 }
 
+function valuesOf(formData, key) {
+  const values = formData.getAll(key).map(value => value.toString().trim()).filter(Boolean);
+  return values.length ? values.join('、') : '未選択';
+}
+
+function currentApplicantType() {
+  return document.querySelector('input[name="applicantType"]:checked')?.value || '個人';
+}
+
+function currentSendMethod() {
+  return document.querySelector('input[name="sendMethod"]:checked')?.value || 'line';
+}
+
+function updateSendLinks(summary) {
+  const subject = 'トランクルーム収納番長 申し込み';
+  const encodedSummary = encodeURIComponent(summary);
+  if (sendLineSummary) {
+    sendLineSummary.href = `${lineShareBase}${encodedSummary}`;
+  }
+  if (sendMailSummary) {
+    sendMailSummary.href = `mailto:${mailTo}?subject=${encodeURIComponent(subject)}&body=${encodedSummary}`;
+  }
+}
+
+function updateApplicantType() {
+  const isCorporate = currentApplicantType() === '法人';
+  if (corporateFields) corporateFields.hidden = !isCorporate;
+  if (companyInput) companyInput.required = isCorporate;
+}
+
+document.querySelectorAll('input[name="applicantType"]').forEach(input => {
+  input.addEventListener('change', updateApplicantType);
+});
+updateApplicantType();
+
 if (applyForm && formResult && formSummary) {
   applyForm.addEventListener('submit', (event) => {
     event.preventDefault();
+    updateApplicantType();
+    if (!applyForm.reportValidity()) return;
+
     const formData = new FormData(applyForm);
+    const applicantType = valueOf(formData, 'applicantType');
+    const corporateLines = applicantType === '法人' ? [
+      `法人名・屋号：${valueOf(formData, 'company')}`,
+      `部署名：${valueOf(formData, 'department')}`,
+      `代表者名：${valueOf(formData, 'representative')}`,
+      `請求書宛名：${valueOf(formData, 'invoiceName')}`,
+      ''
+    ] : [];
+
     const summary = [
       'トランクルーム収納番長 申込み・空き確認',
       '',
+      `申込区分：${applicantType}`,
+      ...corporateLines,
       `お名前：${valueOf(formData, 'name')}`,
       `ふりがな：${valueOf(formData, 'kana')}`,
       `電話番号：${valueOf(formData, 'tel')}`,
       `メール：${valueOf(formData, 'email')}`,
       `希望の部屋・サイズ：${valueOf(formData, 'room')}`,
       `利用開始希望日：${valueOf(formData, 'start')}`,
+      `利用期間：${valueOf(formData, 'period')}`,
       `見学希望：${valueOf(formData, 'visit')}`,
       `連絡しやすい時間帯：${valueOf(formData, 'contactTime')}`,
+      '',
+      `保証人の有無：${valueOf(formData, 'guarantor')}`,
+      `保証人のお名前：${valueOf(formData, 'guarantorName')}`,
+      `保証人の電話番号：${valueOf(formData, 'guarantorTel')}`,
+      `申込者との関係：${valueOf(formData, 'guarantorRelation')}`,
+      '',
+      `本人確認書類：${valueOf(formData, 'identityDocument')}`,
+      `画像提出予定：${valuesOf(formData, 'identityImage')}`,
+      '画像はLINEで送付します',
       '',
       `預けたい荷物：${valueOf(formData, 'items')}`,
       '',
@@ -312,8 +497,15 @@ if (applyForm && formResult && formSummary) {
     ].join('\n');
 
     formSummary.textContent = summary;
+    updateSendLinks(summary);
     formResult.classList.add('open');
     formResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    if (currentSendMethod() === 'mail' && sendMailSummary) {
+      window.location.href = sendMailSummary.href;
+    } else if (sendLineSummary) {
+      window.open(sendLineSummary.href, '_blank', 'noopener');
+    }
   });
 }
 

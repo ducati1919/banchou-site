@@ -58,19 +58,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-bottom: 1px solid var(--line);
 }
 .header-inner {
-  max-width: 1240px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
   position: relative;
 }
 .logo-wrap { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .logo-wrap img { height: 54px; width: auto; }
-.nav { display: flex; gap: 24px; align-items: center; font-size: 14px; font-weight: 700; }
-.nav a { color: var(--ink-2); transition: color .2s, background .2s; position: relative; padding: 4px 0; }
+.nav { display: flex; gap: 18px; align-items: center; font-size: 14px; font-weight: 700; min-width: 0; }
+.nav a { color: var(--ink-2); transition: color .2s, background .2s; position: relative; padding: 4px 0; white-space: nowrap; }
 .nav a:hover, .nav a.active { color: var(--orange); }
 .nav a.active::after {
   content: '';
@@ -82,13 +82,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--orange);
   border-radius: 3px;
 }
-.header-cta { display: flex; align-items: center; gap: 10px; }
-.tel-block { text-align: right; line-height: 1.2; }
+.header-cta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.tel-block { text-align: right; line-height: 1.2; flex-shrink: 0; }
 .tel-block .label { font-size: 10px; color: var(--ink-3); font-weight: 700; letter-spacing: .08em; }
 .tel-block .num {
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-weight: 900;
-  font-size: 22px;
+  font-size: 21px;
   color: var(--ink);
   display: flex;
   align-items: center;
@@ -97,7 +97,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .tel-block .num svg { color: var(--orange); }
 .btn-line-sm, .btn-contact-sm {
   color: white;
-  padding: 11px 18px;
+  padding: 10px 16px;
   border-radius: 10px;
   font-weight: 800;
   font-size: 13px;
