@@ -21,6 +21,10 @@
 .detail-wrap { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: start; }
 .photo-placeholder { min-height: 390px; border: 2px dashed var(--line); border-radius: 20px; background: linear-gradient(135deg, #FFF7E8 0%, #fff 100%); display: grid; place-items: center; text-align: center; color: var(--ink-2); padding: 28px; }
 .photo-placeholder strong { display: block; font-size: 24px; color: var(--ink); margin-bottom: 8px; font-family: 'M PLUS Rounded 1c', sans-serif; }
+.room-gallery { display: grid; gap: 14px; }
+.room-gallery figure { border: 2px solid var(--line); border-radius: 20px; overflow: hidden; background: var(--cream); box-shadow: var(--shadow-sm); }
+.room-gallery img { width: 100%; height: 300px; object-fit: cover; }
+.room-gallery figcaption { padding: 10px 14px; color: var(--ink-2); font-size: 13px; font-weight: 800; text-align: center; }
 .detail-panel { border: 2px solid var(--line); border-radius: 20px; padding: 26px; background: var(--bg); }
 .detail-panel h2 { font-size: 22px; font-weight: 900; margin-bottom: 18px; }
 .spec-list { display: grid; gap: 12px; }
@@ -39,6 +43,7 @@
   .detail-hero-inner, .detail-wrap { grid-template-columns: 1fr; }
   .hero-price { min-width: 0; }
   .photo-placeholder { min-height: 280px; }
+  .room-gallery img { height: 240px; }
 }
 </style>
 </head>
@@ -85,7 +90,7 @@
 
   <section class="detail-main">
     <div class="detail-wrap">
-      <div class="photo-placeholder">
+      <div class="photo-placeholder" id="roomPhotos">
         <div>
           <strong>写真準備中</strong>
           <p>各部屋の写真をいただいたら、この枠に部屋写真を表示します。</p>
@@ -149,6 +154,16 @@ if (!room) {
   document.title = `${room.no}号室 | トランクルーム収納番長`;
   document.getElementById('roomTitle').textContent = `${room.no}号室`;
   document.getElementById('roomLead').textContent = `${room.floor}階の収納スペースです。料金と広さを確認して、気になる場合はLINEで空き状況を確認してください。`;
+  const roomPhotos = document.getElementById('roomPhotos');
+  if (roomPhotos && Array.isArray(room.images) && room.images.length) {
+    roomPhotos.className = 'room-gallery';
+    roomPhotos.innerHTML = room.images.map((src, index) => `
+      <figure>
+        <img src="${src}" alt="${room.no}\u53f7\u5ba4 \u5199\u771f${index + 1}">
+        <figcaption>${room.no}\u53f7\u5ba4 \u5199\u771f${index + 1}</figcaption>
+      </figure>
+    `).join('');
+  }
   document.getElementById('roomPrice').textContent = yen(room.price);
   document.getElementById('specNo').textContent = `${room.no}号室`;
   document.getElementById('specFloor').textContent = `${room.floor}階`;
