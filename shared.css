@@ -69,7 +69,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .logo-wrap { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .logo-wrap img { height: 54px; width: auto; }
-.nav { display: flex; gap: 18px; align-items: center; font-size: 14px; font-weight: 700; min-width: 0; }
+.nav { display: flex; gap: 14px; align-items: center; font-size: 13px; font-weight: 700; min-width: 0; }
 .nav a { color: var(--ink-2); transition: color .2s, background .2s; position: relative; padding: 4px 0; white-space: nowrap; }
 .nav a:hover, .nav a.active { color: var(--orange); }
 .nav a.active::after {
@@ -97,7 +97,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .tel-block .num svg { color: var(--orange); }
 .btn-line-sm, .btn-contact-sm {
   color: white;
-  padding: 10px 16px;
+  padding: 10px 14px;
   border-radius: 10px;
   font-weight: 800;
   font-size: 13px;

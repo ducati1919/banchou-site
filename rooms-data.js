@@ -217,6 +217,7 @@ window.BANCHOU_ROOM_IMAGES = {
     "assets/207No2.JPG"
   ],
   208: [
+    "assets/208No1.jpg",
     "assets/208No2.JPG"
   ],
   209: [
