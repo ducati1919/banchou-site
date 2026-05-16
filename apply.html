@@ -73,10 +73,13 @@
 .form-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 20px; }
 .form-submit, .form-line-link, .form-mail-link { border: 0; border-radius: 999px; min-height: 48px; padding: 12px 20px; font-weight: 900; font-family: 'M PLUS Rounded 1c', sans-serif; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
 .form-submit { background: #06C755; color: white; box-shadow: 0 4px 0 var(--green-deep); }
+.form-submit:disabled { opacity: .65; cursor: wait; box-shadow: none; }
 .form-line-link { background: white; color: var(--green-deep); border: 2px solid rgba(6,199,85,.42); }
 .form-mail-link { background: var(--orange); color: white; box-shadow: 0 4px 0 var(--orange-deep); }
 .form-result { display: none; margin-top: 20px; border: 2px solid rgba(6,199,85,.34); background: #F2FFF6; border-radius: 16px; padding: 18px; }
 .form-result.open { display: block; }
+.form-result.error { border-color: rgba(215,62,44,.34); background: #FFF7F4; }
+.form-result.error strong { color: var(--red); }
 .form-result strong { display: block; color: var(--green-deep); margin-bottom: 8px; }
 .form-result pre { white-space: pre-wrap; font: inherit; font-size: 13px; line-height: 1.75; color: var(--ink-2); background: white; border: 1px solid rgba(6,199,85,.22); border-radius: 12px; padding: 14px; max-height: 260px; overflow: auto; }
 .photo-row { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; margin: 32px 0; }
@@ -87,6 +90,18 @@
 .message-box h2 { font-size: 20px; font-weight: 900; margin-bottom: 10px; }
 .message-box p { color: var(--ink-2); font-size: 14px; line-height: 1.8; }
 .message-template { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 18px; color: var(--ink-2); font-size: 14px; line-height: 1.9; margin-top: 16px; }
+.contract-guide { margin: 30px 0 0; display: grid; gap: 18px; }
+.contract-guide-head { border: 2px solid var(--orange); border-radius: 20px; padding: 24px; background: linear-gradient(180deg, #FFF8EC 0%, #fff 100%); box-shadow: var(--shadow-sm); }
+.contract-guide-head h2 { font-size: 24px; font-weight: 900; margin-bottom: 8px; }
+.contract-guide-head p { color: var(--ink-2); font-size: 14px; line-height: 1.9; }
+.contract-guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.contract-card { background: white; border: 2px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-sm); }
+.contract-card h3 { font-size: 17px; font-weight: 900; color: var(--orange); margin-bottom: 10px; }
+.contract-card ul { list-style: none; display: grid; gap: 8px; }
+.contract-card li { color: var(--ink-2); font-size: 13px; line-height: 1.65; display: flex; gap: 8px; }
+.contract-card li::before { content: "✓"; color: var(--orange); font-weight: 900; flex: 0 0 auto; }
+.contract-alert { border: 2px solid rgba(215,62,44,.28); background: #FFF7F4; border-radius: 16px; padding: 18px 20px; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
+.contract-alert strong { color: var(--red); }
 .notice-fix { background: var(--ink); color: white; padding: 8px 20px; font-size: 12px; text-align: center; }
 .notice-fix strong { color: var(--yellow); }
 @media (max-width: 960px) {
@@ -102,6 +117,7 @@
   .form-grid { grid-template-columns: 1fr; }
   .corporate-fields { grid-template-columns: 1fr; }
   .identity-options { grid-template-columns: 1fr; }
+  .contract-guide-grid { grid-template-columns: 1fr; }
   .apply-form-panel { padding: 22px 18px; }
 }
 </style>
@@ -170,20 +186,87 @@
           <ol class="step-list">
             <li><div><strong>空室確認</strong><span>LINEまたは電話で、希望サイズ・利用開始時期・見学希望をお知らせください。</span></div></li>
             <li><div><strong>見学・サイズ確認</strong><span>現地でお部屋の広さ、入口、台車、駐車スペースを確認できます。</span></div></li>
-            <li><div><strong>お申し込み・ご契約</strong><span>本人確認書類と初月分の利用料をご用意ください。初期費用は0円です。</span></div></li>
-            <li><div><strong>カードキーを受け取り利用開始</strong><span>カードキー1つで入口を解錠できます。24時間365日、荷物の出し入れができます。</span></div></li>
+            <li><div><strong>お申し込み・ご契約</strong><span>本人確認書類、非常時連絡先、支払い方法を確認します。契約書類は署名・捺印のうえご返送いただきます。</span></div></li>
+            <li><div><strong>鍵を受け取り利用開始</strong><span>カードキー1枚とルームキー2本をお渡しします。24時間365日、荷物の出し入れができます。</span></div></li>
           </ol>
         </div>
         <div class="panel">
           <h2>契約時に必要なもの</h2>
           <ul class="check-list">
-            <li><strong>✓</strong><span>本人確認書類（運転免許証・マイナンバーカードなど）</span></li>
+            <li><strong>✓</strong><span>本人確認書類（運転免許証・健康保険証・マイナンバーカード表面など）</span></li>
             <li><strong>✓</strong><span>初月分の利用料</span></li>
-            <li><strong>✓</strong><span>お部屋に付ける鍵（各お部屋の鍵はお持ちください）</span></li>
+            <li><strong>✓</strong><span>住所・勤務先・非常時連絡先などのご契約情報</span></li>
             <li><strong>✓</strong><span>保管したい荷物の内容が分かるメモや写真</span></li>
           </ul>
         </div>
       </div>
+
+      <section class="contract-guide" aria-labelledby="contract-guide-title">
+        <div class="contract-guide-head">
+          <span class="section-eyebrow">CONTRACT</span>
+          <h2 id="contract-guide-title">ご契約前に確認していただきたいこと</h2>
+          <p>契約書類の内容を、申し込み前に確認しやすいようにまとめました。正式な契約内容はお渡しする契約書・利用規則をご確認ください。</p>
+        </div>
+        <div class="contract-guide-grid">
+          <div class="contract-card">
+            <h3>契約書類</h3>
+            <ul>
+              <li>レンタル収納庫賃貸借契約書</li>
+              <li>レンタル収納スペース利用規則</li>
+              <li>反社会的勢力排除に関する覚書</li>
+              <li>残置物所有権にかかる同意書</li>
+            </ul>
+          </div>
+          <div class="contract-card">
+            <h3>お支払い・契約期間</h3>
+            <ul>
+              <li>口座振替またはクレジットカード決済に対応</li>
+              <li>口座振替は毎月26日、クレジットカードは毎月13日決済</li>
+              <li>契約満了1か月前までに解約申出がなければ6か月ごとに自動更新</li>
+              <li>解約は前々月末までにご連絡ください。日割り解約はできません</li>
+            </ul>
+          </div>
+          <div class="contract-card">
+            <h3>鍵・再発行</h3>
+            <ul>
+              <li>カードキー1枚、ルームキー2本をお渡しします</li>
+              <li>ルームキー再交付は1本4,000円</li>
+              <li>入退館カード再交付は1枚2,000円</li>
+              <li>解約時はカードキー・ルームキーをご返却ください</li>
+            </ul>
+          </div>
+          <div class="contract-card">
+            <h3>収納できないもの</h3>
+            <ul>
+              <li>現金・貴金属・高価品などの貴重品</li>
+              <li>危険物・発火性のあるもの・法令に触れるもの</li>
+              <li>食品・飲料・動植物・異臭や悪臭のするもの</li>
+              <li>遺骨・位牌・変質しやすいもの</li>
+            </ul>
+          </div>
+          <div class="contract-card">
+            <h3>禁止事項</h3>
+            <ul>
+              <li>居住・宿泊・長時間滞在</li>
+              <li>施設内での作業、騒音・振動を出す行為</li>
+              <li>ネジ・クギなどによる造作や形状変更</li>
+              <li>収納庫外や天井メッシュ部への荷物の設置</li>
+            </ul>
+          </div>
+          <div class="contract-card">
+            <h3>ご利用上の注意</h3>
+            <ul>
+              <li>盗難・破損・変質・カビ等については原則として責任を負いかねます</li>
+              <li>退出時は扉の施錠をご確認ください</li>
+              <li>壁面は金属のため、搬入・搬出時の傷にご注意ください</li>
+              <li>施設は利用者の皆さまで譲り合ってお使いください</li>
+            </ul>
+          </div>
+        </div>
+        <div class="contract-alert">
+          <strong>本人確認書類について：</strong>マイナンバーカードをご提出いただく場合は表面のみで大丈夫です。個人番号が記載された裏面は送らないでください。法人契約の場合は、法人名・担当者名・請求書宛名なども確認します。
+        </div>
+      </section>
 
       <section class="apply-form-panel" aria-labelledby="apply-form-title">
         <div class="apply-form-head">
@@ -196,6 +279,7 @@
         </div>
 
         <form id="applyForm">
+          <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;">
           <div class="applicant-type" aria-label="申込区分">
             <label>
               <input type="radio" name="applicantType" value="個人" checked>
@@ -214,6 +298,10 @@
             <div class="form-field">
               <label for="kana">ふりがな</label>
               <input id="kana" name="kana" type="text" placeholder="例：やまだ たろう">
+            </div>
+            <div class="form-field full">
+              <label for="address">ご住所</label>
+              <input id="address" name="address" type="text" autocomplete="street-address" placeholder="例：大阪府堺市西区津久野町...">
             </div>
             <div class="corporate-fields" id="corporateFields" hidden>
               <div class="form-field">
@@ -240,6 +328,18 @@
             <div class="form-field">
               <label for="email">メールアドレス</label>
               <input id="email" name="email" type="email" autocomplete="email" placeholder="例：name@example.com">
+            </div>
+            <div class="form-field">
+              <label for="workplace">勤務先名</label>
+              <input id="workplace" name="workplace" type="text" placeholder="例：株式会社〇〇">
+            </div>
+            <div class="form-field">
+              <label for="workplaceTel">勤務先TEL</label>
+              <input id="workplaceTel" name="workplaceTel" type="tel" placeholder="例：06-0000-0000">
+            </div>
+            <div class="form-field full">
+              <label for="workplaceAddress">勤務先住所</label>
+              <input id="workplaceAddress" name="workplaceAddress" type="text" placeholder="例：大阪府大阪市...">
             </div>
             <div class="form-field">
               <label for="room">希望の部屋・サイズ</label>
@@ -274,20 +374,30 @@
               <input id="contactTime" name="contactTime" type="text" placeholder="例：平日18時以降">
             </div>
             <div class="form-field">
-              <label for="guarantor">保証人の有無</label>
+              <label for="payment">お支払い方法</label>
+              <select id="payment" name="payment">
+                <option value="未定">未定</option>
+                <option value="クレジットカード">クレジットカード</option>
+                <option value="口座振替">口座振替</option>
+                <option value="相談したい">相談したい</option>
+              </select>
+              <div class="form-help">口座振替は毎月26日、クレジットカードは毎月13日決済です。</div>
+            </div>
+            <div class="form-field">
+              <label for="guarantor">保証人・非常時連絡先</label>
               <select id="guarantor" name="guarantor">
                 <option value="未定">未定</option>
-                <option value="あり">あり</option>
-                <option value="なし">なし</option>
+                <option value="非常時連絡先あり">非常時連絡先あり</option>
+                <option value="保証人あり">保証人あり</option>
                 <option value="必要なら用意できます">必要なら用意できます</option>
               </select>
             </div>
             <div class="form-field">
-              <label for="guarantorName">保証人のお名前</label>
+              <label for="guarantorName">保証人・非常時連絡先のお名前</label>
               <input id="guarantorName" name="guarantorName" type="text" placeholder="例：山田 花子">
             </div>
             <div class="form-field">
-              <label for="guarantorTel">保証人の電話番号</label>
+              <label for="guarantorTel">保証人・非常時連絡先の電話番号</label>
               <input id="guarantorTel" name="guarantorTel" type="tel" placeholder="例：090-0000-0000">
             </div>
             <div class="form-field">
@@ -296,7 +406,7 @@
             </div>
             <div class="identity-box">
               <h3>本人確認書類の画像提出</h3>
-              <p>契約時に本人確認書類の画像提出をお願いします。フォーム送信後、LINEで表面・裏面の写真を送ってください。</p>
+              <p>契約時に本人確認書類の画像提出をお願いします。フォーム送信後、LINEまたはメールで必要書類の写真を送ってください。</p>
               <div class="form-field">
                 <label for="identityDocument">提出予定の本人確認書類</label>
                 <select id="identityDocument" name="identityDocument">
@@ -310,10 +420,10 @@
               </div>
               <div class="identity-options" aria-label="画像提出予定">
                 <label><input type="checkbox" name="identityImage" value="表面画像をLINEで送付予定">表面画像</label>
-                <label><input type="checkbox" name="identityImage" value="裏面画像をLINEで送付予定">裏面画像</label>
+                <label><input type="checkbox" name="identityImage" value="裏面画像を送付予定（必要な書類のみ）">裏面画像</label>
                 <label><input type="checkbox" name="identityImage" value="法人書類も送付予定">法人書類</label>
               </div>
-              <div class="form-help">マイナンバーカードは番号面ではなく、本人確認に必要な面だけを送ってください。必要書類はLINEで確認します。</div>
+              <div class="form-help">マイナンバーカードは表面のみ送ってください。個人番号が記載された裏面は送らないでください。運転免許証など裏面に住所変更等の記載がある書類は、必要に応じて確認します。</div>
             </div>
             <div class="form-field full">
               <label for="items">預けたい荷物</label>
@@ -328,19 +438,19 @@
               <div class="send-choice-title">送信方法を選んでください</div>
               <div class="send-choice-options" aria-label="送信方法">
                 <label>
-                  <input type="radio" name="sendMethod" value="line" checked>
-                  <span>LINEで送る</span>
+                  <input type="radio" name="sendMethod" value="mail" checked>
+                  <span>メールで送信</span>
                 </label>
                 <label>
-                  <input type="radio" name="sendMethod" value="mail">
-                  <span>メールで送る</span>
+                  <input type="radio" name="sendMethod" value="line">
+                  <span>LINEで送る</span>
                 </label>
               </div>
-              <div class="send-choice-note">LINEは入力内容を送信文として開きます。メールは room.banchou@gmail.com 宛のメール作成画面を開きます。</div>
+              <div class="send-choice-note">メール送信はこの画面から直接送信します。LINEは入力内容を送信文として開きます。</div>
             </div>
           </div>
           <div class="form-actions">
-            <button class="form-submit" type="submit">選んだ方法で送る準備をする</button>
+            <button class="form-submit" type="submit" id="applySubmit">送信する</button>
             <a class="form-line-link" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで送る</a>
           </div>
         </form>
@@ -408,10 +518,12 @@ const formSummary = document.getElementById('formSummary');
 const copySummary = document.getElementById('copySummary');
 const sendLineSummary = document.getElementById('sendLineSummary');
 const sendMailSummary = document.getElementById('sendMailSummary');
+const applySubmit = document.getElementById('applySubmit');
 const corporateFields = document.getElementById('corporateFields');
 const companyInput = document.getElementById('company');
 const mailTo = 'room.banchou@gmail.com';
 const lineShareBase = 'https://line.me/R/share?text=';
+const applyEndpoint = '/api/apply';
 
 function valueOf(formData, key) {
   return (formData.get(key) || '').toString().trim() || '未入力';
@@ -453,12 +565,13 @@ document.querySelectorAll('input[name="applicantType"]').forEach(input => {
 updateApplicantType();
 
 if (applyForm && formResult && formSummary) {
-  applyForm.addEventListener('submit', (event) => {
+  applyForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     updateApplicantType();
     if (!applyForm.reportValidity()) return;
 
     const formData = new FormData(applyForm);
+    if (valueOf(formData, 'website') !== '未入力') return;
     const applicantType = valueOf(formData, 'applicantType');
     const corporateLines = applicantType === '法人' ? [
       `法人名・屋号：${valueOf(formData, 'company')}`,
@@ -475,22 +588,29 @@ if (applyForm && formResult && formSummary) {
       ...corporateLines,
       `お名前：${valueOf(formData, 'name')}`,
       `ふりがな：${valueOf(formData, 'kana')}`,
+      `住所：${valueOf(formData, 'address')}`,
       `電話番号：${valueOf(formData, 'tel')}`,
       `メール：${valueOf(formData, 'email')}`,
+      `勤務先名：${valueOf(formData, 'workplace')}`,
+      `勤務先TEL：${valueOf(formData, 'workplaceTel')}`,
+      `勤務先住所：${valueOf(formData, 'workplaceAddress')}`,
+      '',
       `希望の部屋・サイズ：${valueOf(formData, 'room')}`,
       `利用開始希望日：${valueOf(formData, 'start')}`,
       `利用期間：${valueOf(formData, 'period')}`,
+      `支払い方法：${valueOf(formData, 'payment')}`,
       `見学希望：${valueOf(formData, 'visit')}`,
       `連絡しやすい時間帯：${valueOf(formData, 'contactTime')}`,
       '',
-      `保証人の有無：${valueOf(formData, 'guarantor')}`,
-      `保証人のお名前：${valueOf(formData, 'guarantorName')}`,
-      `保証人の電話番号：${valueOf(formData, 'guarantorTel')}`,
+      `保証人・非常時連絡先：${valueOf(formData, 'guarantor')}`,
+      `保証人・非常時連絡先のお名前：${valueOf(formData, 'guarantorName')}`,
+      `保証人・非常時連絡先の電話番号：${valueOf(formData, 'guarantorTel')}`,
       `申込者との関係：${valueOf(formData, 'guarantorRelation')}`,
       '',
       `本人確認書類：${valueOf(formData, 'identityDocument')}`,
       `画像提出予定：${valuesOf(formData, 'identityImage')}`,
-      '画像はLINEで送付します',
+      '本人確認書類の画像はLINEまたはメールで送付します',
+      '※マイナンバーカードは表面のみ。個人番号が記載された裏面は送付しません。',
       '',
       `預けたい荷物：${valueOf(formData, 'items')}`,
       '',
@@ -499,13 +619,55 @@ if (applyForm && formResult && formSummary) {
 
     formSummary.textContent = summary;
     updateSendLinks(summary);
+    formResult.classList.remove('error');
     formResult.classList.add('open');
     formResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    if (currentSendMethod() === 'mail' && sendMailSummary) {
-      window.location.href = sendMailSummary.href;
-    } else if (sendLineSummary) {
+    if (currentSendMethod() === 'line' && sendLineSummary) {
       window.open(sendLineSummary.href, '_blank', 'noopener');
+      return;
+    }
+
+    if (applySubmit) {
+      applySubmit.disabled = true;
+      applySubmit.textContent = '送信中です...';
+    }
+    formResultTitle.textContent = '送信中です';
+
+    try {
+      const response = await fetch(applyEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          summary,
+          sendMethod: currentSendMethod(),
+          applicantType,
+          name: valueOf(formData, 'name'),
+          kana: valueOf(formData, 'kana'),
+          address: valueOf(formData, 'address'),
+          tel: valueOf(formData, 'tel'),
+          email: valueOf(formData, 'email'),
+          room: valueOf(formData, 'room'),
+          start: valueOf(formData, 'start'),
+          period: valueOf(formData, 'period'),
+          payment: valueOf(formData, 'payment'),
+          visit: valueOf(formData, 'visit'),
+          contactTime: valueOf(formData, 'contactTime')
+        })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || '送信できませんでした');
+      }
+      formResultTitle.textContent = '送信しました';
+    } catch (error) {
+      formResult.classList.add('error');
+      formResultTitle.textContent = '自動送信できませんでした。下の内容をコピーしてLINEまたはメールで送ってください';
+    } finally {
+      if (applySubmit) {
+        applySubmit.disabled = false;
+        applySubmit.textContent = '送信する';
+      }
     }
   });
 }

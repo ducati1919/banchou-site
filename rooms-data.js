@@ -6,7 +6,7 @@ window.BANCHOU_ROOMS = [
   { no: 105, floor: 1, size: "約1.7帖 / 2.80㎡", tatami: 1.7, area: 2.80, price: 15400, vacant: true },
   { no: 106, floor: 1, size: "約2.0帖 / 3.20㎡", tatami: 2.0, area: 3.20, price: 17600, vacant: true },
   { no: 107, floor: 1, size: "約1.4帖 / 2.30㎡", tatami: 1.4, area: 2.30, price: 12650, vacant: true },
-  { no: 108, floor: 1, size: "約1.2帖 / 2.00㎡", tatami: 1.2, area: 2.00, price: 11000, vacant: false },
+  { no: 108, floor: 1, size: "約1.2帖 / 2.00㎡", tatami: 1.2, area: 2.00, price: 11000, vacant: true },
   { no: 109, floor: 1, size: "約0.4帖 / 0.50㎡", tatami: 0.4, area: 0.50, price: 2700, vacant: true },
   { no: 110, floor: 1, size: "約0.4帖 / 0.50㎡", tatami: 0.4, area: 0.50, price: 2700, vacant: false },
   { no: 111, floor: 1, size: "約1.3帖 / 2.10㎡", tatami: 1.3, area: 2.10, price: 11550, vacant: true },
@@ -32,7 +32,7 @@ window.BANCHOU_ROOMS = [
   { no: 131, floor: 1, size: "約2.4帖 / 3.90㎡", tatami: 2.4, area: 3.90, price: 21450, vacant: false },
   { no: 132, floor: 1, size: "約0.8帖 / 1.30㎡", tatami: 0.8, area: 1.30, price: 7150, vacant: false },
   { no: 133, floor: 1, size: "約2.7帖 / 4.40㎡", tatami: 2.7, area: 4.40, price: 24200, vacant: true },
-  { no: 134, floor: 1, size: "約1.4帖 / 2.30㎡", tatami: 1.4, area: 2.30, price: 12650, vacant: false },
+  { no: 134, floor: 1, size: "約1.4帖 / 2.30㎡", tatami: 1.4, area: 2.30, price: 12650, vacant: true },
   { no: 201, floor: 2, size: "\u7d040.6\u5e16 / 0.90\u33a1", tatami: 0.6, area: 0.90, price: 4050, vacant: false },
   { no: 202, floor: 2, size: "約0.6帖 / 1.00㎡", tatami: 0.6, area: 1.00, price: 4500, vacant: false },
   { no: 203, floor: 2, size: "約0.6帖 / 0.90㎡", tatami: 0.6, area: 0.90, price: 4050, vacant: false },
@@ -44,7 +44,7 @@ window.BANCHOU_ROOMS = [
   { no: 209, floor: 2, size: "約2.1帖 / 3.40㎡", tatami: 2.1, area: 3.40, price: 15300, vacant: false },
   { no: 210, floor: 2, size: "約1.2帖 / 1.90㎡", tatami: 1.2, area: 1.90, price: 8550, vacant: false },
   { no: 211, floor: 2, size: "約0.9帖 / 1.50㎡", tatami: 0.9, area: 1.50, price: 6750, vacant: false },
-  { no: 212, floor: 2, size: "約0.7帖 / 1.10㎡", tatami: 0.7, area: 1.10, price: 4950, vacant: false },
+  { no: 212, floor: 2, size: "約0.7帖 / 1.10㎡", tatami: 0.7, area: 1.10, price: 4950, vacant: true },
   { no: 213, floor: 2, size: "約1.7帖 / 2.80㎡", tatami: 1.7, area: 2.80, price: 12600, vacant: true },
   { no: 214, floor: 2, size: "約1.0帖 / 1.70㎡", tatami: 1.0, area: 1.70, price: 7650, vacant: false }
 ];

@@ -30,7 +30,14 @@
 .plan-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
 .plan-head h2 { font-size: 24px; font-weight: 900; }
 .plan-head p { color: var(--ink-3); font-size: 13px; font-weight: 700; line-height: 1.7; max-width: 560px; }
-.plan-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.floor-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 18px; }
+.floor-tab { border: 2px solid var(--orange); background: white; color: var(--orange); border-radius: 999px; padding: 11px 22px; font-size: 14px; font-weight: 900; }
+.floor-tab.active { background: var(--orange); color: white; box-shadow: 0 4px 0 var(--orange-deep); }
+.floor-panel { display: none; }
+.floor-panel.active { display: block; }
+.floor-room-panel { display: none; }
+.floor-room-panel.active { display: block; }
+.plan-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
 .plan-card { background: white; border: 2px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-sm); }
 .plan-card h3 { padding: 16px 18px 12px; font-size: 17px; font-weight: 900; border-bottom: 1px solid var(--line); }
 .plan-img { background: #fffaf2; padding: 14px; }
@@ -140,16 +147,20 @@
           <h2 id="plan-title">配置図で場所も確認</h2>
           <p>後で各部屋の写真を追加できるように、詳細ページには画像枠を用意しています。</p>
         </div>
+        <div class="floor-tabs" aria-label="階数の切り替え">
+          <button class="floor-tab active" type="button" data-floor-view="1">1階を表示</button>
+          <button class="floor-tab" type="button" data-floor-view="2">2階を表示</button>
+        </div>
         <div class="plan-grid">
-          <article class="plan-card">
+          <article class="plan-card floor-panel active" data-floor-panel="1">
             <h3>1階配置図（101〜134号室）</h3>
-            <div class="plan-img"><img src="assets/１階白紙.jpg" alt="1階配置図" /></div>
-            <p class="plan-note">1階は搬入しやすく、家具・家電・重い荷物の保管を検討される方に人気です。</p>
+            <div class="plan-img"><img src="assets/availability-map-1f.jpg" alt="1階の満室状況入り配置図" /></div>
+            <p class="plan-note">「済」が付いている部屋は現在満室です。空室状況は変動するため、気になる部屋はLINEまたは電話でご確認ください。</p>
           </article>
-          <article class="plan-card">
+          <article class="plan-card floor-panel" data-floor-panel="2">
             <h3>2階配置図（201〜214号室）</h3>
-            <div class="plan-img"><img src="assets/２階白紙.jpg" alt="2階配置図" /></div>
-            <p class="plan-note">2階にも複数サイズの部屋があります。予算や保管量に合わせて選べます。</p>
+            <div class="plan-img"><img src="assets/availability-map-2f.jpg" alt="2階の満室状況入り配置図" /></div>
+            <p class="plan-note">「済」が付いている部屋は現在満室です。2階にも複数サイズの空室があります。</p>
           </article>
         </div>
       </section>
@@ -163,17 +174,19 @@
       <div class="filter-bar" aria-label="部屋一覧フィルター">
         <button class="filter-btn active" data-filter="all">すべて</button>
         <button class="filter-btn" data-filter="vacant">空室のみ</button>
-        <button class="filter-btn" data-filter="1">1階のみ</button>
-        <button class="filter-btn" data-filter="2">2階のみ</button>
         <button class="filter-btn" data-filter="small">1帖以下</button>
         <button class="filter-btn" data-filter="large">2帖以上</button>
       </div>
 
-      <div class="floor-title"><h2>1階</h2><span>101〜134号室</span></div>
-      <div class="rooms-grid" id="rooms1f"></div>
+      <section class="floor-room-panel active" data-floor-panel="1">
+        <div class="floor-title"><h2>1階</h2><span>101〜134号室</span></div>
+        <div class="rooms-grid" id="rooms1f"></div>
+      </section>
 
-      <div class="floor-title"><h2>2階</h2><span>201〜214号室</span></div>
-      <div class="rooms-grid" id="rooms2f"></div>
+      <section class="floor-room-panel" data-floor-panel="2">
+        <div class="floor-title"><h2>2階</h2><span>201〜214号室</span></div>
+        <div class="rooms-grid" id="rooms2f"></div>
+      </section>
 
       <div class="note-box">
         表示は税込月額です。空室状況は日々変動します。満室表示の部屋でも、近いサイズの空室をご提案できる場合があります。
@@ -224,8 +237,8 @@ function createCard(room) {
       <div class="room-spec"><div class="label">広さ</div><div class="value">${room.size}</div></div>
       <div class="room-spec"><div class="label">月額税込</div><div class="value room-price">${yen(room.price)}<small>円</small></div></div>
     </div>
-    <div class="room-note">${roomHint(room)}</div>
-    <a class="room-cta" href="room-detail.html?room=${room.no}">この部屋の詳細を見る</a>
+    <div class="room-note">${room.vacant ? roomHint(room) : '現在満室です。近いサイズの空室をご提案できる場合があります。'}</div>
+    ${room.vacant ? `<a class="room-cta" href="room-detail.html?room=${room.no}">この部屋の詳細を見る</a>` : ''}
   `;
   return card;
 }
@@ -235,16 +248,36 @@ document.getElementById('rooms1f').append(...rooms.filter(room => room.floor ===
 document.getElementById('rooms2f').append(...rooms.filter(room => room.floor === 2).map(createCard));
 
 function applyFilter(filter) {
-  document.querySelectorAll('.room-card').forEach(card => {
+  document.querySelectorAll('.floor-room-panel.active .room-card').forEach(card => {
     const tatami = Number(card.dataset.tatami);
     const show =
       filter === 'all' ||
       card.dataset.status === filter ||
-      card.dataset.floor === filter ||
       (filter === 'small' && tatami <= 1) ||
       (filter === 'large' && tatami >= 2);
     card.style.display = show ? '' : 'none';
   });
+}
+
+function resetInactiveFloorCards() {
+  document.querySelectorAll('.floor-room-panel:not(.active) .room-card').forEach(card => {
+    card.style.display = '';
+  });
+}
+
+function currentFilter() {
+  return document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+}
+
+function showFloor(floor) {
+  document.querySelectorAll('[data-floor-panel]').forEach(panel => {
+    panel.classList.toggle('active', panel.dataset.floorPanel === floor);
+  });
+  document.querySelectorAll('.floor-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.floorView === floor);
+  });
+  resetInactiveFloorCards();
+  applyFilter(currentFilter());
 }
 
 document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -253,6 +286,10 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.add('active');
     applyFilter(btn.dataset.filter);
   });
+});
+
+document.querySelectorAll('.floor-tab').forEach(tab => {
+  tab.addEventListener('click', () => showFloor(tab.dataset.floorView));
 });
 
 const toggle = document.querySelector('.menu-toggle');

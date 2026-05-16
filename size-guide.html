@@ -32,8 +32,11 @@
 .size-section { margin-top: 70px; }
 .size-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
 .size-card { border: 2px solid var(--line); border-radius: 20px; overflow: hidden; background: var(--bg); box-shadow: var(--shadow-sm); }
-.size-card figure { height: 260px; overflow: hidden; background: var(--ink); }
-.size-card img { width: 100%; height: 100%; object-fit: cover; }
+.size-card figure { overflow: hidden; background: var(--cream); }
+.size-visual { display: grid; grid-template-columns: 1fr 1fr; min-height: 250px; }
+.size-visual img { width: 100%; height: 100%; object-fit: cover; }
+.size-visual .size-illust { object-fit: cover; background: #fffaf1; border-right: 1px solid var(--line); }
+.size-visual .size-photo { min-height: 250px; }
 .size-body { padding: 22px; }
 .size-kicker { color: var(--orange); font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: .08em; margin-bottom: 6px; }
 .size-body h3 { font-size: 24px; font-weight: 900; margin-bottom: 10px; }
@@ -63,7 +66,9 @@
   .choice-grid { grid-template-columns: 1fr; }
   .hero-photo.main { inset: 0 24px 60px 0; }
   .hero-photo.sub { width: 185px; height: 140px; }
-  .size-card figure { height: 220px; }
+  .size-visual { grid-template-columns: 1fr; }
+  .size-visual .size-illust { border-right: 0; border-bottom: 1px solid var(--line); }
+  .size-visual .size-photo { min-height: 220px; }
 }
 </style>
 </head>
@@ -139,7 +144,10 @@
 
         <div class="size-grid">
           <article class="size-card">
-            <figure><img src="assets/201No1.JPG" alt="0.6帖クラスの収納スペース"></figure>
+            <figure class="size-visual">
+              <img class="size-illust" src="assets/size-compact-3d.png" alt="0.4〜0.6帖に入る荷物の立体イラスト">
+              <img class="size-photo" src="assets/201No1.JPG" alt="0.6帖クラスの収納スペース">
+            </figure>
             <div class="size-body">
               <div class="size-kicker">0.4〜0.6帖クラス</div>
               <h3>小物・書類・季節用品に</h3>
@@ -157,7 +165,10 @@
           </article>
 
           <article class="size-card">
-            <figure><img src="assets/114No1.JPG" alt="1.2帖クラスの収納スペース"></figure>
+            <figure class="size-visual">
+              <img class="size-illust" src="assets/size-standard-3d.png" alt="0.7〜1.2帖に入る荷物の立体イラスト">
+              <img class="size-photo" src="assets/114No1.JPG" alt="1.2帖クラスの収納スペース">
+            </figure>
             <div class="size-body">
               <div class="size-kicker">0.7〜1.2帖クラス</div>
               <h3>衣装ケースや季節家電に</h3>
@@ -175,7 +186,10 @@
           </article>
 
           <article class="size-card">
-            <figure><img src="assets/130No1.JPG" alt="1.9帖クラスの収納スペース"></figure>
+            <figure class="size-visual">
+              <img class="size-illust" src="assets/size-family-3d.png" alt="1.3〜2.0帖に入る荷物の立体イラスト">
+              <img class="size-photo" src="assets/130No1.JPG" alt="1.9帖クラスの収納スペース">
+            </figure>
             <div class="size-body">
               <div class="size-kicker">1.3〜2.0帖クラス</div>
               <h3>家電・小型家具も検討しやすい</h3>
@@ -193,7 +207,10 @@
           </article>
 
           <article class="size-card">
-            <figure><img src="assets/113No1.JPG" alt="2.8帖以上の収納スペース"></figure>
+            <figure class="size-visual">
+              <img class="size-illust" src="assets/size-large-3d.png" alt="2.1帖以上に入る荷物の立体イラスト">
+              <img class="size-photo" src="assets/113No1.JPG" alt="2.8帖以上の収納スペース">
+            </figure>
             <div class="size-body">
               <div class="size-kicker">2.1帖以上クラス</div>
               <h3>家具・大型荷物・在庫保管に</h3>
