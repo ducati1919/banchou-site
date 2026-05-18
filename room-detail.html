@@ -35,8 +35,9 @@
 .status-text.occupied { color: var(--ink-3); }
 .detail-actions { display: grid; gap: 12px; margin-top: 22px; }
 .detail-btn { display: flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 999px; color: white; font-weight: 900; font-family: 'M PLUS Rounded 1c', sans-serif; }
+.detail-btn.apply { background: var(--orange); box-shadow: 0 4px 0 var(--orange-deep); }
 .detail-btn.line { background: #06C755; box-shadow: 0 4px 0 var(--green-deep); }
-.detail-btn.tel { background: var(--orange); box-shadow: 0 4px 0 var(--orange-deep); }
+.detail-btn.tel { background: var(--ink); box-shadow: 0 4px 0 rgba(0,0,0,.35); }
 .detail-btn.back { background: white; color: var(--ink); border: 2px solid var(--line); box-shadow: none; }
 .detail-note { margin-top: 22px; color: var(--ink-2); font-size: 13px; line-height: 1.8; }
 @media (max-width: 860px) {
@@ -108,6 +109,7 @@
         </dl>
         <div class="detail-actions">
           <a class="detail-btn line" id="lineLink" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEでこの部屋を確認</a>
+          <a class="detail-btn apply" id="applyLink" href="apply.html">この部屋で申し込む</a>
           <a class="detail-btn tel" href="tel:0120666780">電話で確認する</a>
           <a class="detail-btn back" href="rooms.html">一覧に戻る</a>
         </div>
@@ -173,6 +175,15 @@ if (!room) {
   const status = document.getElementById('specStatus');
   status.textContent = room.vacant ? '空室あり' : '満室';
   status.className = `status-text ${room.vacant ? 'vacant' : 'occupied'}`;
+  const applyLink = document.getElementById('applyLink');
+  if (applyLink) {
+    if (room.vacant) {
+      applyLink.href = `apply.html?room=${encodeURIComponent(room.no)}`;
+      applyLink.textContent = `${room.no}号室で申し込む`;
+    } else {
+      applyLink.remove();
+    }
+  }
 }
 
 const toggle = document.querySelector('.menu-toggle');

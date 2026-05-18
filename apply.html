@@ -524,6 +524,7 @@ const companyInput = document.getElementById('company');
 const mailTo = 'room.banchou@gmail.com';
 const lineShareBase = 'https://line.me/R/share?text=';
 const applyEndpoint = '/api/apply';
+const applyParams = new URLSearchParams(location.search);
 
 function valueOf(formData, key) {
   return (formData.get(key) || '').toString().trim() || '未入力';
@@ -563,6 +564,14 @@ document.querySelectorAll('input[name="applicantType"]').forEach(input => {
   input.addEventListener('change', updateApplicantType);
 });
 updateApplicantType();
+
+const requestedRoom = applyParams.get('room');
+if (requestedRoom && applyForm) {
+  const roomInput = applyForm.querySelector('[name="room"]');
+  if (roomInput && !roomInput.value.trim()) {
+    roomInput.value = requestedRoom.endsWith('号室') ? requestedRoom : `${requestedRoom}号室`;
+  }
+}
 
 if (applyForm && formResult && formSummary) {
   applyForm.addEventListener('submit', async (event) => {
