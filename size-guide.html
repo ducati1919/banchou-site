@@ -47,6 +47,21 @@
 .room-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .room-link { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; border-radius: 999px; background: white; border: 2px solid var(--orange); color: var(--orange); padding: 8px 12px; font-size: 12px; font-weight: 900; }
 .room-link.primary { background: var(--orange); color: white; }
+.price-table-section { margin-top: 54px; }
+.price-table-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 16px; }
+.price-table-head h2 { font-size: 26px; font-weight: 900; }
+.price-table-head p { color: var(--ink-3); font-size: 13px; font-weight: 700; line-height: 1.7; max-width: 540px; }
+.price-table-wrap { overflow-x: auto; border: 2px solid var(--line); border-radius: 16px; background: white; box-shadow: var(--shadow-sm); }
+.price-table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 14px; }
+.price-table th { background: var(--cream); color: var(--ink); text-align: left; font-size: 12px; font-weight: 900; padding: 13px 16px; border-bottom: 2px solid var(--line); white-space: nowrap; }
+.price-table td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.price-table tr:last-child td { border-bottom: 0; }
+.price-table-room { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 18px; font-weight: 900; }
+.price-table-price { color: var(--orange); font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 20px; font-weight: 900; white-space: nowrap; }
+.price-table-link { display: inline-flex; align-items: center; justify-content: center; min-width: 92px; border-radius: 999px; background: var(--green); color: white; padding: 8px 14px; font-size: 12px; font-weight: 900; white-space: nowrap; }
+.price-status { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 6px 11px; font-size: 12px; font-weight: 900; white-space: nowrap; }
+.price-status.vacant { background: rgba(6,199,85,.12); color: var(--green); }
+.price-status.occupied { background: #E7DED0; color: var(--ink-2); }
 .advice-band { margin-top: 70px; background: var(--ink); color: white; border-radius: 22px; padding: 30px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; }
 .advice-band h2 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
 .advice-band p { color: #E8DCCB; font-size: 14px; line-height: 1.8; }
@@ -59,6 +74,8 @@
   .guide-hero-inner, .advice-band { grid-template-columns: 1fr; }
   .choice-grid { grid-template-columns: repeat(2, 1fr); }
   .size-grid, .tips { grid-template-columns: 1fr; }
+  .price-table-head { display: block; }
+  .price-table-head h2 { margin-bottom: 8px; }
   .hero-photo-stack { min-height: 340px; max-width: 620px; }
 }
 @media (max-width: 560px) {
@@ -134,6 +151,31 @@
         <article class="choice-card"><span class="tag">2.1帖以上</span><strong>家具・大型家電あり</strong><p>ソファ、棚、大きめの家電、店舗備品など。量が読みにくい場合も余裕を持ちやすいです。</p></article>
         <article class="choice-card"><span class="tag">法人利用</span><strong>在庫・備品保管</strong><p>書類、販促物、工具、在庫品など。出し入れ頻度と荷物の形でサイズを選ぶのがおすすめです。</p></article>
       </div>
+
+      <section class="price-table-section" aria-labelledby="price-table-title">
+        <div class="price-table-head">
+          <div>
+            <span class="section-eyebrow">PRICE LIST</span>
+            <h2 id="price-table-title">料金一覧表</h2>
+          </div>
+          <p>サイズ選びの参考に、各部屋の広さと料金を一覧にしました。満室の部屋は料金を出さず、募集状況だけ表示しています。</p>
+        </div>
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>部屋番号</th>
+                <th>階</th>
+                <th>広さ</th>
+                <th>月額税込</th>
+                <th>状況</th>
+                <th>詳細</th>
+              </tr>
+            </thead>
+            <tbody id="priceTableBody"></tbody>
+          </table>
+        </div>
+      </section>
 
       <section class="size-section" id="size-list">
         <div class="section-head">
@@ -272,7 +314,32 @@
 
 <div class="floating-cta"><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="floating-line"><span class="txt">🐕 LINEで空き確認</span></a></div>
 
+<script src="rooms-data.js"></script>
 <script>
+function yen(value) {
+  return value.toLocaleString('ja-JP');
+}
+
+function createPriceRow(room) {
+  const row = document.createElement('tr');
+  row.className = room.vacant ? 'vacant' : 'occupied';
+  row.innerHTML = `
+    <td><span class="price-table-room">${room.no}号室</span></td>
+    <td>${room.floor}階</td>
+    <td>${room.size}</td>
+    <td>${room.vacant ? `<span class="price-table-price">${yen(room.price)}円</span>` : `<span class="price-status occupied">満室</span>`}</td>
+    <td><span class="price-status ${room.vacant ? 'vacant' : 'occupied'}">${room.vacant ? '空室あり' : '満室'}</span></td>
+    <td>${room.vacant ? `<a class="price-table-link" href="room-detail.html?room=${room.no}">詳細を見る</a>` : `<span class="price-status occupied">募集なし</span>`}</td>
+  `;
+  return row;
+}
+
+const rooms = window.BANCHOU_ROOMS || [];
+const priceTableBody = document.getElementById('priceTableBody');
+if (priceTableBody) {
+  priceTableBody.append(...rooms.map(createPriceRow));
+}
+
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 if (toggle && nav) {
