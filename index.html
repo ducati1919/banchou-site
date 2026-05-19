@@ -17,6 +17,7 @@
   .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
   .hero-badge { background: white; color: var(--orange-deep); border: 2px solid var(--orange); padding: 6px 14px; font-size: 12px; font-weight: 900; border-radius: 999px; display: inline-flex; align-items: center; box-shadow: var(--shadow-sm); }
   .hero-badge.filled { background: var(--orange); color: white; }
+  .hero-badge.campaign { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
   .hero h1 { font-size: clamp(34px, 5vw, 62px); font-weight: 900; letter-spacing: 0; margin-bottom: 18px; line-height: 1.22; }
   .hero h1 .mark { display: inline-block; background: linear-gradient(transparent 62%, var(--yellow-light) 62%); padding: 0 6px; }
   .hero h1 .accent { color: var(--orange); }
@@ -28,6 +29,10 @@
   .price-main .value span { font-size: 17px; color: var(--ink); }
   .price-mini { border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; background: white; }
   .price-mini .value { font-family: 'M PLUS Rounded 1c', sans-serif; color: var(--ink); font-size: 24px; font-weight: 900; line-height: 1.15; }
+  .campaign-panel { max-width: 580px; margin: -8px 0 22px; background: white; border: 3px solid var(--yellow); border-radius: 18px; padding: 16px 18px; box-shadow: 0 8px 0 rgba(251,192,45,.24); }
+  .campaign-kicker { color: var(--orange); font-size: 12px; font-weight: 900; letter-spacing: .08em; margin-bottom: 5px; }
+  .campaign-title { font-family: 'M PLUS Rounded 1c', sans-serif; color: var(--ink); font-size: clamp(22px, 3.2vw, 32px); font-weight: 900; line-height: 1.25; }
+  .campaign-panel p { color: var(--ink-2); font-size: 12px; line-height: 1.7; margin-top: 7px; }
   .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
   .hero-visual { position: relative; min-height: 500px; }
   .hero-photo { position: absolute; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-lg); border: 6px solid white; background: white; }
@@ -122,7 +127,7 @@
 <body>
 
 <div class="notice-bar">
-  <strong>★堺市西区 最安水準</strong> &nbsp;│&nbsp; <strong>津久野駅すぐ</strong> &nbsp;│&nbsp; <strong>初期費用0円</strong> &nbsp;│&nbsp; <strong>24時間365日利用OK</strong>
+  <strong>新規キャンペーン</strong> 初月無料・2カ月目/3カ月目20%OFF &nbsp;│&nbsp; <strong>月額2,700円〜</strong> &nbsp;│&nbsp; <strong>24時間365日利用OK</strong>
 </div>
 
 <header class="header">
@@ -152,6 +157,7 @@
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-badges">
+        <span class="hero-badge campaign">新規キャンペーン実施中</span>
         <span class="hero-badge filled">堺市西区 最安水準</span>
         <span class="hero-badge">JR津久野駅すぐ</span>
         <span class="hero-badge">初期費用0円</span>
@@ -163,6 +169,11 @@
         <div class="price-main"><div class="label">月額利用料</div><div class="value">2,700<span>円〜/月</span></div><div class="label">税込・0.4帖から</div></div>
         <div class="price-mini"><div class="label">初期費用</div><div class="value">0円</div></div>
         <div class="price-mini"><div class="label">利用時間</div><div class="value">24時間</div></div>
+      </div>
+      <div class="campaign-panel">
+        <div class="campaign-kicker">NEW CUSTOMER CAMPAIGN</div>
+        <div class="campaign-title">初月無料・2カ月目と3カ月目は20%OFF</div>
+        <p>新規ご契約の方が対象です。空室確認・見学予約の際に「キャンペーンを見た」とお伝えください。</p>
       </div>
       <div class="hero-cta">
         <a href="rooms.html" class="btn btn-line">空室を見る</a>

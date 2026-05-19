@@ -16,9 +16,13 @@
 .apply-hero p { opacity: .96; font-size: 15px; line-height: 1.9; }
 .apply-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .apply-badge { background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.38); border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 900; }
+.apply-badge.campaign { background: var(--yellow); border-color: white; color: var(--ink); }
 .apply-card { background: white; color: var(--ink); border-radius: 20px; padding: 28px; box-shadow: 0 8px 0 rgba(0,0,0,.18); }
 .apply-card h2 { font-size: 20px; font-weight: 900; margin-bottom: 10px; }
 .apply-card p { color: var(--ink-3); font-size: 13px; margin-bottom: 18px; line-height: 1.7; }
+.apply-campaign { background: #FFF6D9; border: 2px solid var(--yellow); border-radius: 14px; padding: 14px 16px; margin: 0 0 16px; }
+.apply-campaign strong { display: block; color: var(--orange); font-size: 13px; font-weight: 900; margin-bottom: 4px; }
+.apply-campaign span { display: block; color: var(--ink); font-size: 14px; font-weight: 900; line-height: 1.55; }
 .apply-actions { display: grid; gap: 12px; }
 .apply-action { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-radius: 14px; padding: 18px 20px; color: white; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; box-shadow: 0 4px 0 rgba(0,0,0,.18); }
 .apply-action.line { background: var(--green); }
@@ -125,7 +129,7 @@
 <body>
 
 <div class="notice-fix">
-  <strong>堺市西区 最安水準</strong> &nbsp;|&nbsp; <strong>月額2,700円〜</strong> &nbsp;|&nbsp; <strong>初期費用0円</strong> &nbsp;|&nbsp; <strong>24時間365日利用OK</strong>
+  <strong>新規キャンペーン</strong> 初月無料・2カ月目/3カ月目20%OFF &nbsp;|&nbsp; <strong>月額2,700円〜</strong> &nbsp;|&nbsp; <strong>24時間365日利用OK</strong>
 </div>
 
 <header class="header">
@@ -161,6 +165,7 @@
         <h1>まずは空室確認から。<br>使いやすい部屋をご案内します。</h1>
         <p>トランクルーム収納番長は、堺市西区津久野町の完全室内型トランクルームです。申込み前に、空室状況・見学希望・ご利用開始日をLINEまたはお電話で確認します。</p>
         <div class="apply-badges">
+          <span class="apply-badge campaign">初月無料＋2・3カ月目20%OFF</span>
           <span class="apply-badge">室料のみ</span>
           <span class="apply-badge">初期費用0円</span>
           <span class="apply-badge">カードキーで24時間利用</span>
@@ -170,6 +175,10 @@
       <div class="apply-card">
         <h2>申込み前の確認はこちら</h2>
         <p>気になる部屋番号、荷物量、使い始めたい時期を送ってください。空き状況を確認して折り返します。</p>
+        <div class="apply-campaign">
+          <strong>新規ご契約キャンペーン</strong>
+          <span>初月無料・2カ月目と3カ月目は20%OFF。申込み時にキャンペーン適用希望とお伝えください。</span>
+        </div>
         <div class="apply-actions">
           <a class="apply-action line" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener"><span>LINEで空室確認<small>写真・スクショも送れます</small></span><span>→</span></a>
           <a class="apply-action tel" href="tel:0120666780"><span>0120-666-780<small>急ぎの方はお電話ください</small></span><span>→</span></a>

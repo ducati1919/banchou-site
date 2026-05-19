@@ -13,10 +13,12 @@
 .rooms-hero { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%); color: white; padding: 58px 24px; text-align: center; }
 .rooms-hero h1 { font-size: clamp(30px,4vw,44px); font-weight: 900; margin-bottom: 10px; }
 .rooms-hero p { opacity: .95; font-size: 15px; line-height: 1.8; max-width: 720px; margin: 0 auto; }
-.price-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 880px; margin: 28px auto 0; }
+.price-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; max-width: 1040px; margin: 28px auto 0; }
 .price-card { background: rgba(255,255,255,.16); border: 2px solid rgba(255,255,255,.35); border-radius: 14px; padding: 16px; }
 .price-card strong { display: block; font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 28px; line-height: 1; margin-bottom: 6px; }
 .price-card span { font-size: 12px; font-weight: 800; opacity: .92; }
+.price-card.campaign { background: var(--yellow); color: var(--ink); border-color: rgba(255,255,255,.72); box-shadow: 0 5px 0 rgba(0,0,0,.12); }
+.price-card.campaign span { opacity: 1; }
 .rooms-main { background: white; padding: 64px 24px; }
 .rooms-wrap { max-width: 1180px; margin: 0 auto; }
 .summary-panel { background: var(--cream); border: 2px solid var(--line); border-radius: 18px; padding: 24px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; margin-bottom: 28px; }
@@ -115,7 +117,7 @@
 <body>
 
 <div class="notice-bar">
-  <strong>堺市西区・津久野駅すぐ</strong> &nbsp;|&nbsp; <strong>月額2,700円〜</strong> &nbsp;|&nbsp; <strong>初期費用0円</strong> &nbsp;|&nbsp; <strong>24時間利用OK</strong>
+  <strong>新規キャンペーン</strong> 初月無料・2カ月目/3カ月目20%OFF &nbsp;|&nbsp; <strong>月額2,700円〜</strong> &nbsp;|&nbsp; <strong>24時間利用OK</strong>
 </div>
 
 <header class="header">
@@ -149,6 +151,7 @@
       <div class="price-strip">
         <div class="price-card"><strong>2,700円〜</strong><span>月額料金</span></div>
         <div class="price-card"><strong>0円</strong><span>初期費用</span></div>
+        <div class="price-card campaign"><strong>初月無料</strong><span>2・3カ月目は20%OFF</span></div>
         <div class="price-card"><strong>48室</strong><span>1階・2階合計</span></div>
       </div>
     </div>
@@ -159,7 +162,7 @@
       <div class="summary-panel">
         <div>
           <h2>部屋番号ごとに料金と大きさがすぐ分かります</h2>
-          <p>空室状況は変動します。詳細ページの「LINEでこの部屋を確認」から、部屋番号を送って空き確認・見学予約できます。</p>
+          <p>新規ご契約キャンペーン実施中です。初月無料、2カ月目と3カ月目は室料20%OFF。空室状況は変動しますので、詳細ページから部屋番号を送って確認できます。</p>
         </div>
         <div class="summary-actions">
           <a class="summary-btn line" href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで空き確認</a>
