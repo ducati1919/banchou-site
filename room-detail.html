@@ -162,7 +162,7 @@ if (!room) {
     roomPhotos.className = 'room-gallery';
     roomPhotos.innerHTML = room.images.map((src, index) => `
       <figure>
-        <img src="${src}" alt="${room.no}\u53f7\u5ba4 \u5199\u771f${index + 1}">
+        <img src="${src}" alt="${room.no}\u53f7\u5ba4 \u5199\u771f${index + 1}" loading="lazy" decoding="async">
         <figcaption>${room.no}\u53f7\u5ba4 \u5199\u771f${index + 1}</figcaption>
       </figure>
     `).join('');
