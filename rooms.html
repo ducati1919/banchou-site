@@ -26,6 +26,24 @@
 .summary-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 12px 18px; color: white; font-weight: 900; font-size: 13px; white-space: nowrap; }
 .summary-btn.line { background: var(--green); }
 .summary-btn.tel { background: var(--orange); }
+.price-table-section { margin-top: 34px; }
+.price-table-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 16px; }
+.price-table-head h2 { font-size: 24px; font-weight: 900; }
+.price-table-head p { color: var(--ink-3); font-size: 13px; font-weight: 700; line-height: 1.7; max-width: 540px; }
+.floor-price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.floor-price-card { border: 2px solid var(--line); border-radius: 16px; background: white; overflow: hidden; box-shadow: var(--shadow-sm); }
+.floor-price-card h3 { background: var(--cream); border-bottom: 2px solid var(--line); padding: 14px 16px; font-size: 18px; font-weight: 900; }
+.price-table-wrap { overflow-x: auto; }
+.price-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14px; }
+.price-table th { background: #fffaf2; color: var(--ink); text-align: left; font-size: 12px; font-weight: 900; padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.price-table td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.price-table tr:last-child td { border-bottom: 0; }
+.price-table-room { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 17px; font-weight: 900; }
+.price-table-price { color: var(--orange); font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 19px; font-weight: 900; white-space: nowrap; }
+.price-table-link { display: inline-flex; align-items: center; justify-content: center; min-width: 78px; border-radius: 999px; background: var(--green); color: white; padding: 8px 12px; font-size: 12px; font-weight: 900; white-space: nowrap; }
+.price-status { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 900; white-space: nowrap; }
+.price-status.vacant { background: rgba(6,199,85,.12); color: var(--green); }
+.price-status.occupied { background: #E7DED0; color: var(--ink-2); }
 .plan-section { margin: 32px 0 30px; }
 .plan-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
 .plan-head h2 { font-size: 24px; font-weight: 900; }
@@ -78,6 +96,9 @@
 @media (max-width: 860px) {
   .price-strip, .plan-grid { grid-template-columns: 1fr; }
   .summary-panel { grid-template-columns: 1fr; }
+  .floor-price-grid { grid-template-columns: 1fr; }
+  .price-table-head { display: block; }
+  .price-table-head h2 { margin-bottom: 8px; }
   .plan-head { display: block; }
   .plan-head h2 { margin-bottom: 8px; }
 }
@@ -192,6 +213,53 @@
       <div class="note-box">
         表示は税込月額です。空室状況は日々変動します。満室表示の部屋でも、近いサイズの空室をご提案できる場合があります。
       </div>
+
+
+      <section class="price-table-section" aria-labelledby="rooms-price-table-title">
+        <div class="price-table-head">
+          <div>
+            <span class="section-eyebrow">PRICE LIST</span>
+            <h2 id="rooms-price-table-title">料金一覧表</h2>
+          </div>
+          <p>1階と2階に分けて確認できます。満室の部屋は料金を表示せず、募集状況のみ表示しています。</p>
+        </div>
+        <div class="floor-price-grid">
+          <article class="floor-price-card">
+            <h3>1階</h3>
+            <div class="price-table-wrap">
+              <table class="price-table">
+                <thead>
+                  <tr>
+                    <th>部屋番号</th>
+                    <th>広さ</th>
+                    <th>月額税込</th>
+                    <th>状況</th>
+                    <th>詳細</th>
+                  </tr>
+                </thead>
+                <tbody id="priceTable1f"></tbody>
+              </table>
+            </div>
+          </article>
+          <article class="floor-price-card">
+            <h3>2階</h3>
+            <div class="price-table-wrap">
+              <table class="price-table">
+                <thead>
+                  <tr>
+                    <th>部屋番号</th>
+                    <th>広さ</th>
+                    <th>月額税込</th>
+                    <th>状況</th>
+                    <th>詳細</th>
+                  </tr>
+                </thead>
+                <tbody id="priceTable2f"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
     </div>
   </section>
 </main>
@@ -250,9 +318,24 @@ function createCard(room) {
   return card;
 }
 
+function createPriceRow(room) {
+  const row = document.createElement('tr');
+  row.className = room.vacant ? 'vacant' : 'occupied';
+  row.innerHTML = `
+    <td><span class="price-table-room">${room.no}号室</span></td>
+    <td>${room.size}</td>
+    <td>${room.vacant ? `<span class="price-table-price">${yen(room.price)}円</span>` : `<span class="price-status occupied">満室</span>`}</td>
+    <td><span class="price-status ${room.vacant ? 'vacant' : 'occupied'}">${room.vacant ? '空室あり' : '満室'}</span></td>
+    <td>${room.vacant ? `<a class="price-table-link" href="room-detail.html?room=${room.no}">詳細</a>` : `<span class="price-status occupied">募集なし</span>`}</td>
+  `;
+  return row;
+}
+
 const rooms = window.BANCHOU_ROOMS || [];
 document.getElementById('rooms1f').append(...rooms.filter(room => room.floor === 1).map(createCard));
 document.getElementById('rooms2f').append(...rooms.filter(room => room.floor === 2).map(createCard));
+document.getElementById('priceTable1f').append(...rooms.filter(room => room.floor === 1).map(createPriceRow));
+document.getElementById('priceTable2f').append(...rooms.filter(room => room.floor === 2).map(createPriceRow));
 
 function applyFilter(filter) {
   document.querySelectorAll('.floor-room-panel.active .room-card').forEach(card => {
