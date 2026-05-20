@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>キャンペーン | 初月無料・2か月目と3か月目20%オフ | トランクルーム収納番長</title>
+<meta name="description" content="トランクルーム収納番長のキャンペーンページ。6か月以上のご契約で初月無料、2か月目と3か月目の賃料が20%オフ。堺市西区・津久野駅すぐの室内型トランクルーム。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.campaign-hero { background: linear-gradient(135deg, #FFF1DB 0%, #fff 42%, #FFE082 100%); padding: 66px 24px 46px; border-bottom: 1px solid var(--line); overflow: hidden; position: relative; }
+.campaign-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 12% 20%, rgba(215,62,44,.12), transparent 28%), radial-gradient(circle at 88% 76%, rgba(232,116,26,.14), transparent 30%); pointer-events: none; }
+.campaign-hero-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr; gap: 34px; align-items: center; position: relative; }
+.campaign-label { display: inline-flex; align-items: center; background: var(--red); color: white; border-radius: 999px; padding: 8px 16px; font-weight: 900; font-size: 13px; margin-bottom: 16px; box-shadow: 0 4px 0 rgba(135,35,22,.22); }
+.campaign-hero h1 { font-size: clamp(34px, 5vw, 60px); font-weight: 900; line-height: 1.18; margin-bottom: 16px; }
+.campaign-hero h1 span { color: var(--red); background: linear-gradient(transparent 62%, var(--yellow-light) 62%); padding: 0 4px; }
+.campaign-hero p { color: var(--ink-2); font-size: 16px; line-height: 1.9; max-width: 620px; }
+.campaign-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.campaign-card { background: white; border: 3px solid var(--red); border-radius: 22px; padding: 26px; box-shadow: 0 10px 0 rgba(215,62,44,.14); }
+.campaign-card h2 { font-size: 22px; font-weight: 900; margin-bottom: 16px; text-align: center; }
+.benefit-list { display: grid; gap: 12px; }
+.benefit { border: 2px solid var(--line); border-radius: 16px; padding: 18px; background: var(--cream); display: grid; grid-template-columns: 84px 1fr; gap: 14px; align-items: center; }
+.benefit strong { color: var(--red); font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 28px; font-weight: 900; line-height: 1; text-align: center; }
+.benefit span { color: var(--ink-2); font-size: 14px; font-weight: 800; line-height: 1.6; }
+.condition-band { background: var(--ink); color: white; padding: 16px 18px; border-radius: 16px; margin-top: 16px; font-weight: 900; text-align: center; }
+.condition-band span { color: var(--yellow); }
+.campaign-section { background: white; }
+.campaign-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.info-card { border: 2px solid var(--line); border-radius: 18px; padding: 24px; background: var(--bg); box-shadow: var(--shadow-sm); }
+.info-card h3 { font-size: 20px; font-weight: 900; color: var(--orange); margin-bottom: 10px; }
+.info-card p, .info-card li { color: var(--ink-2); font-size: 14px; line-height: 1.8; }
+.info-card ul { list-style: none; display: grid; gap: 8px; }
+.info-card li::before { content: "✓"; color: var(--orange); font-weight: 900; margin-right: 8px; }
+.saving-box { margin-top: 26px; border: 2px solid var(--orange); border-radius: 20px; overflow: hidden; background: white; }
+.saving-head { background: var(--orange); color: white; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.saving-head h2 { font-size: 22px; font-weight: 900; }
+.saving-body { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+.saving-example { padding: 24px; border-right: 1px solid var(--line); }
+.saving-example:last-child { border-right: none; }
+.saving-example h3 { font-size: 18px; font-weight: 900; margin-bottom: 10px; }
+.saving-example dl { display: grid; gap: 8px; }
+.saving-example div { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px dashed var(--line); padding-bottom: 7px; color: var(--ink-2); font-size: 14px; }
+.saving-example strong { color: var(--red); font-size: 20px; }
+.steps { background: var(--cream); border-top: 1px solid var(--line); }
+.step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.step { background: white; border: 2px solid var(--line); border-radius: 18px; padding: 24px; position: relative; }
+.step-num { width: 42px; height: 42px; border-radius: 50%; background: var(--orange); color: white; display: grid; place-items: center; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900; margin-bottom: 12px; }
+.step h3 { font-size: 19px; font-weight: 900; margin-bottom: 8px; }
+.step p { color: var(--ink-2); font-size: 14px; line-height: 1.8; }
+.notes { background: white; }
+.note-box-campaign { max-width: 920px; margin: 0 auto; border: 2px solid rgba(215,62,44,.28); background: #FFF7F4; border-radius: 18px; padding: 24px; }
+.note-box-campaign h2 { color: var(--red); font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+.note-box-campaign ul { list-style: none; display: grid; gap: 9px; }
+.note-box-campaign li { color: var(--ink-2); font-size: 14px; line-height: 1.8; }
+.note-box-campaign li::before { content: "※"; color: var(--red); font-weight: 900; margin-right: 6px; }
+@media (max-width: 900px) {
+  .campaign-hero-inner, .campaign-grid, .step-grid { grid-template-columns: 1fr; }
+  .saving-body { grid-template-columns: 1fr; }
+  .saving-example { border-right: none; border-bottom: 1px solid var(--line); }
+  .saving-example:last-child { border-bottom: none; }
+}
+@media (max-width: 560px) {
+  .benefit { grid-template-columns: 1fr; text-align: center; }
+  .campaign-card { padding: 20px; }
+  .saving-head { display: block; }
+}
+</style>
+</head>
+<body>
+
+<div class="notice-bar">
+  <strong>キャンペーン実施中</strong> &nbsp;|&nbsp; <strong>初月無料</strong> &nbsp;|&nbsp; <strong>2・3か月目20%オフ</strong> &nbsp;|&nbsp; <strong>6か月以上契約限定</strong>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="assets/toplogo.jpg" alt="トランクルーム収納番長" /></a>
+    <nav class="nav">
+      <a href="index.html">ホーム</a>
+      <a href="campaign.html" class="active">キャンペーン</a>
+      <a href="rooms.html">料金・お部屋一覧</a>
+      <a href="size-guide.html">サイズ選び</a>
+      <a href="apply.html">お申し込み</a>
+      <a href="access.html">アクセス</a>
+      <a href="faq.html">Q&amp;A</a>
+    </nav>
+    <div class="header-cta">
+      <div class="tel-block"><div class="label">お電話はこちら</div><a href="tel:0120666780" class="num">0120-666-780</a></div>
+      <a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="btn-line-sm">LINE</a>
+      <a href="contact.html" class="btn-contact-sm">お問い合わせ</a>
+    </div>
+    <button class="menu-toggle" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<main>
+  <section class="campaign-hero">
+    <div class="campaign-hero-inner">
+      <div>
+        <div class="campaign-label">6か月以上ご利用の方限定</div>
+        <h1>初月無料。<br><span>2か月目と3か月目は20%オフ</span>。</h1>
+        <p>引っ越し前後の一時保管、季節用品の整理、法人備品の保管に。長めに使う方ほど始めやすいキャンペーンです。</p>
+        <div class="campaign-actions">
+          <a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="btn btn-line">LINEでキャンペーン相談</a>
+          <a href="rooms.html" class="btn btn-tel">空室を見る</a>
+          <a href="apply.html" class="btn btn-ghost">申し込みへ</a>
+        </div>
+      </div>
+      <div class="campaign-card">
+        <h2>キャンペーン内容</h2>
+        <div class="benefit-list">
+          <div class="benefit"><strong>0円</strong><span>ご利用開始月の賃料が無料</span></div>
+          <div class="benefit"><strong>20%</strong><span>2か月目の賃料が20%オフ</span></div>
+          <div class="benefit"><strong>20%</strong><span>3か月目の賃料が20%オフ</span></div>
+        </div>
+        <div class="condition-band">適用条件：<span>6か月以上のご契約</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="campaign-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">POINT</span>
+        <h2 class="section-title">いま始めると、最初の3か月が軽くなります。</h2>
+        <p class="section-lead">初期費用0円のわかりやすい料金に、期間限定の賃料割引を組み合わせたキャンペーンです。</p>
+      </div>
+      <div class="campaign-grid">
+        <article class="info-card reveal"><h3>初月無料</h3><p>使い始めの月の賃料が無料。荷物の整理や搬入準備を進めやすくなります。</p></article>
+        <article class="info-card reveal"><h3>2・3か月目も割引</h3><p>2か月目と3か月目は、それぞれ賃料20%オフ。短期ではなく、少し長めに使う方に向いています。</p></article>
+        <article class="info-card reveal"><h3>6か月以上限定</h3><p>キャンペーン適用には6か月以上のご契約が必要です。長期保管、季節用品、法人備品におすすめです。</p></article>
+      </div>
+
+      <div class="saving-box reveal">
+        <div class="saving-head"><h2>割引イメージ</h2><span>月額料金により割引額は変わります</span></div>
+        <div class="saving-body">
+          <div class="saving-example">
+            <h3>月額2,700円のお部屋の場合</h3>
+            <dl>
+              <div><dt>通常3か月分</dt><dd>8,100円</dd></div>
+              <div><dt>キャンペーン適用</dt><dd>4,320円</dd></div>
+              <div><dt>お得になる目安</dt><dd><strong>3,780円</strong></dd></div>
+            </dl>
+          </div>
+          <div class="saving-example">
+            <h3>月額39,600円のお部屋の場合</h3>
+            <dl>
+              <div><dt>通常3か月分</dt><dd>118,800円</dd></div>
+              <div><dt>キャンペーン適用</dt><dd>63,360円</dd></div>
+              <div><dt>お得になる目安</dt><dd><strong>55,440円</strong></dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">HOW TO USE</span>
+        <h2 class="section-title">キャンペーン利用の流れ</h2>
+      </div>
+      <div class="step-grid">
+        <article class="step reveal"><div class="step-num">1</div><h3>LINEで相談</h3><p>「キャンペーンを見た」と送ってください。希望サイズや利用開始時期も一緒に送るとスムーズです。</p></article>
+        <article class="step reveal"><div class="step-num">2</div><h3>空室・料金を確認</h3><p>空いている部屋、月額料金、キャンペーン適用後の目安をご案内します。</p></article>
+        <article class="step reveal"><div class="step-num">3</div><h3>6か月以上で申込み</h3><p>条件をご確認のうえ、6か月以上のご契約でキャンペーンを適用します。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes">
+    <div class="note-box-campaign reveal">
+      <h2>ご注意ください</h2>
+      <ul>
+        <li>キャンペーンの適用は6か月以上のご契約に限ります。</li>
+        <li>表示の割引は賃料に対する割引です。鍵の再発行など別途費用が発生する場合は対象外です。</li>
+        <li>空室状況により、ご希望のお部屋で適用できない場合があります。</li>
+        <li>キャンペーン内容は予告なく変更・終了する場合があります。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="cta-eyebrow">キャンペーン相談</span>
+      <h2>LINEで「キャンペーン見た」と送ってください。</h2>
+      <p>空室状況と、割引後の料金目安をご案内します。</p>
+      <div class="cta-buttons">
+        <a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="cta-card line"><div class="cta-icon">LINE</div><div class="cta-label">LINE / 24時間受付</div><div class="cta-value">キャンペーンを相談する</div><div class="cta-sub">希望サイズ・利用開始日も送れます</div><div class="cta-arrow" style="background:#E6F9EC;color:var(--green-deep)">→</div></a>
+        <a href="tel:0120666780" class="cta-card tel"><div class="cta-icon">TEL</div><div class="cta-label">TEL / お電話はこちら</div><div class="cta-value">0120-666-780</div><div class="cta-arrow">→</div></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/toplogo.jpg" alt="収納番長" /><p>堺市西区・JR津久野駅すぐの<br>地域密着型トランクルーム。</p></div>
+      <div class="footer-col"><h4>メニュー</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="campaign.html">キャンペーン</a></li><li><a href="rooms.html">料金・お部屋一覧</a></li><li><a href="size-guide.html">サイズの選び方</a></li><li><a href="apply.html">お申し込み</a></li><li><a href="access.html">アクセス</a></li><li><a href="faq.html">Q&amp;A</a></li></ul></div>
+      <div class="footer-col"><h4>お問い合わせ</h4><ul><li><a href="tel:0120666780"><strong style="color:white;">0120-666-780</strong></a></li><li><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener">LINEで空室確認</a></li><li><a href="apply.html">お申し込み</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 トランクルーム収納番長. All Rights Reserved.</span></div>
+  </div>
+</footer>
+
+<div class="floating-cta"><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="floating-line"><span class="txt">LINEでキャンペーン相談</span></a></div>
+
+<script>
+const toggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
+if (toggle && nav) {
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
