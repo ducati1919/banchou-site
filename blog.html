@@ -346,14 +346,14 @@
     <main>
 
       <!-- Featured -->
-      <a href="blog/moving-temporary-storage-20260520.html" class="featured-post reveal" data-category="引越し・暮らし収納">
+      <a href="blog/moving-temporary-storage-20260520.html" class="featured-post reveal" data-category="活用ガイド">
         <div class="featured-img">
           <img src="assets/blog-moving-temp-storage-20260520.jpg" alt="引越し前後の仮置きと屋内型トランクルーム" loading="lazy" decoding="async">
           <span class="featured-badge">★ 最新記事</span>
         </div>
         <div class="featured-body">
           <div class="post-meta">
-            <span class="post-cat">引越し・暮らし収納</span>
+            <span class="post-cat">活用ガイド</span>
             <span>2026年5月20日</span>
           </div>
           <h2>引越し前後の「仮置き」こそ、<br>津久野駅近くの屋内型トランクルームが助けになる話</h2>
@@ -373,10 +373,10 @@
 
       <!-- Post grid -->
       <div class="post-grid" aria-live="polite">
-        <a href="blog/office-documents-storage.html" class="post-card reveal" data-category="法人・書類収納">
+        <a href="blog/office-documents-storage.html" class="post-card reveal" data-category="収納のコツ">
           <div class="post-thumb"><img src="assets/blog-office-documents-20260519.jpg" alt="法人の書類・備品収納" loading="lazy" decoding="async"></div>
           <div class="post-body">
-            <div class="post-meta"><span class="post-cat">法人・書類収納</span><span>2026年5月19日</span></div>
+            <div class="post-meta"><span class="post-cat">収納のコツ</span><span>2026年5月19日</span></div>
             <h3>増える書類と備品、オフィスを広く保つコツ</h3>
             <p>契約書・販促物・備品が増えて仕事場が手狭に。毎日使うものと外部保管を分けて、動線を整える考え方。</p>
           </div>
@@ -411,15 +411,33 @@
         </h3>
         <ul class="cat-list">
           <li>
-            <button type="button" class="category-filter" data-category="法人・書類収納">
-              法人・書類収納
+            <button type="button" class="category-filter" data-filter="収納のコツ">
+              収納のコツ
               <span class="cnt">1</span>
             </button>
           </li>
           <li>
-            <button type="button" class="category-filter" data-category="引越し・暮らし収納">
-              引越し・暮らし収納
+            <button type="button" class="category-filter" data-filter="活用ガイド">
+              活用ガイド
               <span class="cnt">1</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="category-filter" data-filter="はじめての方へ">
+              はじめての方へ
+              <span class="cnt">0</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="category-filter" data-filter="地域情報">
+              地域情報
+              <span class="cnt">0</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="category-filter" data-filter="お知らせ">
+              お知らせ
+              <span class="cnt">0</span>
             </button>
           </li>
         </ul>
@@ -572,13 +590,13 @@
 
   categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const category = button.dataset.category;
+      const category = button.dataset.filter;
       const isActive = button.classList.contains('active');
       const nextCategory = isActive ? '' : category;
       let visibleCount = 0;
 
       categoryButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.category === nextCategory);
+        btn.classList.toggle('active', btn.dataset.filter === nextCategory);
       });
 
       articleCards.forEach(card => {
