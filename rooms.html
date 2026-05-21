@@ -36,9 +36,10 @@
 .floor-price-card { border: 2px solid var(--line); border-radius: 16px; background: white; overflow: hidden; box-shadow: var(--shadow-sm); }
 .floor-price-card h3 { background: var(--cream); border-bottom: 2px solid var(--line); padding: 14px 16px; font-size: 18px; font-weight: 900; }
 .floor-price-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.floor-price-table-card { min-width: 0; }
 .floor-price-table-card + .floor-price-table-card { border-left: 1px solid var(--line); }
-.price-table-wrap { overflow-x: auto; }
-.price-table { width: 100%; min-width: 420px; border-collapse: collapse; font-size: 14px; }
+.price-table-wrap { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+.price-table { width: max-content; min-width: 520px; border-collapse: collapse; font-size: 14px; }
 .price-table th { background: #fffaf2; color: var(--ink); text-align: left; font-size: 12px; font-weight: 900; padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
 .price-table td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; }
 .price-table tr:last-child td { border-bottom: 0; }
@@ -111,6 +112,8 @@
   .rooms-grid, .room-photo-grid { grid-template-columns: 1fr; }
   .room-card { min-height: 0; }
   .room-num { font-size: 26px; }
+  .price-table-wrap { border-bottom: 1px solid var(--line); }
+  .price-table { min-width: 560px; }
 }
 </style>
 </head>
@@ -192,12 +195,6 @@
           </article>
         </div>
       </section>
-
-      <div class="room-photo-grid">
-        <figure><img src="assets/P2120294.JPG" alt="室内通路" loading="lazy" decoding="async"><figcaption>明るい室内通路</figcaption></figure>
-        <figure><img src="assets/P2120297.JPG" alt="収納スペース" loading="lazy" decoding="async"><figcaption>清潔な収納スペース</figcaption></figure>
-        <figure><img src="assets/P2120300.JPG" alt="2階配置図" loading="lazy" decoding="async"><figcaption>現地の配置図も確認できます</figcaption></figure>
-      </div>
 
       <div class="filter-bar" aria-label="部屋一覧フィルター">
         <button class="filter-btn active" data-filter="all">すべて</button>
@@ -306,6 +303,12 @@
           </article>
         </div>
       </section>
+
+      <div class="room-photo-grid">
+        <figure><img src="assets/P2120294.JPG" alt="室内通路" loading="lazy" decoding="async"><figcaption>明るい室内通路</figcaption></figure>
+        <figure><img src="assets/P2120297.JPG" alt="収納スペース" loading="lazy" decoding="async"><figcaption>清潔な収納スペース</figcaption></figure>
+        <figure><img src="assets/P2120300.JPG" alt="2階配置図" loading="lazy" decoding="async"><figcaption>現地の配置図も確認できます</figcaption></figure>
+      </div>
     </div>
   </section>
 </main>
