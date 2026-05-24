@@ -44,7 +44,7 @@ window.BANCHOU_ROOMS = [
   { no: 209, floor: 2, size: "約2.1帖 / 3.40㎡", tatami: 2.1, area: 3.40, price: 15300, vacant: false },
   { no: 210, floor: 2, size: "約1.2帖 / 1.90㎡", tatami: 1.2, area: 1.90, price: 8550, vacant: false },
   { no: 211, floor: 2, size: "約0.9帖 / 1.50㎡", tatami: 0.9, area: 1.50, price: 6750, vacant: false },
-  { no: 212, floor: 2, size: "約0.7帖 / 1.10㎡", tatami: 0.7, area: 1.10, price: 4950, vacant: true },
+  { no: 212, floor: 2, size: "約0.7帖 / 1.10㎡", tatami: 0.7, area: 1.10, price: 4950, vacant: false },
   { no: 213, floor: 2, size: "約1.7帖 / 2.80㎡", tatami: 1.7, area: 2.80, price: 12600, vacant: true },
   { no: 214, floor: 2, size: "約1.0帖 / 1.70㎡", tatami: 1.0, area: 1.70, price: 7650, vacant: false }
 ];
