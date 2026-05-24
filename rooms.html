@@ -63,8 +63,27 @@
 .plan-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
 .plan-card { background: white; border: 2px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-sm); }
 .plan-card h3 { padding: 16px 18px 12px; font-size: 17px; font-weight: 900; border-bottom: 1px solid var(--line); }
-.plan-img { background: #fffaf2; padding: 14px; }
+.plan-img { background: #fffaf2; padding: 14px; position: relative; }
 .plan-img img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); }
+.plan-occupied-mark {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: clamp(34px, 7vw, 74px);
+  height: clamp(34px, 7vw, 74px);
+  color: #d71920;
+  font-weight: 900;
+  font-size: clamp(26px, 5.5vw, 58px);
+  line-height: 1;
+  text-shadow:
+    2px 2px 0 #fff45a,
+    -2px 2px 0 #fff45a,
+    2px -2px 0 #fff45a,
+    -2px -2px 0 #fff45a;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.plan-occupied-mark.room-212 { left: 68%; top: 54%; }
 .plan-note { padding: 0 18px 16px; color: var(--ink-2); font-size: 12px; line-height: 1.7; }
 .room-photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0 34px; }
 .room-photo-grid figure { border-radius: 14px; overflow: hidden; background: var(--ink); box-shadow: var(--shadow-sm); }
@@ -190,7 +209,7 @@
           </article>
           <article class="plan-card floor-panel" data-floor-panel="2">
             <h3>2階配置図（201〜214号室）</h3>
-            <div class="plan-img"><img src="assets/availability-map-2f.jpg" alt="2階の満室状況入り配置図" loading="lazy" decoding="async"></div>
+            <div class="plan-img"><img src="assets/availability-map-2f.jpg" alt="2階の満室状況入り配置図" loading="lazy" decoding="async"><span class="plan-occupied-mark room-212" aria-hidden="true">済</span></div>
             <p class="plan-note">「済」が付いている部屋は現在満室です。2階にも複数サイズの空室があります。</p>
           </article>
         </div>
