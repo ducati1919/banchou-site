@@ -68,9 +68,15 @@
   </url>
   <url>
     <loc>https://s-banchou.com/blog.html</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://s-banchou.com/blog/seasonal-appliances-storage-20260528.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://s-banchou.com/blog/disaster-supplies-storage-20260527.html</loc>
