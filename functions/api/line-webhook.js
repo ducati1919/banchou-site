@@ -1,5 +1,5 @@
 const LINE_REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply';
-const DEFAULT_SITE_URL = 'https://banchou-site.pages.dev';
+const DEFAULT_SITE_URL = 'https://s-banchou.com';
 
 const encoder = new TextEncoder();
 
