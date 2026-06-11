@@ -68,9 +68,15 @@
   </url>
   <url>
     <loc>https://s-banchou.com/blog.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://s-banchou.com/blog/entryway-rain-gear-storage-20260611.html</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://s-banchou.com/blog/pre-guest-washitsu-living-storage-20260610.html</loc>
