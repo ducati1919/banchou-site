@@ -68,9 +68,15 @@
   </url>
   <url>
     <loc>https://s-banchou.com/blog</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://s-banchou.com/blog/motorcycle-gear-summer-storage-20260618</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://s-banchou.com/blog/winter-rug-kotatsu-storage-20260617</loc>
