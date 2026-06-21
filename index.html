@@ -340,8 +340,11 @@
       if (!res.ok) return;
       const html = await res.text();
       const doc = new DOMParser().parseFromString(html, 'text/html');
-      const posts = [...doc.querySelectorAll('.featured-post, .post-card')].slice(0, 3).map(post => {
+      const seenHrefs = new Set();
+      const posts = [...doc.querySelectorAll('.featured-post, .post-card')].map(post => {
         const href = post.getAttribute('href') || 'blog.html';
+        if (seenHrefs.has(href)) return null;
+        seenHrefs.add(href);
         const img = post.querySelector('img');
         const meta = [...post.querySelectorAll('.post-meta span')].map(el => el.textContent.trim());
         const category = meta.find(v => !/^\d{4}年/.test(v)) || 'お知らせ';
@@ -355,7 +358,7 @@
           title: textOf(post, 'h2') || textOf(post, 'h3'),
           excerpt: textOf(post, 'p')
         };
-      }).filter(post => post.title);
+      }).filter(post => post && post.title).slice(0, 3);
       if (!posts.length) return;
       container.innerHTML = posts.map(post => `
         <a href="${post.href}" class="news-card reveal in">
