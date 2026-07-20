@@ -94,26 +94,25 @@ window.BANCHOU_ROOM_IMAGES = {
     "assets/110No2.JPG"
   ],
   111: [
-    "assets/111No1.JPG",
-    "assets/111No2.JPG"
+    "assets/111No1.JPG?v=20260720-photos",
+    "assets/111No2.JPG?v=20260720-photos"
   ],
   112: [
-    "assets/112No1.JPG",
-    "assets/112No2.JPG"
+    "assets/112No1.JPG?v=20260720-photos",
+    "assets/112No2.JPG?v=20260720-photos"
   ],
   113: [
-    "assets/113No1.JPG",
-    "assets/113No2.JPG",
-    "assets/113No3.JPG"
+    "assets/113No1.JPG?v=20260720-photos",
+    "assets/113No2.JPG?v=20260720-photos"
   ],
   114: [
-    "assets/114No1.JPG",
-    "assets/114No2.JPG"
+    "assets/114No1.JPG?v=20260720-photos",
+    "assets/114No2.JPG?v=20260720-photos"
   ],
   115: [
-    "assets/115No1.JPG",
-    "assets/115No2.JPG",
-    "assets/115No3.JPG"
+    "assets/115No1.JPG?v=20260720-photos",
+    "assets/115No2.JPG?v=20260720-photos",
+    "assets/115No3.JPG?v=20260720-photos"
   ],
   116: [
     "assets/116No1.JPG",
@@ -190,6 +189,19 @@ window.BANCHOU_ROOM_IMAGES = {
   134: [
     "assets/134No1.JPG",
     "assets/134No2.jpg"
+  ],
+  135: [
+    "assets/135No1.JPG?v=20260720-photos",
+    "assets/135No2.JPG?v=20260720-photos"
+  ],
+  136: [
+    "assets/136No1.JPG?v=20260720-photos",
+    "assets/136No2.JPG?v=20260720-photos",
+    "assets/136No3.JPG?v=20260720-photos"
+  ],
+  137: [
+    "assets/137No1.JPG?v=20260720-photos",
+    "assets/137No2.JPG?v=20260720-photos"
   ],
   201: [
     "assets/201No1.JPG",
