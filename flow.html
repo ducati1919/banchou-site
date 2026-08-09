@@ -461,6 +461,15 @@
 <div class="floating-cta"><a href="https://lin.ee/R9sF0Qmn" target="_blank" rel="noopener" class="floating-line"><span class="txt">🐕 LINEで空き確認</span></a></div>
 
 <script>
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      toggle.classList.toggle('open');
+    });
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
